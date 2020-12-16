@@ -1,0 +1,57 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Cửa Hàng</a>
+                <br>
+                <br>
+            </div>
+            <br>
+
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:1"></div>
+                    <div style="flex:1"><strong>User Name</strong></div>
+                    <div style="flex:2"> <strong>Last Name</strong> </div>
+                    <div style="flex:2"> <strong>Email</strong> </div>
+                    <div style="flex:2"> <strong>Thao Tác</strong> </div>
+                </div>
+                {% for item in users %}
+{#                    Neu la superuser thi khong hien thi#}
+                    {% if not item.is_superuser %}
+                        <div class="cart-row">
+                            <div style="flex:1"></div>
+                            <div style="flex:1">{{ item.username }}</div>
+                            <div style="flex:2">{{ item.last_name }}</div>
+                            <div style="flex:2">{{ item.email }}</div>
+        {#                Button Chuc Nang them, xoa, sua, phan quyen #}
+                            <div style="flex:2">
+        {#                    Neu la superuser moi hien button phan quyen#}
+                                {% if perms.user.is_superuser %}
+                                    <a class="btn btn-info" href="{% url 'manager:view_permission' item.id %}"> Phan Quyen </a>
+                                {% endif %}
+                                {#  Check quyen  #}
+                                {% if perms.auth.change_user %}
+                                    <a class="btn btn-warning" href="#"> Sua </a>
+                                {% endif %}
+
+                                {% if perms.auth.delete_user %}
+                                    <a class="btn btn-danger" href="#"> Xoa </a>
+                                {% endif %}
+                            </div>
+        {#                   ---------------Phan  quyen ----------------------------------------------           #}
+                            {% block user_permission %}
+
+                            {% endblock %}
+        {#            Quyen trong model category    /#}
+
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}

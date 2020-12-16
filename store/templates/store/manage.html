@@ -1,0 +1,7 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+{#    Vao trang trong neu chua nhan vao chuc nang#}
+            <p><div class="form-field"><a href=" {% url 'manage_action' 1 %}" >Thêm Sản Phẩm</a></div></p>
+            <div class="form-field"><a href="{% url 'manage_action' 2 %}" >Thêm Danh Mục</a></div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'store/main.html' %}
+{% load static %}
+<style>
+#div_top_hypers {
+    background-color:#eeeeee;
+    display:inline;
+}
+#ul_top_hypers {
+    display: flex;
+    justify-content:space-around;
+    list-style-type:none;
+}
+</style>
+{% block content %}
+{#    Muốn thêm được ảnh phải có thêm phần accept-charset="utf-8" enctype="multipart/form-data" trong <form>#}
+    <form action="" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        {% csrf_token %}
+{#    Vao trang trong neu chua nhan vao chuc nang#}
+            <div>
+                <ul id = "menu">
+                    <li><a href=" {% url 'manage_action' 1 %}" >Thêm Sản Phẩm</a></li>
+                    <li><a href="{% url 'manage_action' 2 %}" >Thêm Danh Mục</a></li>
+                </ul>
+            </div>
+        {#    Vao form nhap san pham#}
+                {% if add_product %}
+                    <p></p>
+                    <p>Tên sản phẩm:</p>
+                    <p><div class="form-field">{{ add_product.title }}</div></p>
+                    <p>Giá:</p>
+                    <p><div class="form-field">{{ add_product.price }}</div></p>
+                    <p>Chi tiết:</p>
+                    <p><div class="form-field">{{ add_product.description }}</div></p>
+                    <p>Danh mục:</p>
+                    <p><div class="form-field">{{ add_product.category }}</div></p>
+                    <p>Ảnh sản phẩm:</p>
+                    <p><div class="form-field">{{ add_product.image }}</div></p>
+                    <p><input id="form-button" class="btn btn-success" type="submit" value="Thêm Sản Phẩm"></p>
+                {% endif %}
+                {% if add_category %}
+                        {#    Vao form nhap danh muc san pham#}
+                    <p>Tên danh mục:</p>
+                    <p><div class="form-field">{{ add_category.title }}</div></p>
+                    <p>Chi tiết:</p>
+                    <p><div class="form-field">{{ add_category.description }}</div></p>
+                    <p><input id="form-button" class="btn btn-success" type="submit" value="Thêm Danh Mục"></p>
+                {% endif %}
+
+
+    </form>
+{% endblock %}

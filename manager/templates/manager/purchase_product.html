@@ -1,0 +1,18 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+    {% block content %}
+        <form action="{% url 'manager:purchase_product' %}" method="post">
+        {% csrf_token %}
+            <p>Người Đặt Hàng:</p>
+            <p><div class="form-field">{{ form.user }}</div></p>
+            <p>Nhà Cung Cấp:</p>
+            <p><div class="form-field">{{ form.supplier }}</div></p>
+            <p>Sản Phẩm:</p>
+            <p><div class="form-field">{{ form.product }}</div></p>
+            <p>Số Lượng:</p>
+            <p><div class="form-field">{{ form.amount }}</div></p>
+            <p>Thời Gian Đặt:</p>
+            <p><div class="form-field">{{ form.time_create }}</div></p>
+            <p><input id="form-button" class="btn btn-success" type="submit" value="Đặt Hàng"></p>
+        </form>
+    {% endblock content %}
