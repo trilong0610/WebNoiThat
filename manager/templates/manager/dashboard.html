@@ -1,0 +1,49 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+{#    Vao trang trong neu chua nhan vao chuc nang#}
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Document</title>
+            </head>
+            <body>
+              <div class="row">
+                  <div class="col-md-12 ">
+                      <h5> PRODUCT </h5>
+                      <hr>
+                      <div class="card card-body">
+                          <a href="" class="btn btn-body btn-sm btn-block">Create Product</a>
+                          <table class="table">
+                              <tr>
+                                  <th></th>
+                                  <th>Title</th>
+                                  <th>Price</th>
+                                  <th>Description</th>
+                                  <th>Active</th>
+                                  <th>Category</th>
+                                  <th>Update</th>
+                                  <th>Remove</th>
+                              </tr>
+                              {% for product in products %}
+                                <tr>
+                                    <td></td>
+                                    <td>{{product.title}}</td>
+                                    <td>{{product.price}}</td>
+                                    <td>{{product.description}}</td>
+                                    <td>{{product.active}}</td>
+                                    <td>{{product.category}}</td>
+                                    <td><a href="/edit/{{ product.id }}" data-title="Edit">Update</a></td>
+                                    <td><a href="/delete/{{ product.id }}" data-title="Delete">Remove</a></td>
+                                </tr>
+                              {% endfor %}
+
+                          </table>
+                      </div>
+                  </div>
+              </div>
+            </body>
+            </html>
+{% endblock %}

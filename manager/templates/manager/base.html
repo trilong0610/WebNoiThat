@@ -68,7 +68,7 @@
                         <a class="dropdown-item" href="{% url 'manager:add_product' %}">Thêm Sản Phẩm</a>
                       {% endif %}
                       {% if perms.product.change_product %}
-                        <a class="dropdown-item" href="#">Quản Lí Sản Phẩm</a>
+                        <a class="dropdown-item" href="{% url 'manager:dashboard' %}">Quản Lí Sản Phẩm</a>
                       {% endif %}
                   </div>
 

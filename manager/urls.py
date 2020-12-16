@@ -15,5 +15,11 @@ urlpatterns = [
     path('gains_permission/<int:user_id>', views.gains_permission.as_view(), name = "view_permission"),
     path('gains_permission/', views.updatePermission, name = "gains_permission"),
     path('update_shipping/', views.update_shipping.as_view(), name = 'update_shipping'),
+
+    #them, xoa, sua sp
+    path('dashboad/', views.dashboard, name="dashboard"),
+    path('edit/<int:id>', views.edit),
+    path('update/<int:id>', views.update),
+    path('delete/<int:id>', views.destroy),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

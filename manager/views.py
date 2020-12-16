@@ -131,3 +131,26 @@ class update_shipping(View):
         status = Order.shipping
         context = {'order_shipping': order, 'status': status}
         return render(request,'manager/shipping.html', context)
+
+
+#load tat ca san pham len bang tren dashboard.html
+def dashboard(request):
+    products = Product.objects.all()
+    return render(request, 'manager/dashboard.html', {'products':products})
+# xoa, sua san pham
+def edit(request, id):
+    product = Product.objects.get(id=id)
+    return render(request, 'manager/edit_product.html', {'product':product})
+
+def update(request, id):
+    product = Product.objects.get(id=id)
+    form = ProductForm(request.POST, instance = product)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    return render(request, 'manager/edit_product.html', {'product':product})
+
+def destroy(request, id):
+    product = Product.objects.get(id=id)
+    product.delete()
+    return redirect("/")
