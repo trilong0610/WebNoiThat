@@ -119,15 +119,11 @@ class update_shipping(View):
         context = {'order_shipping':order, 'status':status}
         return render(request,'manager/shipping.html', context)
     def post(self, request):
-        customer = User.objects.get(pk=request.user.id)
-        order, created = Order.objects.get_or_create(user=request.user, complete=False)
+        customer = User.objects.get(id = request.user.id)
+        # order, created = Order.objects.get_or_create(user=request.user, complete=False)
         data = request.POST["shipping"]
-        if data == "shipped":
-            order.complete = True
-            order.save()
-            orderitems = order.orderitem_set.all()
-            for i in orderitems:
-                    shipping = False
+        Order.objects.filter(id = data).update(complete = True)
+        order = Order.objects.get(id = data)
         status = Order.shipping
         context = {'order_shipping': order, 'status': status}
         return render(request,'manager/shipping.html', context)
