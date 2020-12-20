@@ -5,8 +5,8 @@ from order.models import Order
 
 
 def shipping_status(request):
-    customer = User.objects.get(pk=request.user.id)
-    order, created = Order.objects.get_or_create(user=request.user, complete=False)
+    current_user = request.user
+    order = Order.objects.filter(user_id = current_user.id)
     status = Order.shipping
-    context = {'order_shipping':order, 'status':status}
+    context = {'order_shipping':order, 'status_ship':status}
     return render(request,'order/shipping_status.html', context)

@@ -14,6 +14,7 @@ class Product(models.Model):
     description = models.TextField(default='')
     digital = models.BooleanField(default=False, null=True, blank=False)
     active = models.BooleanField(default=True)
+    date_add = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
     def __str__(self):

@@ -719,7 +719,7 @@ utils.toDashed = function( str ) {
 
 var console = window.console;
 /**
- * allow user to initialize classes via [data-namespace] or .js-namespace class
+ * allow user to initialize classes via [data-namespace] or .script-namespace class
  * htmlInit( Widget, 'widgetName' )
  * options are parsed from data-namespace-options
  */
@@ -728,7 +728,7 @@ utils.htmlInit = function( WidgetClass, namespace ) {
     var dashedNamespace = utils.toDashed( namespace );
     var dataAttr = 'data-' + dashedNamespace;
     var dataAttrElems = document.querySelectorAll( '[' + dataAttr + ']' );
-    var jsDashElems = document.querySelectorAll( '.js-' + dashedNamespace );
+    var jsDashElems = document.querySelectorAll( '.script-' + dashedNamespace );
     var elems = utils.makeArray( dataAttrElems )
       .concat( utils.makeArray( jsDashElems ) );
     var dataOptionsAttr = dataAttr + '-options';
@@ -2268,7 +2268,7 @@ return Outlayer;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/js/item',[
+    define( 'isotope/script/item',[
         'outlayer/outlayer'
       ],
       factory );
@@ -2346,7 +2346,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/js/layout-mode',[
+    define( 'isotope/script/layout-mode',[
         'get-size/get-size',
         'outlayer/outlayer'
       ],
@@ -2746,7 +2746,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/js/layout-modes/masonry',[
+    define( 'isotope/script/layout-modes/masonry',[
         '../layout-mode',
         'masonry/masonry'
       ],
@@ -2819,7 +2819,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/js/layout-modes/fit-rows',[
+    define( 'isotope/script/layout-modes/fit-rows',[
         '../layout-mode'
       ],
       factory );
@@ -2888,7 +2888,7 @@ return FitRows;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/js/layout-modes/vertical',[
+    define( 'isotope/script/layout-modes/vertical',[
         '../layout-mode'
       ],
       factory );
@@ -2954,12 +2954,12 @@ return Vertical;
         'get-size/get-size',
         'desandro-matches-selector/matches-selector',
         'fizzy-ui-utils/utils',
-        'isotope/js/item',
-        'isotope/js/layout-mode',
+        'isotope/script/item',
+        'isotope/script/layout-mode',
         // include default layout modes
-        'isotope/js/layout-modes/masonry',
-        'isotope/js/layout-modes/fit-rows',
-        'isotope/js/layout-modes/vertical'
+        'isotope/script/layout-modes/masonry',
+        'isotope/script/layout-modes/fit-rows',
+        'isotope/script/layout-modes/vertical'
       ],
       function( Outlayer, getSize, matchesSelector, utils, Item, LayoutMode ) {
         return factory( window, Outlayer, getSize, matchesSelector, utils, Item, LayoutMode );
@@ -2972,12 +2972,12 @@ return Vertical;
       require('get-size'),
       require('desandro-matches-selector'),
       require('fizzy-ui-utils'),
-      require('isotope/js/item'),
-      require('isotope/js/layout-mode'),
+      require('isotope/script/item'),
+      require('isotope/script/layout-mode'),
       // include default layout modes
-      require('isotope/js/layout-modes/masonry'),
-      require('isotope/js/layout-modes/fit-rows'),
-      require('isotope/js/layout-modes/vertical')
+      require('isotope/script/layout-modes/masonry'),
+      require('isotope/script/layout-modes/fit-rows'),
+      require('isotope/script/layout-modes/vertical')
     );
   } else {
     // browser global

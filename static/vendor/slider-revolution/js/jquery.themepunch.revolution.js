@@ -1,5 +1,5 @@
 /**************************************************************************
- * jquery.themepunch.revolution.js - jQuery Plugin for Revolution Slider
+ * jquery.themepunch.revolution.script - jQuery Plugin for Revolution Slider
  * @version: 5.4.5 (17.05.2017)
  * @requires jQuery v1.7 or later (tested on 1.9)
  * @author ThemePunch
@@ -245,7 +245,7 @@
 					}
 				},					
 				extensions:"extensions/",			//example extensions/ or extensions/source/
-				extensions_suffix:".min.js",
+				extensions_suffix:".min.script",
 				//addons:[{fileprefix:"revolution.addon.whiteboard",init:"initWhiteBoard",params:"opt",handel:"whiteboard"}],
 				debugMode:false
 			};
@@ -270,7 +270,7 @@
 						if (i>0) jQuery(this).remove();
 					})
 				}
-				options.jsFileLocation = options.jsFileLocation || getScriptLocation("themepunch.revolution.min.js");						
+				options.jsFileLocation = options.jsFileLocation || getScriptLocation("themepunch.revolution.min.script");
 				options.jsFileLocation = options.jsFileLocation + options.extensions;
 				options.scriptsneeded = getNeededScripts(options,c);
 				options.curWinRange = 0;
@@ -607,7 +607,7 @@ jQuery.extend(true, _R, {
 		if (v.Core===undefined) {
 			v.Core = new Object();
 			v.Core.alias = "Slider Revolution Core";
-			v.Core.name = "jquery.themepunch.revolution.min.js";
+			v.Core.name = "jquery.themepunch.revolution.min.script";
 			v.Core.ver = _R.getversion().core;
 		}
 
@@ -1192,7 +1192,7 @@ var waitForScripts = function(c,o) {
 //////////////////////////////////
 var getScriptLocation = function(a) {
 
-	var srcexp = new RegExp("themepunch.revolution.min.js","gi"),
+	var srcexp = new RegExp("themepunch.revolution.min.script","gi"),
 		ret = "";
 	jQuery("script").each(function() {
 		var src = jQuery(this).attr("src");
@@ -1200,8 +1200,8 @@ var getScriptLocation = function(a) {
 			ret = src;							
 	});
 	
-	ret = ret.replace('jquery.themepunch.revolution.min.js', ''); 
-	ret = ret.replace('jquery.themepunch.revolution.js', ''); 	
+	ret = ret.replace('jquery.themepunch.revolution.min.script', '');
+	ret = ret.replace('jquery.themepunch.revolution.script', '');
 	ret = ret.split("?")[0];		
 	return ret;
 }
@@ -1734,7 +1734,7 @@ var initSlider = function (container,opt) {
 		// REMOVE ANY VIDEO JS SETTINGS OF THE VIDEO  IF NEEDED  (OLD FALL BACK, AND HELP FOR 3THD PARTY PLUGIN CONFLICTS)
 		container.find('.tp-caption video').each(function(i) {
 			var v = jQuery(this);
-			v.removeClass("video-js vjs-default-skin");
+			v.removeClass("video-script vjs-default-skin");
 			v.attr("preload","");
 			v.css({display:"none"});
 		});

@@ -111,28 +111,31 @@ def updatePermission(request):
             return JsonResponse('Permission was remove', safe=False)
         return JsonResponse('Permission changged failed', safe=False)
 
-class update_shipping(View):
+
+class view_shipping(View):
     def get(self,request):
-        customer = User.objects.get(pk=request.user.id)
-        order, created = Order.objects.get_or_create(user=request.user, complete=False)
+        current_user = request.user
+        order = Order.objects.filter(user_id=current_user.id)
         status = Order.shipping
         context = {'order_shipping':order, 'status':status}
-        return render(request,'manager/shipping.html', context)
-    def post(self, request):
-        customer = User.objects.get(id = request.user.id)
-        # order, created = Order.objects.get_or_create(user=request.user, complete=False)
-        data = request.POST["shipping"]
-        Order.objects.filter(id = data).update(complete = True)
-        order = Order.objects.get(id = data)
-        status = Order.shipping
-        context = {'order_shipping': order, 'status': status}
-        return render(request,'manager/shipping.html', context)
+        return render(request, 'manager/shipping_control.html', context)
 
+def updateShipping(request):
+    data = json.loads(request.body)
+    orderid = data['orderid']
+    status = data['status']
+    order = Order.objects.get(id = orderid)
+    order.status = status
+    order.save()
+    status = Order.shipping
+    return JsonResponse('Update shipping complete', safe=False)
 
 #load tat ca san pham len bang tren dashboard.html
+
 def dashboard(request):
     products = Product.objects.all()
     return render(request, 'manager/dashboard.html', {'products':products})
+
 # xoa, sua san pham
 def edit(request, id):
     product = Product.objects.get(id=id)

@@ -15,29 +15,50 @@
                     <div style="flex:1"></div>
                     <div style="flex:1"><strong>Mã đơn</strong></div>
                     <div style="flex:3"><strong>Sản phẩm</strong></div>
+                    <div style="flex:1"><strong>Số lượng</strong></div>
                     <div style="flex:1"> <strong>Ngày đặt</strong> </div>
-                    <div style="flex:1"><strong>Hoàn Thành</strong> </div>
+                    <div style="flex:2"><strong>Hoàn Thành</strong> </div>
                     <div style="flex:1"><strong>Tình trạng giao hàng</strong> </div>
                 </div>
-
-                <div class="cart-row">
+                {% for order in order_shipping %}
+                    <div class="cart-row">
                     <div style="flex:1"></div>
-                    <div style="flex:1">{{ order_shipping.id }}</div>
+                    {#                   Mã đơn          #}
+                    <div style="flex:1"><strong>{{ order.id }}</strong></div>
+                    {#                   Sản phẩm          #}
                     <div style="flex:3"><strong>
-                        {% for item in order_shipping.orderitem_set.all %}
-                            <p>{{ item.product }} x {{ item.quantity }}</p>
+                        {% for orderitem in order.orderitem_set.all %}
+                            <p>{{ orderitem.product.title }}</p>
                         {% endfor %}
                     </strong></div>
-                    <div style="flex:1">{{ order_shipping.date_ordered }}</div>
-                    <div style="flex:1">{{ order_shipping.complete }}</div>
-                    <div style="flex:1">
-                        {% if status %}
-                            Đang Giao
+                    {#                   Số lượng          #}
+                    <div style="flex:1"><strong>
+                        {% for orderitem in order.orderitem_set.all %}
+                            <p>{{ orderitem.quantity }}</p>
+                        {% endfor %}
+                    </strong></div>
+                    {#                   Ngày đặt          #}
+                    <div style="flex:1"> <strong>{{ order.date_ordered }}</strong> </div>
+                    {#                   Hoàn Thành          #}
+                    <div style="flex:2"><strong>
+                        {% if order.complete  %}
+                            Đã Hoàn Thành
                         {% else %}
-                            Đã Giao
+                            Chưa Hoàn Thành
                         {% endif %}
-                    </div>
+                    </strong> </div>
+                    {#                   Tình trạng giao hàng          #}
+                    <div style="flex:1"><strong>
+                        {% if status_ship %}
+                             Đã Giao
+                        {% else %}
+                             Đang giao
+                        {% endif %}
+                    </strong> </div>
                 </div>
+                {% endfor %}
+
+
             </div>
         </div>
     </div>

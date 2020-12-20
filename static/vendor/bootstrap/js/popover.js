@@ -1,5 +1,5 @@
 /* ========================================================================
- * Bootstrap: popover.js v3.3.7
+ * Bootstrap: popover.script v3.3.7
  * http://getbootstrap.com/javascript/#popovers
  * ========================================================================
  * Copyright 2011-2016 Twitter, Inc.
@@ -17,7 +17,7 @@
     this.init('popover', element, options)
   }
 
-  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js')
+  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.script')
 
   Popover.VERSION  = '3.3.7'
 
@@ -29,7 +29,7 @@
   })
 
 
-  // NOTE: POPOVER EXTENDS tooltip.js
+  // NOTE: POPOVER EXTENDS tooltip.script
   // ================================
 
   Popover.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype)
@@ -46,7 +46,7 @@
     var content = this.getContent()
 
     $tip.find('.popover-title')[this.options.html ? 'html' : 'text'](title)
-    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain js events
+    $tip.find('.popover-content').children().detach().end()[ // we use append for html objects to maintain script events
       this.options.html ? (typeof content == 'string' ? 'html' : 'append') : 'text'
     ](content)
 

@@ -5,9 +5,15 @@ from os import path
 # Create your models here.
 
 class Order(models.Model):
+    STATUS =(
+        ('1', 'Đang chuẩn bị'),
+        ('2', 'Đang vận chuyển'),
+        ('3', 'Đã giao'),
+        ('4', 'Tạm ngưng'),
+    )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    date_ordered = models.DateTimeField(auto_now_add=True)
-    complete = models.BooleanField(default=True, null=True, blank=False)
+    date_ordered = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=100, choices=STATUS, default= 1)
     transaction_id = models.CharField(max_length=100, null=True)
     def __str__(self):
         return str(self.transaction_id)

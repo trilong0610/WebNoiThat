@@ -18,7 +18,7 @@ import json
 def store(request):
     if request.user.is_authenticated:
         user = request.user
-        order, created = Order.objects.get_or_create(user=user, complete=False)
+        order, created = Order.objects.get_or_create(user=user, status= '1')
         items = order.orderitem_set.all()
         cartItems = order.get_cart_items
     else:
@@ -27,7 +27,9 @@ def store(request):
         cartItems = order['get_cart_items']
 
     category = Category.objects.all()
+
     product_main = Product.objects.all()
+
     context = {'category':category, 'items': items, 'cartItems' : cartItems, 'products':product_main}
 
     return render(request, 'store/Home.html', context)
@@ -42,7 +44,7 @@ class view_category(View):
     def get(self, request, category_id):
         if request.user.is_authenticated:
             customer = request.user.id
-            order, created = Order.objects.get_or_create(user_id=customer, complete=False)
+            order, created = Order.objects.get_or_create(user_id=customer, status= '1')
             items = order.orderitem_set.all()
             cartItems = order.get_cart_items
         else:
@@ -109,7 +111,7 @@ def updateItem(request):
 
     customer = request.user
     product = Product.objects.get(id = productID)
-    order, created = Order.objects.get_or_create(user = customer, complete=False)
+    order, created = Order.objects.get_or_create(user = customer, status= '1')
 
     orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 

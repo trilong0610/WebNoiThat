@@ -1,4 +1,4 @@
-console.log("Loadded permission.js")
+console.log("Loadded permission.script")
 
 var updateBtns = document.getElementsByClassName('update-cart')
 for (i = 0; i < updateBtns.length; i++){

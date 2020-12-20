@@ -1,6 +1,6 @@
 /*! jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
-* Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-1-7.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
+* Includes: widget.script, position.script, data.script, disable-selection.script, effect.script, effects/effect-blind.script, effects/effect-bounce.script, effects/effect-clip.script, effects/effect-drop.script, effects/effect-explode.script, effects/effect-fade.script, effects/effect-fold.script, effects/effect-highlight.script, effects/effect-puff.script, effects/effect-pulsate.script, effects/effect-scale.script, effects/effect-shake.script, effects/effect-size.script, effects/effect-slide.script, effects/effect-transfer.script, focusable.script, form-reset-mixin.script, jquery-1-7.script, keycode.script, labels.script, scroll-parent.script, tabbable.script, unique-id.script, widgets/accordion.script, widgets/autocomplete.script, widgets/button.script, widgets/checkboxradio.script, widgets/controlgroup.script, widgets/datepicker.script, widgets/dialog.script, widgets/draggable.script, widgets/droppable.script, widgets/menu.script, widgets/mouse.script, widgets/progressbar.script, widgets/resizable.script, widgets/selectable.script, widgets/selectmenu.script, widgets/slider.script, widgets/sortable.script, widgets/spinner.script, widgets/tabs.script, widgets/tooltip.script
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 
 (function( factory ) {
@@ -1975,7 +1975,7 @@ jQuery.cssHooks.borderColor = {
 
 // Basic color names only.
 // Usage of any of the other color names requires adding yourself or including
-// jquery.color.svg-names.js.
+// jquery.color.svg-names.script.
 colors = jQuery.Color.names = {
 
 	// 4.1. Basic color keywords
