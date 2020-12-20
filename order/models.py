@@ -10,7 +10,7 @@ class Order(models.Model):
     complete = models.BooleanField(default=True, null=True, blank=False)
     transaction_id = models.CharField(max_length=100, null=True)
     def __str__(self):
-        return str(self.user)
+        return str(self.transaction_id)
 
     @property
     def get_cart_total(self):
