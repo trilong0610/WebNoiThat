@@ -18,8 +18,8 @@ urlpatterns = [
 
     #them, xoa, sua sp
     path('dashboad/', views.dashboard, name="dashboard"),
-    path('edit/<int:id>', views.edit),
-    path('update/<int:id>', views.update),
-    path('delete/<int:id>', views.destroy),
+    path('edit/<int:id>', views.edit, name = 'edit_product'),
+    path('update/<int:id>', views.update, name = 'update_product'),
+    path('delete/<int:id>', views.destroy, name = 'delete_product'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
