@@ -1,6 +1,6 @@
 console.log("Loadded permission.script")
 
-var updateBtns = document.getElementsByClassName('update-cart')
+var updateBtns = document.getElementsByClassName('update-carts')
 for (i = 0; i < updateBtns.length; i++){
     updateBtns[i].addEventListener('click', function (){
         var productID = this.dataset.product

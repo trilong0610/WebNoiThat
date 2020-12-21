@@ -7,7 +7,7 @@ app_name = 'manager'
 urlpatterns = [
     path('', views.home, name = 'home'),
     path('purchase_product/', views.purchase_product.as_view(), name = 'purchase_product'),
-# quan li them xoa sua hang hoa
+    # quan li them xoa sua hang hoa
     path('add_category/', views.add_category.as_view(), name = "add_category"),
     path('add_product/', views.add_product.as_view(), name = "add_product"),
     # Phan quyen

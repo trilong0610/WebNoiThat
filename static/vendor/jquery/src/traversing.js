@@ -185,7 +185,7 @@ jQuery.each({
 				jQuery.unique( matched );
 			}
 
-			// Reverse order for parents* and prev-derivatives
+			// Reverse carts for parents* and prev-derivatives
 			if ( rparentsprev.test( name ) ) {
 				matched.reverse();
 			}

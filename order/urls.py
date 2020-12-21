@@ -1,6 +1,10 @@
 from django.urls import path
-from . import views
-
+from order import views
+from django.conf.urls.static import static
+from django.conf import settings
+from django.contrib.auth import views as auth_views
+app_name = 'carts'
 urlpatterns = [
-    path('',views.shipping_status, name = 'shipping_status')
+    # gio hang
+    path('', views.cart, name="carts"),
 ]

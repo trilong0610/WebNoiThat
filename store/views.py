@@ -5,7 +5,7 @@ from django.contrib import messages
 from product.models import Category,Product
 from product.forms import ProductForm,CategoryForm
 from django.http import HttpResponse
-from order.models import Order,ShippingAddress,OrderItem
+from cart.models import Cart, ShippingAddress, CartItem
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, decorators, logout
 from django.contrib.auth.decorators import login_required
@@ -14,23 +14,23 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 import json
 # Create your views here.
 # Xem hang hoa
-@login_required(login_url='login')
 def store(request):
     if request.user.is_authenticated:
         user = request.user
-        order, created = Order.objects.get_or_create(user=user, status= '1')
-        items = order.orderitem_set.all()
-        cartItems = order.get_cart_items
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
     else:
         items = []
-        order = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = order['get_cart_items']
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
 
     category = Category.objects.all()
-
+    # sam pham moi nhat
+    hot_product = Product.objects.all().order_by('-id')[:3]
     product_main = Product.objects.all()
 
-    context = {'category':category, 'items': items, 'cartItems' : cartItems, 'products':product_main}
+    context = {'category':category,'hot_product':hot_product, 'items': items, 'cartItems' : cartItems, 'products':product_main}
 
     return render(request, 'store/Home.html', context)
 
@@ -44,13 +44,13 @@ class view_category(View):
     def get(self, request, category_id):
         if request.user.is_authenticated:
             customer = request.user.id
-            order, created = Order.objects.get_or_create(user_id=customer, status= '1')
-            items = order.orderitem_set.all()
-            cartItems = order.get_cart_items
+            cart, created = Cart.objects.get_or_create(user_id=customer, complete=False)
+            items = cart.cartitem_set.all()
+            cartItems = cart.get_cart_items
         else:
             items = []
-            order = {'get_cart_total': 0, 'get_cart_items': 0}
-            cartItems = order['get_cart_items']
+            cart = {'get_cart_total': 0, 'get_cart_items': 0}
+            cartItems = cart['get_cart_items']
         q = Category.objects.get(pk=category_id)
         category = Category.objects.all()
 
@@ -62,9 +62,9 @@ class view_category(View):
 #     q = Category.objects.get(pk=category_id)
 #     return render(request, 'store/list_product.html', {"list_product": q})
 
-# def cart(request):
+# def carts(request):
 #     context = {}
-#     return render(request, 'store/../cart/templates/cart/cart.html', context)
+#     return render(request, 'store/../carts/templates/carts/carts.html', context)
 
 
 
@@ -111,19 +111,24 @@ def updateItem(request):
 
     customer = request.user
     product = Product.objects.get(id = productID)
-    order, created = Order.objects.get_or_create(user = customer, status= '1')
+    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
     if action == 'add':
-        orderItem.quantity = (orderItem.quantity + 1)
+        cartItem.quantity = (cartItem.quantity + 1)
     elif action == 'remove':
-        orderItem.quantity = (orderItem.quantity - 1)
+        cartItem.quantity = (cartItem.quantity - 1)
 
-    orderItem.save()
+    cartItem.save()
 
-    if orderItem.quantity <= 0:
-        orderItem.delete()
+    if cartItem.quantity <= 0:
+        cartItem.delete()
     return JsonResponse('Item was added', safe=False)
 
 #them, xoa, sua san pham
+
+# Xem san pham
+def view_product(request):
+    product = Product.objects.all()
+    return render(request, 'store/ProductGrid.html')

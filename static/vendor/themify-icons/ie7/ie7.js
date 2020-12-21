@@ -1,7 +1,7 @@
 /* To avoid CSS expressions while still supporting IE 7 and IE 6, use this script */
 /* The script tag referring to this file must be placed before the ending body tag. */
 
-/* Use conditional comments in order to target IE 7 and older:
+/* Use conditional comments in carts to target IE 7 and older:
 	<!--[if lt IE 8]><!-->
 	<script src="ie7/ie7.script"></script>
 	<!--<![endif]-->

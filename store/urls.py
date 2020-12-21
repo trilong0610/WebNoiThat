@@ -7,7 +7,7 @@ urlpatterns = [
     # trang chu
     path('', views.store, name="store"),
     # gio hang
-
+    path('ProductGrid/', views.view_product, name = 'ProductGrid'),
     # thanh toan
     path('updateItem/', views.updateItem, name="updateItem"),
     # xem san pham trong danh muc

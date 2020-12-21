@@ -74,7 +74,7 @@
                     {#                   ---------------Phan  quyen ----------------------------------------------           #}
                     {#                Menu chuc nang             #}
                     <div style="flex:1">
-                        {% with 'product category order orderitem shippingaddress purchase user' as list %}
+                        {% with 'product category carts orderitem shippingaddress purchase user' as list %}
                           {% for i in list.split %}
                             <div class="container">
                             <div class="row">
@@ -180,25 +180,25 @@
                     {#                End Danh Muc             #}
                      {#                Don hang             #}
                     <div style="flex:1">
-                        {% if 'order.add_order' in user_permission.get_all_permissions %}#}
+                        {% if 'carts.add_order' in user_permission.get_all_permissions %}#}
                                 <button type="button" class="btn btn-success ">Them Don hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Them Don hang</button>
                             {% endif %}
 
-                            {% if 'order.view_order' in user_permission.get_all_permissions %}
+                            {% if 'carts.view_order' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xem Don hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xem Don hang</button>
                             {% endif %}
 
-                            {% if 'order.change_order' in user_permission.get_all_permissions %}
+                            {% if 'carts.change_order' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Sua Don hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Sua Don hang</button>
                             {% endif %}
 
-                            {% if 'order.delete_order' in user_permission.get_all_permissions %}
+                            {% if 'carts.delete_order' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xoa Don hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xoa Don hang</button>
@@ -207,25 +207,25 @@
                     {#                End don hang             #}
                     {#                Ct don hang             #}
                     <div style="flex:1">
-                        {% if 'order.add_orderitem' in user_permission.get_all_permissions %}#}
+                        {% if 'carts.add_orderitem' in user_permission.get_all_permissions %}#}
                                 <button type="button" class="btn btn-success ">Them Chi Tiet Don Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Them Chi Tiet Don Hang</button>
                             {% endif %}
 
-                            {% if 'order.view_orderitem' in user_permission.get_all_permissions %}
+                            {% if 'carts.view_orderitem' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xem Chi Tiet Don Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xem Chi Tiet Don Hang</button>
                             {% endif %}
 
-                            {% if 'order.change_orderitem' in user_permission.get_all_permissions %}
+                            {% if 'carts.change_orderitem' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Sua Chi Tiet San Pham</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Sua Chi Tiet San Pham</button>
                             {% endif %}
 
-                            {% if 'order.delete_orderitem' in user_permission.get_all_permissions %}
+                            {% if 'carts.delete_orderitem' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xoa Chi Tiet San Pham</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xoa Chi Tiet San Pham</button>
@@ -234,25 +234,25 @@
                     {#                End ct don hang             #}
                     {#                Giao hang             #}
                     <div style="flex:1">
-                        {% if 'order.add_shippingaddress' in user_permission.get_all_permissions %}#}
+                        {% if 'carts.add_shippingaddress' in user_permission.get_all_permissions %}#}
                                 <button type="button" class="btn btn-success ">Them Chi Tiet Giao Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Them Chi Tiet Giao Hang</button>
                             {% endif %}
 
-                            {% if 'order.view_shippingaddress' in user_permission.get_all_permissions %}
+                            {% if 'carts.view_shippingaddress' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xem Chi Tiet Giao Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xem Chi Tiet Giao Hang</button>
                             {% endif %}
 
-                            {% if 'order.change_shippingaddress' in user_permission.get_all_permissions %}
+                            {% if 'carts.change_shippingaddress' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Sua Chi Tiet Giao Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Sua Chi Tiet Giao Hang</button>
                             {% endif %}
 
-                            {% if 'order.delete_shippingaddress' in user_permission.get_all_permissions %}
+                            {% if 'carts.delete_shippingaddress' in user_permission.get_all_permissions %}
                                 <button type="button" class="btn btn-success ">Xoa Chi Tiet Giao Hang</button>
                             {% else %}
                                 <button type="button" class="btn btn-danger ">Xoa Chi Tiet Giao Hang</button>

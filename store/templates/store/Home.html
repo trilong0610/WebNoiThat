@@ -113,37 +113,22 @@
                                         <div class="navbar-main">
                                             <ul class="navbar-menu">
                                                 <li class="dropdown">
-                                                    <a href="Home.html" style="color: #c19876;">HOME</a>
+                                                    <a href="Home.html" style="color: #c19876;">Trang Chủ</a>
 
                                                 </li>
                                                 <li class="dropdown productMN">
-                                                    <a href="ProductGrid.html">PRODUCT</a>
+                                                    <a href="ProductGrid.html">Danh Mục Sản Phẩm</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
 
                                                             <div class="col-md-3 ">
                                                                 <div class=" slideSort">
-                                                                    <h3 class="slider-left-title">Catalog</h3>
+                                                                    <h3 class="slider-left-title">Loại Sản Phẩm</h3>
                                                                     <ul class="slide-left-list">
-                                                                        <li><a href="ProductGrid.html">Kitchen</a></li>
-                                                                        <li><a href="ProductGrid.html">Living room</a></li>
-                                                                        <li><a href="ProductGrid.html">Office</a></li>
-                                                                        <li><a href="ProductGrid.html">Gadgets</a></li>
-                                                                        <li><a href="ProductGrid.html">Accessories</a></li>
-                                                                        <li><a href="ProductGrid.html">Tool kits</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 ">
-
-                                                                <div class=" slideSort">
-                                                                    <h3 class="slider-left-title">Categories</h3>
-                                                                    <ul class="slide-left-list">
-                                                                        <li><a href="ProductGrid.html">New Product</a></li>
-                                                                        <li><a href="ProductGrid.html">Most Poupular</a></li>
-                                                                        <li><a href="ProductGrid.html">Top Trending</a></li>
-                                                                        <li><a href="ProductGrid.html">On Sale</a></li>
+                                                                        {% for items in category %}
+                                                                            <li><a href="ProductGrid.html">{{ items.title }}</a></li>
+                                                                        {% endfor %}
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -480,73 +465,31 @@
             <section class="latest-product">
                 <div class="container">
                     <div class="latest-product-title title-text">
-                        <h3>OUR PRODUCT</h3>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit es</p>
+                        <h3>Sản phẩm mới nhất</h3>
+{#                        <p>Duis aute irure dolor in reprehenderit in voluptate velit es</p>#}
                     </div>
                     <div class="detail-navtab latest-product-tab">
-                        <ul class="nav nav-pills nav-justified">
-                            <li class="active"><a data-toggle="pill" href="#all" class="color-setting">NEW PRODUCT</a></li>
-                            <li class=""><a data-toggle="pill" href="#featured" class="color-setting">MOST POPULAR</a></li>
-                            <li class=""><a data-toggle="pill" href="#latest" class="color-setting">TOP TRENDING</a></li>
-                            <li class=""><a data-toggle="pill" href="#sellers" class="color-setting">SALE</a></li>
-                        </ul>
+{#                        <ul class="nav nav-pills nav-justified">#}
+{#                            <li class="active"><a data-toggle="pill" href="#all" class="color-setting">NEW PRODUCT</a></li>#}
+{#                            <li class=""><a data-toggle="pill" href="#featured" class="color-setting">MOST POPULAR</a></li>#}
+{#                            <li class=""><a data-toggle="pill" href="#latest" class="color-setting">TOP TRENDING</a></li>#}
+{#                            <li class=""><a data-toggle="pill" href="#sellers" class="color-setting">SALE</a></li>#}
+{#                        </ul>#}
                         <div class="tab-content detail-tab">
                             <div id="all" class="tab-pane fade  active in">
                                 <div class="row product-gird">
-                                    <div class="col-xs-6 col-sm-3">
+{#                                 ---------Hot product --------------    #}
+                                    {% for items in hot_product %}
+                                        <div class="col-xs-6 col-sm-3">
                                         <div class="product-item productG" style="margin-top: 0">
                                             <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/2.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="Cart.html">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/3.png" alt="product" class="product-img-first img-responsive">
+                                                <img src="{{ items.image.url|default_if_none:'#' }}" alt="product" class="product-img-first img-responsive">
                                                 <div class="arrIcon"></div>
                                                 <div class="box-posi">HOT</div>
                                                 <div class="arrIcon2">
                                                     <ul>
                                                         <li>
                                                             <a href="Cart.html">
-
                                                                 <i class="la la-shopping-cart"></i>
                                                             </a>
                                                         </li>
@@ -558,7 +501,6 @@
                                                         </li>
                                                         <li>
                                                             <a href="#">
-
                                                                 <i class="la la-heart-o"></i>
                                                             </a>
                                                         </li>
@@ -569,848 +511,894 @@
                                                 <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
                                                     <div class="product-name">
                                                         <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
+                                                            <a href="#" class="color-setting">{{ items.title }}</a>
                                                         </h3>
                                                     </div>
                                                     <div class="product-price">
-                                                        <span class="price1">$240.00</span>
-                                                        <span class="price">$199.00</span>
+                                                        <span class="price">   {{ items.price }} VND</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="Cart.html">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Mystery Box</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">HOT</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="Cart.html">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price1">$240.00</span>
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="Cart.html">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">NEW</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="Cart.html">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-
-                                        <div class="product-image sizeImg" style="height: 100%">
-                                            <img src="images/2.png" alt="product" class="product-img-first img-responsive">
-                                            <div class="arrIcon"></div>
-                                            <div class="box-posi">NEW</div>
-                                            <div class="arrIcon2">
-                                                <ul>
-                                                    <li>
-                                                        <a href="Cart.html">
-
-                                                            <i class="la la-shopping-cart"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li style="margin-left: 6px;margin-right: 6px;">
-                                                        <a href="SingleProduct.html">
-
-                                                            <i class="la la-eye"></i>
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="#">
-
-                                                            <i class="la la-heart-o"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="product-text clearfix">
-                                            <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                <div class="product-name">
-                                                    <h3 class="product-title">
-                                                        <a href="#" class="color-setting">Magic Clock</a>
-
-
-
-                                                    </h3>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span class="price">$199.00</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/8.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">The versatile Cabbage</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                </div>
-                            </div>
-                            <div id="featured" class="tab-pane fade">
-                                <div class="row product-gird">
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/2.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/3.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">HOT</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price1">$199.00</span>
-                                                        <span class="price">$ 199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-                                                                <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Mystery Box</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">HOT</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price1">$199.00</span>
-                                                        <span class="price">$ 199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">NEW</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                </div>
-                            </div>
-                            <div id="latest" class="tab-pane fade">
-                                <div class="row product-gird">
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">NEW</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/2.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">NEW</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/8.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">The versatile Cabbage</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                </div>
-                            </div>
-                            <div id="sellers" class="tab-pane fade">
-                                <div class="row product-gird">
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Mystery Box</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">HOT</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Magic Clock</a>
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price1">$199.00</span>
-                                                        <span class="price">$ 199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
-                                    <div class="col-xs-6 col-sm-3">
-                                        <div class="product-item productG" style="margin-top: 0">
-                                            <div class="product-image sizeImg" style="height: 100%">
-                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">
-                                                <div class="arrIcon"></div>
-                                                <div class="box-posi">SALE</div>
-                                                <div class="arrIcon2">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-shopping-cart"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li style="margin-left: 6px;margin-right: 6px;">
-                                                            <a href="SingleProduct.html">
-
-
-                                                            <i class="la la-eye"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-
-                                                                <i class="la la-heart-o"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="product-text clearfix">
-                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">
-                                                    <div class="product-name">
-                                                        <h3 class="product-title">
-                                                            <a href="#" class="color-setting">Biplane</a>
-
-
-                                                        </h3>
-                                                    </div>
-                                                    <div class="product-price">
-                                                        <span class="price">$199.00</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> <!-- /product-item -->
+                                    {% endfor %}
+                                {# ---------End Hot product --------------    #}
+                                     <!-- /product-item -->
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/3.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">HOT</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="Cart.html">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price1">$240.00</span>#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="Cart.html">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Mystery Box</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">HOT</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="Cart.html">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price1">$240.00</span>#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="Cart.html">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">NEW</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="Cart.html">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{##}
+{#                                        <div class="product-image sizeImg" style="height: 100%">#}
+{#                                            <img src="images/2.png" alt="product" class="product-img-first img-responsive">#}
+{#                                            <div class="arrIcon"></div>#}
+{#                                            <div class="box-posi">NEW</div>#}
+{#                                            <div class="arrIcon2">#}
+{#                                                <ul>#}
+{#                                                    <li>#}
+{#                                                        <a href="Cart.html">#}
+{##}
+{#                                                            <i class="la la-shopping-carts"></i>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                    <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                        <a href="SingleProduct.html">#}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                    <li>#}
+{#                                                        <a href="#">#}
+{##}
+{#                                                            <i class="la la-heart-o"></i>#}
+{#                                                        </a>#}
+{#                                                    </li>#}
+{#                                                </ul>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="product-text clearfix">#}
+{#                                            <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                <div class="product-name">#}
+{#                                                    <h3 class="product-title">#}
+{#                                                        <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{##}
+{##}
+{#                                                    </h3>#}
+{#                                                </div>#}
+{#                                                <div class="product-price">#}
+{#                                                    <span class="price">$199.00</span>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{##}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/8.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">The versatile Cabbage</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div id="featured" class="tab-pane fade">#}
+{#                                <div class="row product-gird">#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/2.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/3.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">HOT</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price1">$199.00</span>#}
+{#                                                        <span class="price">$ 199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{#                                                                <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Mystery Box</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">HOT</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price1">$199.00</span>#}
+{#                                                        <span class="price">$ 199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">NEW</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div id="latest" class="tab-pane fade">#}
+{#                                <div class="row product-gird">#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/7.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">NEW</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{##}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/2.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">NEW</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{##}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/8.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">The versatile Cabbage</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <div id="sellers" class="tab-pane fade">#}
+{#                                <div class="row product-gird">#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/4.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Mystery Box</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/5.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">HOT</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Magic Clock</a>#}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price1">$199.00</span>#}
+{#                                                        <span class="price">$ 199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
+{#                                    <div class="col-xs-6 col-sm-3">#}
+{#                                        <div class="product-item productG" style="margin-top: 0">#}
+{#                                            <div class="product-image sizeImg" style="height: 100%">#}
+{#                                                <img src="images/6.png" alt="product" class="product-img-first img-responsive">#}
+{#                                                <div class="arrIcon"></div>#}
+{#                                                <div class="box-posi">SALE</div>#}
+{#                                                <div class="arrIcon2">#}
+{#                                                    <ul>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-shopping-carts"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                            <a href="SingleProduct.html">#}
+{##}
+{##}
+{#                                                            <i class="la la-eye"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                        <li>#}
+{#                                                            <a href="#">#}
+{##}
+{#                                                                <i class="la la-heart-o"></i>#}
+{#                                                            </a>#}
+{#                                                        </li>#}
+{#                                                    </ul>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                            <div class="product-text clearfix">#}
+{#                                                <div class="product-left pull-left" style="padding-top: 20px;padding-bottom: 15px;">#}
+{#                                                    <div class="product-name">#}
+{#                                                        <h3 class="product-title">#}
+{#                                                            <a href="#" class="color-setting">Biplane</a>#}
+{##}
+{##}
+{#                                                        </h3>#}
+{#                                                    </div>#}
+{#                                                    <div class="product-price">#}
+{#                                                        <span class="price">$199.00</span>#}
+{#                                                    </div>#}
+{#                                                </div>#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div> <!-- /product-item -->#}
                                 </div>
                             </div>
                         </div>

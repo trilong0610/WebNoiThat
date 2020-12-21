@@ -2,7 +2,7 @@ from django.db import models
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(default='',max_length=255)
-    description = models.TextField(default='')
+    description = models.TextField(default='', blank=True)
     active = models.BooleanField(default=True)
     def __str__(self):
         return self.title
@@ -11,8 +11,8 @@ class Category(models.Model):
 class Product(models.Model):
     title = models.CharField(default='',max_length=255)
     price  = models.IntegerField(default=0)
-    description = models.TextField(default='')
-    digital = models.BooleanField(default=False, null=True, blank=False)
+    description = models.TextField(default='', blank=True)
+    amount = models.IntegerField(default=1)
     active = models.BooleanField(default=True)
     date_add = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

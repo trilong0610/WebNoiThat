@@ -1,6 +1,6 @@
 console.log("Loadded permission.script")
 
-var updateBtns = document.getElementsByClassName('update-cart')
+var updateBtns = document.getElementsByClassName('update-carts')
 for (i = 0; i < updateBtns.length; i++){
     updateBtns[i].addEventListener('click', function (){
         var productID = this.dataset.product
@@ -149,13 +149,13 @@ $(function() {
         e.stopPropagation();
     });
 
-    /*Mini shop cart*/
-    var miniCart = $('.mini-cart');
-    $('.u-shop-cart .ic-cart').on('click', function () {
+    /*Mini shop carts*/
+    var miniCart = $('.mini-carts');
+    $('.u-shop-carts .ic-carts').on('click', function () {
         miniCart.toggleClass('opened');
     });
     $(window).on('click', function (event) {
-        if (!$(event.target).closest(miniCart).length && !$(event.target).closest('.u-shop-cart .ic-cart').length) {
+        if (!$(event.target).closest(miniCart).length && !$(event.target).closest('.u-shop-carts .ic-carts').length) {
             miniCart.removeClass('opened');
         }
     });
@@ -919,7 +919,7 @@ $(function() {
 
             // close btn init
             if($('.item-close').length) base.closeBtn();
-            if($('.shopping-cart-full').length) base.removeProduct();
+            if($('.shopping-carts-full').length) base.removeProduct();
 
         },
 

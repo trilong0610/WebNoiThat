@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.shortcuts import render, redirect
 from django.views import View
 
-from order.models import Order
+from cart.models import Cart
 from product.models import Product
 from product.forms import ProductForm,CategoryForm
 from supplier.models import Supplier
@@ -115,19 +115,19 @@ def updatePermission(request):
 class view_shipping(View):
     def get(self,request):
         current_user = request.user
-        order = Order.objects.filter(user_id=current_user.id)
-        status = Order.shipping
-        context = {'order_shipping':order, 'status':status}
+        cart = Cart.objects.filter(user_id=current_user.id)
+        status = Cart.shipping
+        context = {'order_shipping':cart, 'status':status}
         return render(request, 'manager/shipping_control.html', context)
 
 def updateShipping(request):
     data = json.loads(request.body)
     orderid = data['orderid']
     status = data['status']
-    order = Order.objects.get(id = orderid)
-    order.status = status
-    order.save()
-    status = Order.shipping
+    cart = Cart.objects.get(id = orderid)
+    cart.status = status
+    cart.save()
+    status = Cart.shipping
     return JsonResponse('Update shipping complete', safe=False)
 
 #load tat ca san pham len bang tren dashboard.html

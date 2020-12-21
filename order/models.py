@@ -1,64 +1,50 @@
-from django.db import models
-from product.models import Product
 from django.contrib.auth.models import User
-from os import path
+from django.db import models
+
 # Create your models here.
+from cart.models import Cart
+
 
 class Order(models.Model):
     STATUS =(
-        ('1', 'Đang chuẩn bị'),
-        ('2', 'Đang vận chuyển'),
-        ('3', 'Đã giao'),
-        ('4', 'Tạm ngưng'),
+        ('1', 'Đã tiếp nhận'),
+        ('2', 'Đang chuẩn bị'),
+        ('3', 'Đang giao hàng'),
+        ('4', 'Đã giao hàng'),
+        ('5', 'Đã hủy'),
+        ('6', 'Tạm ngưng'),
     )
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     date_ordered = models.DateField(auto_now_add=True)
-    status = models.CharField(max_length=100, choices=STATUS, default= 1)
+    status = models.CharField(max_length=100, choices=STATUS, default='1')
     transaction_id = models.CharField(max_length=100, null=True)
-    def __str__(self):
-        return str(self.transaction_id)
-
-    @property
-    def get_cart_total(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.get_total for item in orderitems])
-        return total
-
-    @property
-    def get_cart_items(self):
-        orderitems = self.orderitem_set.all()
-        total = sum([item.quantity for item in orderitems])
-        return total
-
-    @property
-    def shipping(self):
-        shipping = False
-        orderitems = self.orderitem_set.all()
-        for i in orderitems:
-            if i.product.digital == False:
-                shipping = True
-        return shipping
-
-
-class OrderItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL,blank=True, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL,blank=True, null=True)
-    quantity = models.IntegerField(default=0, null=True, blank=True)
-    date_add = models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return str(self.order)
-    @property
-    def get_total(self):
-        total = self.product.price * self.quantity
-        return total
-
-class ShippingAddress(models.Model):
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
-    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)
     state = models.CharField(max_length=200, null=False)
     zipcode = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return self.address
+        return str(self.user + " -- " + self.cart.id)
+
+    # @property
+    # def get_cart_total(self):
+    #     cartitem = self.cartitem.all()
+    #     total = sum([item.get_total for item in cartitem])
+    #     return total
+    #
+    # @property
+    # def get_cart_items(self):
+    #     cartitem = self.cartitem_set.all()
+    #     total = sum([item.quantity for item in cartitem])
+    #     return total
+    #
+    # @property
+    # def shipping(self):
+    #     shipping = False
+    #     cartitem = self.cartitem_set.all()
+    #     for i in cartitem:
+    #         if i.product.digital == False:
+    #             shipping = True
+    #     return shipping
+
