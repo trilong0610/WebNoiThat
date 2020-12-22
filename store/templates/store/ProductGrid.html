@@ -1,6 +1,6 @@
 {% extends 'store/base.html' %}
 {%  load static %}
-
+{% load humanize %}
 {% block banner %}
     <div class="banner relative">
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
@@ -52,22 +52,19 @@
 {#                       ---------- All product---------#}
                             {% for all_product in all_product %}
                                 <div class="col-md-4">
-                                <a href="SingleProduct.html">
+                                <a href="{% url 'store:detailProduct' all_product.id %}">
                                     <div class="productG ">
                                     <div class="sizeImg" style="width: 100%;float: none">
-                                        <img src="{{ all_product.image.url|default_if_none:'#' }}" alt="product1" class="img-responsive"/>
+                                        <img src="{{ all_product.image.url|default_if_none:'#' }}" alt="product1" class="img-thumbnail"/>
                                         <div class="arrIcon"></div>
     {#                                    <div class="box-posi">HOT</div>#}
                                         <div class="arrIcon2">
                                             <ul>
                                                 <li>
-                                                    <a href="#">
-                                                        <i class="la la-shopping-cart"></i>
-                                                    </a>
+                                                        <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
                                                 </li>
                                                 <li style="margin-left: 6px;margin-right: 6px;">
-                                                    <a href="SingleProduct.html">
-
+                                                    <a href="{% url 'store:detailProduct' all_product.id %}">
                                                     <i class="la la-eye"></i>
                                                     </a>
                                                 </li>
@@ -82,8 +79,7 @@
                                     </div>
                                     <div class="sizeImgCalc" style="width: 100%;float: none;padding-left: 0;padding-bottom: 7px;">
                                         <h3> {{ all_product.title }}</h3>
-                                        <h4>{{ all_product.price }} VND</h4>
-
+                                        <h4>{{ all_product.price|intcomma }} VND</h4>
                                     </div>
                                 </div>
                                 </a>
@@ -128,130 +124,6 @@
                     </div>
 {% endblock content %}
 {% block left-navbar %}
-                    <div class=" slideSort">
-                        <h3 class="slider-left-title">Danh Mục</h3>
-                        <ul class="slide-left-list">
-                            <li><a href="#">Sản phẩm mới</a></li>
-                            <li><a href="#">Nhiều người mua</a></li>
-                            <li><a href="#">Giảm giá</a></li>
-                        </ul>
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
-                    <div class=" slideSort">
-                        <h3 class="slider-left-title">Loại Sản Phẩm</h3>
-                    {#        ---- Category-------                #}
-                        <ul class="slide-left-list">
-                            {% for items in category %}
-                                <li><a href="#">{{ items.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    {#        ---- Category-------                #}
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
-                    <div class="sidebar-filter-color">
-                        <h3 class="slider-left-title">CATALOG</h3>
-                        <h3 class="slider-left-title" style="font-size: 16px;margin-top: 15px;margin-bottom: 15px;">
-                            PRICE</h3>
-                        <div class="sidebar-box">
-                            <div class="custom-checkbox">
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                                <p>Under 10$</p>
-                            </div>
-                            <div class="custom-checkbox">
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                                <p>$10-$20</p>
-                            </div>
-                            <div class="custom-checkbox">
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                                <p>$20-$30</p>
-                            </div>
-                            <div class="custom-checkbox">
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                                <p>$30-$40</p>
-                            </div>
-                            <div class="custom-checkbox">
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
-                                </div>
-                                <p>Above $40</p>
-                            </div>
 
-                        </div>
-                        <h3 class="slider-left-title" style="font-size: 16px;margin-top: 26px;margin-bottom: 22px;">
-                            COLOR</h3>
-
-                        <ul>
-                            <li class="tooltip" style="background: #ffd098;">
-                                <span class="tooltiptext">Tooltip text</span>
-                            </li>
-                            <li class="tooltip" style="background: #f7bb66;">
-                                <span class="tooltiptext">Tooltip text 1</span>
-
-                            </li>
-                            <li class="tooltip" style="background: #af793a;">
-                                <span class="tooltiptext">Tooltip text 2</span>
-
-                            </li>
-                            <li class="tooltip" style="background: #b75a20;">
-                                <span class="tooltiptext">Tooltip text 3</span>
-
-                            </li>
-                            <li class="tooltip" style="background: #9e5519;">
-                                <span class="tooltiptext">Tooltip text 4</span>
-
-                            </li>
-                            <li class="tooltip" style="background: #513f0d;">
-                                <span class="tooltiptext">Tooltip text 5</span>
-
-                            </li>
-                            <li class="tooltip" style="background: #5d1809;">
-                                <span class="tooltiptext">Tooltip text 6</span>
-
-                            </li>
-                        </ul>
-
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 0;"></div>
-
-                    <div class="box-slider-left slideNewproduct slideNewproduct2">
-                        <h3 class="slider-left-title">Best sellers</h3>
-{#                    -------------Best seller---------#}
-                        {% for best_seller in best_sellers %}
-                            <div class="box-slideNewproduct">
-                            <div class="slideNewproduct-item slideNewproduct-img">
-                                <a href="SingleProduct.html"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1"
-                                                 class="img-responsive"/></a>
-                            </div>
-                            <div class="slideNewproduct-item slideNewproduct-text">
-                                <h5><a href="SingleProduct.html"> {{ best_seller.title }}</a></h5>
-                                <p class="slideProduct-price"> {{ best_seller.price }} VND</p>
-                            </div>
-                        </div>
-                        {% endfor %}
-{#                    ------------- end Best seller---------#}
-                    </div>
 {% endblock left-navbar %}
 

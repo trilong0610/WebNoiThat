@@ -18,6 +18,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import  CreateUserForm
 from django.http import HttpResponseRedirect
 
+def accountDetail(request):
+    context = {}
+    return render(request, 'user/AccountDetail.html', context)
+
 
 def RegisterPage(request):
     form = CreateUserForm()
@@ -30,14 +34,13 @@ def RegisterPage(request):
             messages.success(request,'Account was created for ' + user)
             return redirect('login')
     context = {'form': form}
-    return  render(request, 'User/register.html', context)
+    return  render(request, 'user/register.html', context)
 
 
 def LoginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -45,7 +48,7 @@ def LoginPage(request):
         else:
             messages.info(request, 'Username or password is incorrect')
     context = {}
-    return render(request, 'User/login.html', context)
+    return render(request, 'user/MyAccount.html', context)
 
 def LogoutUser(request):
     logout(request)

@@ -26,7 +26,7 @@ class Order(models.Model):
     zipcode = models.CharField(max_length=200, null=False)
     date_added = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return str(self.user + " -- " + self.cart.id)
+        return str(self.user.username)
 
     #
     # @property

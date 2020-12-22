@@ -1,3 +1,4 @@
+{% load humanize %}
 {% load static %}
 <!DOCTYPE html>
 <!-- <html class="no-js" lang="en"> -->
@@ -79,29 +80,16 @@
                         </div>
                     </div>
                     <div class="header-dropdown pull-right">
-                        <div class="dropdown dp-iblock ">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-expanded="false">ENG
-                                <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">ENGLISH</a></li>
-                                <li><a href="#">VIETNAMESE</a></li>
-                            </ul>
-                        </div>
-                        <div class="dropdown header-dropdown-br dp-iblock">
-                            <button class="btn dropdown-toggle" type="button" data-toggle="dropdown"
-                                    aria-expanded="false">USD
-                                <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">USD</a></li>
-                                <li><a href="#">VND</a></li>
-                                <li><a href="#">EURO</a></li>
-                            </ul>
-                        </div>
                         <div class="check-account dp-iblock">
-                            <a href="WishList.html" class="account link-color" style="padding-left: 19px;padding-right: 10px;">My
-                                Wishlist: 4</a>
-                            <a href="Cart.html" class="check link-color">My Cart: 3</a>
+                            <p>
+                                {% if user.is_authenticated %}
+                                                    Xin chào: {{ user.username }}
+                                                {% else %}
+                                                    <a href="{% url 'user:login' %}" class="check link-color">Đăng nhập/Đăng kí</a>
+                                                {% endif %}
+                            </p>
+                            <a href="Cart.html" class="check link-color">Giỏ Hàng: {{ cartItems }}</a>
+
                         </div>
                     </div>
                     <!--                            <div class="header-tleft pull-right">-->
@@ -123,7 +111,7 @@
                         <div class="s-inner clearfix">
                             <div class="pull-left nav-left">
                                 <div class="logo">
-                                    <a href="Home.html">
+                                    <a href="{% url 'store:home' %}">
                                         <img src="{% static 'images/logo.png' %}" alt="logo" class=" img-responsive">
                                     </a>
                                 </div>
@@ -137,14 +125,13 @@
                                 <div class="navbar-main">
                                     <ul class="navbar-menu">
                                         <li class="dropdown">
-                                            <a href="{% url 'store:store' %}" >Trang Chủ</a>
+                                            <a href="{% url 'store:home' %}" >Trang Chủ</a>
                                         </li>
                                           <li class="dropdown productMN">
                                                     <a href="{% url 'store:productGrid' %}" class="active-menu">Sản Phẩm</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
-
                                                             <div class="col-md-5 ">
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Loại Sản Phẩm</h3>
@@ -155,14 +142,13 @@
                                                                     </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-5 ">
+                                                            <div class="col-md-3 ">
 
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Danh Mục</h3>
                                                                     <ul class="slide-left-list">
                                                                         <li><a href="{% url 'store:hotProduct' %}">Sản phẩm mới</a></li>
-                                                                        <li><a href="ProductGrid.html">Nhiều người mua</a></li>
-                                                                        <li><a href="ProductGrid.html">Giảm giá</a></li>
+                                                                        <li><a href="{% url 'store:mostPopular' %}">Nhiều người mua</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -227,7 +213,7 @@
 {#                                                                        <li><a href="FAQ.html">FAQ</a></li>#}
 {#                                                                        <li><a href="Policy.html">Term & Conditions</a></li>#}
 {#                                                                        <li><a href="Policy.html">Private Policy</a></li>#}
-{#                                                                        <li><a href="Policy.html">Term of User</a></li>#}
+{#                                                                        <li><a href="Policy.html">Term of user</a></li>#}
 {#                                                                    </ul>#}
 {#                                                                </div>#}
 {#                                                            </div>#}
@@ -286,13 +272,18 @@
 {#                                                    </div>#}
 {#                                                </li>#}
                                         <li class="dropdown">
-                                            <a href="AboutUs.html">Về Chúng Tôi</a>
-                                        </li>
-                                        <li class="dropdown">
                                             <a href="{% url 'store:contact' %}">Liên Hệ</a>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="MyAccount.html">Tài Khoản</a>
+                                            {% if user.is_authenticated %}
+                                               <a href="{% url 'user:accountDetail' %}">
+                                                    Tài Khoản
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'user:login' %}">
+                                                    Tài Khoản
+                                                </a>
+                                            {% endif %}
                                         </li>
                                     </ul>
                                 </div>
@@ -331,8 +322,99 @@
             </div>
             <div class="col-md-3 col-md-pull-9">
             {#    ----------------Left navbar----------------#}
-                {% block left-navbar %}
-                {% endblock left-navbar %}
+{#                {% block left-navbar %}#}
+{#                {% endblock left-navbar %}#}
+                <div class=" slideSort">
+                        <h3 class="slider-left-title">Danh Mục</h3>
+                        <ul class="slide-left-list">
+                            <li><a href="#">Sản phẩm mới</a></li>
+                            <li><a href="#">Nhiều người mua</a></li>
+{#                            <li><a href="#">Giảm giá</a></li>#}
+                        </ul>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
+                    <div class=" slideSort">
+                        <h3 class="slider-left-title">Loại Sản Phẩm</h3>
+                    {#        ---- Category-------                #}
+                        <ul class="slide-left-list">
+                            {% for items in category %}
+                                <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {#        ---- Category-------                #}
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
+{#                    <div class="sidebar-filter-color">#}
+{#                        <h3 class="slider-left-title">CATALOG</h3>#}
+{#                        <h3 class="slider-left-title" style="font-size: 16px;margin-top: 15px;margin-bottom: 15px;">#}
+{#                            PRICE</h3>#}
+{#                        <div class="sidebar-box">#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>Under 10$</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$10-$20</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$20-$30</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$30-$40</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>Above $40</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 0;"></div>#}
+
+                    <div class="box-slider-left slideNewproduct slideNewproduct2">
+                        <h3 class="slider-left-title">Best sellers</h3>
+{#                    -------------Best seller---------#}
+                        {% for best_seller in best_sellers %}
+                            <div class="box-slideNewproduct">
+                            <div class="slideNewproduct-item slideNewproduct-img">
+                                <a href="SingleProduct.html"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1"
+                                                 class="img-responsive"/></a>
+                            </div>
+                            <div class="slideNewproduct-item slideNewproduct-text">
+                                <h5><a href="SingleProduct.html"> {{ best_seller.title }}</a></h5>
+                                <p class="slideProduct-price"> {{ best_seller.price }} VND</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+{#                    ------------- end Best seller---------#}
+                    </div>
             {#    ----------------Left navbar----------------#}
             </div>
         </div>
@@ -383,7 +465,7 @@
                             <h4>Other</h4>
                         </div>
                         <div class="list-support">
-                            <a href="AccountDetail.html" > <p>Account</p></a>
+                            <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
                             <a href="Cart.html"> <p>Cart</p></a>
                             <a href="WishList.html"> <p>Wishlist</p></a>
                         </div>
@@ -461,6 +543,6 @@
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.parallax.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.slideanims.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.video.min.js' %}"></script>
-<script src="{% static 'script/main.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
 </body>
 </html>

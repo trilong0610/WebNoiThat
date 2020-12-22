@@ -73,7 +73,7 @@ class view_User(PermissionRequiredMixin,View):
     def get(self,request):
         # Neu la superuser moi cho vao trang phan quyen
             list_users = User.objects.all()
-            # Gui OBJ User hien tai de check permission
+            # Gui OBJ user hien tai de check permission
             request_user = User.objects.get(id = request.user.id)
             context = {'users': list_users, 'request_user': request_user}
             return render(request, 'manager/view_user.html', context)

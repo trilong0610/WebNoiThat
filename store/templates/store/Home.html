@@ -99,7 +99,7 @@
                                 <div class="s-inner clearfix">
                                     <div class="pull-left nav-left">
                                         <div class="logo">
-                                            <a href="Home.html">
+                                            <a href="{% url 'store:home' %}">
                                             <img src="images/logo.png" alt="logo" class=" img-responsive">
                                             </a>
                                         </div>
@@ -117,7 +117,7 @@
 
                                                 </li>
                                                 <li class="dropdown productMN">
-                                                    <a href="ProductGrid.html">Danh Mục Sản Phẩm</a>
+                                                    <a href="{% url 'store:productGrid' %}">Sản Phẩm</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
@@ -126,8 +126,8 @@
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Loại Sản Phẩm</h3>
                                                                     <ul class="slide-left-list">
-                                                                        {% for items in category %}
-                                                                            <li><a href="ProductGrid.html">{{ items.title }}</a></li>
+                                                                        {% for category in category %}
+                                                                            <li><a href="{% url 'store:category' category.id %}">{{ category.title }}</a></li>
                                                                         {% endfor %}
                                                                     </ul>
                                                                 </div>
@@ -258,7 +258,7 @@
                                                     <a href="Contact.html">CONTACT</a>
                                                 </li>
                                                 <li class="dropdown">
-                                                    <a href="MyAccount.html">ACCOUNT</a>
+                                                    <a href="../../../user/templates/user/MyAccount.html">ACCOUNT</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -1670,7 +1670,7 @@
                                         <h4>Other</h4>
                                     </div>
                                     <div class="list-support">
-                                        <a href="AccountDetail.html" > <p>Account</p></a>
+                                        <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
                                         <a href="Cart.html"> <p>Cart</p></a>
                                         <a href="WishList.html"> <p>Wishlist</p></a>
                                     </div>
