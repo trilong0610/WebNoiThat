@@ -52,10 +52,21 @@ class view_category(View):
             cart = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = cart['get_cart_items']
         q = Category.objects.get(pk=category_id)
+        all_product = q.product_set.all()
         category = Category.objects.all()
-
-        context = {'category': category, "product": q, 'items': items, 'cartItems': cartItems}
-        return render(request, 'store/store.html', context)
+        # sam pham moi nhat
+        hot_product = Product.objects.all().order_by('-id')[:6]
+        # best seller
+        best_seller = Product.objects.all().order_by('-amount_sell')[:6]
+        context = {'category': category,
+                   'items': items,
+                   'cartItems': cartItems,
+                   'all_product': all_product,
+                   'best_sellers': best_seller,
+                   'hot_product':hot_product,
+                   'items': items
+                   }
+        return render(request, 'store/base.html', context)
 
 # def view_category(request, category_id):
 #     # list_product = Category.objects.get(pk=category_id)
@@ -130,5 +141,55 @@ def updateItem(request):
 
 # Xem san pham
 def view_product(request):
-    product = Product.objects.all()
-    return render(request, 'store/ProductGrid.html')
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+    # sam pham moi nhat
+    hot_product = Product.objects.all().order_by('-id')[:6]
+    # best seller
+    best_seller = Product.objects.all().order_by('-amount_sell')[:6]
+
+    all_product = Product.objects.all()
+
+    context = {'category':category,
+               'hot_product':hot_product,
+               'items': items,
+               'cartItems' : cartItems,
+               'all_product':all_product,
+               'best_sellers':best_seller,
+               }
+    return render(request, 'store/ProductGrid.html', context)
+
+# San pham moi
+def hot_product(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+    # sam pham moi nhat
+    all_product = Product.objects.all().order_by('-id')[:10]
+    context = {'category':category,
+               'hot_product':hot_product,
+               'items': items,
+               'cartItems' : cartItems,
+               'all_product':all_product,
+               }
+    return render(request, 'store/base.html', context)
+
+# lien hệ
+def contact(request):
+    context = {}
+    return render(request, 'store/Contact.html')

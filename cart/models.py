@@ -52,6 +52,7 @@ class CartItem(models.Model):
         total = self.product.price * self.quantity
         return total
 
+
 class ShippingAddress(models.Model):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)

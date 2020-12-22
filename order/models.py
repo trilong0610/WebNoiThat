@@ -3,6 +3,7 @@ from django.db import models
 
 # Create your models here.
 from cart.models import Cart
+from product.models import Product
 
 
 class Order(models.Model):
@@ -27,6 +28,7 @@ class Order(models.Model):
     def __str__(self):
         return str(self.user + " -- " + self.cart.id)
 
+    #
     # @property
     # def get_cart_total(self):
     #     cartitem = self.cartitem.all()

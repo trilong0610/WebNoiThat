@@ -17,6 +17,7 @@ class Product(models.Model):
     date_add = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
+    amount_sell = models.IntegerField(default=0)
     def __str__(self):
         return self.title
 
