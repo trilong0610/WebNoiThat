@@ -6,6 +6,5 @@ from django.contrib.auth import views as auth_views
 app_name = 'checkout'
 urlpatterns = [
     # gio hang
-    path(''
-         '', views.checkout, name="checkout"),
+    path('', views.checkout, name="checkout"),
 ]

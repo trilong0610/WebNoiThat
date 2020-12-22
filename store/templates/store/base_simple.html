@@ -1,12 +1,12 @@
 {% load humanize %}
-{% load  static %}
+{% load static %}
 <!DOCTYPE html>
 <!-- <html class="no-js" lang="en"> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Product Grid</title>
+    <title>TL Store</title>
     <meta name="author" content="ThemePunch"/>
     <meta name="description" content="The Garden theme tempalte">
     <meta name="keywords" content="The Garden theme template">
@@ -88,7 +88,7 @@
                                                     <a href="{% url 'user:login' %}" class="check link-color">Đăng nhập/Đăng kí</a>
                                                 {% endif %}
                             </p>
-                            <a href="Cart.html" class="check link-color">Giỏ Hàng: {{ cartItems }}</a>
+                            <a href="{% url 'cart:view_cart' %}" class="check link-color">Giỏ Hàng: {{ cartItems }}</a>
 
                         </div>
                     </div>
@@ -306,251 +306,116 @@
                 </div>
             </nav>
         </div>
-
+{#    ----------------Banner and title----------------#}
+        {% block banner %}
+        {% endblock banner %}
+        {#    ----------------Banner and title----------------#}
     </header>
-    <section style="margin-top: 100px;margin-bottom: 50px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <div style="max-width: 470px">
-                        <div class="image-preview-container">
-                            <!-- - - - - - - - - - - - - - Image Preview Container - - - - - - - - - - - - - - - - -->
-                            <div class="image-preview">
-                                <a href="images/SingleProduct/Group 1059.png"
-                                   data-zoom-image="images/SingleProduct/Group 1059.png" data-fancybox="group">
-                                    <img class="img-thumbnail" id="zoom-image" src="{{ product.image.url|default_if_none:'#' }}" alt="">
-                                </a>
-                            </div>
-                            <!--/ .image-preview-->
-                            <!-- - - - - - - - - - - - - - End of Image Preview Container - - - - - - - - - - - - - - - - -->
-                            <!-- - - - - - - - - - - - - - Thumbnails - - - - - - - - - - - - - - - - -->
-                            <div class="carousel-type-2">
-                                <div class="owl-carousel type-small product-thumbs" id="thumbnails" data-max-items="4">
-                                    <a class="active" href="#" data-image="images/SingleProduct/Group 1059.png"
-                                       data-zoom-image="images/SingleProduct/Group 1059.png">
-                                        <img src="images/SingleProduct/Tractor-photo-3-897x897.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1062.png"
-                                       data-image="images/SingleProduct/Group 1062.png"
-                                       data-zoom-image="images/SingleProduct/Group 1062.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 16.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1060.png"
-                                       data-image="images/SingleProduct/Group 1060.png"
-                                       data-zoom-image="images/SingleProduct/Group 1060.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 17.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1061.png"
-                                       data-image="images/SingleProduct/Group 1061.png"
-                                       data-zoom-image="images/SingleProduct/Group 1061.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 18.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- - - - - - - - - - - - - - End of Thumbnails - - - - - - - - - - - - - - - - -->
-                        </div>
-                        <!--/ .image-preview-container -->
+    {% block content %}
+    {% endblock content %}
+
+
+<footer id="footerV2">
+    <div class="container" style="position: relative">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="footer-contentV2">
+                    <div class="footer-titleV2">
+                        <h4 style="font-size: 32px;font-weight: 700">WOODY STORE</h4>
                     </div>
-                </div>
-                <div class="col-md-6  clearfix">
-                    <div class="mid-product-content media-body">
-                        <h3 style="font-size: 35px">{{ product.title }}</h3>
-                        <p style="color: #000">In Stock - SKU: {{ product.id }}</p>
-                        <div class="notable clearfix">
-                            <ul>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star"></i></li>
-                                <li><i class="fa fa-star-o"></i></li>
-                            </ul>
-                            <p>Quantity</p>
-                        </div><!--/notable-->
-                        <div class="details-desc" style="margin-top: 0">
-
-                        </div>
-                        <span class="details-price"> {{ product.price|intcomma }} VND</span>
-                        <div class="lineAbout" style="width: 100%;height: 1px"></div>
-
-                        <div class="details-button clearfix" style="margin-bottom: 0">
-{#                           <div style="width: 50%;float: left">#}
-{#                               <h3>Quantity</h3>#}
-{#                               --------------So luong--------------------#}
-{#                                   <div class="pd-c-quantity quantity details-next">#}
-{#                                   <input type="number" min="1" max="100" step="1" value="1" name="quantity_product">#}
-{#                                   <div class="quantity-button quantity-down">#}
-{#                                       <span class="step-next"><i class="la la-angle-down"></i></span>#}
-{#                                   </div>#}
-{#                                   <div class="quantity-button quantity-up">#}
-{#                                       <span class="step-next"><i class="la la-angle-up"></i></span>#}
-{#                                   </div>#}
-{#                               </div>#}
-{#                           </div>#}
-{#                            <div class="sidebar-filter-color" style="width: 50%;float: left">#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-{#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 15px;"></div>#}
-                       <div class="addCart">
-                           <ul>
-{#                               --------------ADD to Cart------------------#}
-                               {% if user.is_authenticated %}
-                                   <li>
-                                   <button data-product="{{ product.id }}" data-action="add" class="button btn-hover btn-details update-carts">ADD TO CARD <i class="la la-shopping-cart" style="font-size: 20px;position: relative;top: 2px;"></i></button>
-                               </li>
-                               {% else %}
-                                   <a href="{% url 'user:login' %}">
-                                    <li>
-                                        <button class="button btn-hover btn-details">ADD TO CARD <i class="la la-shopping-cart" style="font-size: 20px;position: relative;top: 2px;"></i></button>
-                                    </li>
-                                   </a>
-                               {% endif %}
-
-
-                           </ul>
-                       </div>
-                        <div class="category_tag" style="margin-top: 20px">
-
-                            <div class="share-link tags" >
-                                <p class="tags-item">Share on:</p>
-                                <ul class="sku-nd">
-                                    <li><a href="#" title=""><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#" title=""><i class="fa fa-rss"></i></a></li>
-                                </ul>
-                            </div><!--/share-link-->
-                            <div class="category tags">
-                                <p class="tags-item">Loại: </p>
-                                <span><a href="{% url 'store:category' product.category_id %}" class="sku-nd" style="font-size: 12px">{{ product.category }}</a></span>
-                            </div><!--/category-->
-                        </div><!--/category_tag-->
-                    </div><!--/mid-product-content-->
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <section class="tabProduct">
-        <div class="container">
-            <div class="menuTabPro">
-                <ul class="">
-                    <li class="active"><a data-toggle="tab" href="#home">Description</a></li>
-                </ul>
-            </div>
-
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active tabProText">
-                    <p>{{ product.description }}</p>
+                    <p>Woody integrates design, technology and <br>
+                        nature. We offer innovative wooden<br>
+                        products to a more sustainable and<br>
+                        durable envoriment.</p>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="page-shop-slidebar" style="    padding-top: 60px;">
-        <div class="container">
-        </div>
-    </section>
-    <footer id="footerV2">
-        <div class="container" style="position: relative">
-            <div class="row">
-                <div class="col-sm-6 col-md-3">
-                    <div class="footer-contentV2">
+            <div class="col-sm-6 col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
                         <div class="footer-titleV2">
-                            <h4 style="font-size: 32px;font-weight: 700">WOODY STORE</h4>
+                            <h4>Menu</h4>
                         </div>
-                        <p>Woody integrates design, technology and <br>
-                            nature. We offer innovative wooden<br>
-                            products to a more sustainable and<br>
-                            durable envoriment.</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-6">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="footer-titleV2">
-                                <h4>Menu</h4>
-                            </div>
-                            <div class="list-support">
-                                <a href="Home.html" ><p>Home</p></a>
-                                <a href="ProductGrid.html" class="active"><p>Product</p></a>
-                                <a href="AboutUs.html" ><p>About Us</p></a>
-                                <a href="Contact.html"><p>Contact</p></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="footer-titleV2">
-                                <h4>Explore</h4>
-                            </div>
-                            <div class="list-support">
-                                <a href="Policy.html"> <p>Policy</p></a>
-                                <a href="FAQ.html"> <p>FAQ</p></a>
-                                <a href="Blogs.html"> <p>Blog</p></a>
-                                <a href="Gallery.html"> <p>Gallery</p></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="footer-titleV2">
-                                <h4>Other</h4>
-                            </div>
-                            <div class="list-support">
-                                <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
-                                <a href="Cart.html"> <p>Cart</p></a>
-                                <a href="WishList.html"> <p>Wishlist</p></a>
-                            </div>
+                        <div class="list-support">
+                            <a href="Home.html" ><p>Home</p></a>
+                            <a href="ProductGrid.html" class="active"><p>Product</p></a>
+                            <a href="AboutUs.html" ><p>About Us</p></a>
+                            <a href="Contact.html"><p>Contact</p></a>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-md-3">
-                    <div class="footer-titleV2">
-                        <h4>Follow Us On</h4>
-                    </div>
-                    <div class="follow-list-icon">
-                        <div class="mr-icon">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                            </ul>
+                    <div class="col-md-4">
+                        <div class="footer-titleV2">
+                            <h4>Explore</h4>
                         </div>
-
-                    </div>
-                    <div class="footer-titleV2">
-                        <h4 style="    margin-top: 30px;">Payment Menthod</h4>
-                    </div>
-                    <div class="follow-list-icon">
-                        <div class="mr-icon">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-fw fa-cc-visa" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-fw fa-cc-paypal" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-fw fa-cc-jcb" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-fw fa-cc-mastercard" aria-hidden="true"></i></a></li>
-                            </ul>
+                        <div class="list-support">
+                            <a href="Policy.html"> <p>Policy</p></a>
+                            <a href="FAQ.html"> <p>FAQ</p></a>
+                            <a href="Blogs.html"> <p>Blog</p></a>
+                            <a href="Gallery.html"> <p>Gallery</p></a>
                         </div>
-
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-titleV2">
+                            <h4>Other</h4>
+                        </div>
+                        <div class="list-support">
+                            <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
+                            <a href="Cart.html"> <p>Cart</p></a>
+                            <a href="WishList.html"> <p>Wishlist</p></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div id="bttop" style="display: block;">
-                <i class="fa fa-chevron-up"></i>
+            <div class="col-sm-6 col-md-3">
+                <div class="footer-titleV2">
+                    <h4>Follow Us On</h4>
+                </div>
+                <div class="follow-list-icon">
+                    <div class="mr-icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="footer-titleV2">
+                    <h4 style="    margin-top: 30px;">Payment Menthod</h4>
+                </div>
+                <div class="follow-list-icon">
+                    <div class="mr-icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-visa" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-paypal" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-jcb" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-mastercard" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="copy-right">
-            <div class="container">
-                <div class="clearfix">
-                    <p style="float: left">Copyrights @ 2019 All Woody by Arena Muiltimedia</p>
-                    <div class="mr-icon" style="float: right;    width: 50%;    margin-top: 16px;">
-                       <ul>
+        <div id="bttop" style="display: block;">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+    </div>
+    <div class="copy-right">
+        <div class="container">
+            <div class="clearfix">
+                <p style="float: left">Copyrights @ 2019 All Woody by Arena Muiltimedia</p>
+                <div class="mr-icon" style="float: right;    width: 50%;    margin-top: 16px;">
+                   <ul>
                                     <li><a href="Policy.html">Term of user</a></li>
                                     <li><a href="Policy.html">Private Policy</a></li>
                                     <li><a href="Contact.html">Site map</a></li>
                                     <li><a href="#">Languages: ENG</a></li>
                                 </ul>
-                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
+</footer>
 </div>
 <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
@@ -571,7 +436,6 @@
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.parallax.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.slideanims.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.video.min.js' %}"></script>
-<script src="{% static 'script/main.js' %}"></script>
-
+<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
 </body>
 </html>

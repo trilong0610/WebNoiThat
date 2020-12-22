@@ -1,10 +1,135 @@
+{% extends 'store/base.html' %}
+{%  load static %}
+{% load humanize %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Tài Khoản của tôi</h3>
+                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Account</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+<div class="col-md-9">
+                    <h3 style="margin-bottom: 30px;text-align: left">ĐƠN HÀNG CỦA TÔI</h3>
+                    <div class="panel-group" id="faqAccordion">
+                        {% for order in orders %}
+                            <div class="panel panel-default faq-coat" style="border: none;    box-shadow: none;">
+                            <div class="panel-heading faq-head bd-color-left-setting active" data-toggle="collapse"
+                                 data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
+                                 style="background: rgb(193, 155, 118);   ">
+                                <h4 class="panel-title">
+                                    {{ order.date_ordered }}
+                                </h4>
+                                <span class="accordion-toggle question-toggle collapsed"><i
+                                        class="fa color-setting fa-minus" aria-hidden="true"></i></span>
+                                <p style="  position: absolute;
+                                            right: 19px;
+                                            top: 14px;
+                                            font-size: 16px;
+                                            color: #fff;">{{ order.cart.get_cart_total|intcomma }} VND</p>
+                            </div>
+                            <div id="question0" class="panel-collapse collapse in" aria-expanded="true" style="">
+                                <div class="panel-body " style=" background: #fff;padding: 30px">
+                                    {% for cartitem in order.cart.cartitem_set.all %}
+                                        <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="{{ cartitem.product.image.url }}" alt="product"
+                                                 class="product-img-first img-responsive">
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                            {{ cartitem.product.price }}
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 50px;">
+                                            <div class="sidebar-filter-color">
+                                                <ul class="clearfix">
+                                                    <li class="tooltip"
+                                                        style="background: #f7bb66;margin-bottom: 0px;margin-right: 0px;float: right;">
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                            width: 50px;
+                                            font-weight: bold;
+                                            text-align: center;
+                                            float: right;
+                                            padding-bottom: 10px;">
+                                                {{ cartitem.quantity }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> {% widthratio cartitem.quantity 1 cartitem.product.price %}</div>
+                                    </div>
+                                        <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                                    {% endfor %}
+                                </div>
+
+
+                            </div>
+                        </div>
+                        {% endfor %}
+<!--                        <div class="panel panel-default faq-coat">-->
+<!--                            <div class="panel-heading faq-head addMore">-->
+<!--                                <h4 class="panel-title" style="text-align: center;display: block;">-->
+<!--                                    <i class="fa fa-plus color-setting" aria-hidden="true"-->
+<!--                                       style="margin-right: 9px;"></i> Add More-->
+<!--                                </h4>-->
+
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+                    </div>
+                </div>
+{% endblock content %}
+{% block left-navbar %}
+                    <ul class="myAccSidebar">
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+                            <a href="{% url 'user:accountDetail' %}">
+                                <p>Account Detail</p>
+                                <i class="la la-user"></i>
+                            </a>
+                        </li>
+{#                        <li class="clearfix">#}
+{#                            <a href="../../../store/templates/store/Address.html">#}
+{#                                <p>Address</p>#}
+{#                                <i class="la la-home"></i>#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        <li class="clearfix">#}
+{#                            <a href="../../../store/templates/store/PaymentMenthod.html">#}
+{#                                <p>Payment Menthod</p>#}
+{#                                <i class="la la-cc-mastercard"></i>#}
+{#                            </a>#}
+{#                        </li>#}
+                        <li class="clearfix">
+                            <a href="{% url 'user:recentOrder' %}">
+                                <p>Recent Order</p>
+                                <i class="la la-shopping-cart"></i>
+                            </a>
+                        </li>
+                        <li class="clearfix">
+                            <a href="../../../store/templates/store/Home.html">
+                                <p>Logout</p>
+                                <i class="la la-sign-out"></i>
+                            </a>
+                        </li>
+                    </ul>
+{% endblock left-navbar %}
+
 <!DOCTYPE html>
 <!-- <html class="no-js" lang="en"> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>MyAccount</title>
+    <title>RecentOrder</title>
     <meta name="author" content="ThemePunch"/>
     <meta name="description" content="The Garden theme tempalte">
     <meta name="keywords" content="The Garden theme template">
@@ -77,7 +202,7 @@
                             </ul>
                         </div>
                         <div class="check-account dp-iblock">
-                            <a href="WishList.html " class="account link-color" style="padding-left: 19px;padding-right: 10px;">My
+                            <a href="../../../store/templates/store/WishList.html" class="account link-color" style="padding-left: 19px;padding-right: 10px;">My
                                 Wishlist: 4</a>
                             <a href="Cart.html" class="check link-color">My Cart: 3</a>
                         </div>
@@ -101,7 +226,7 @@
                         <div class="s-inner clearfix">
                             <div class="pull-left nav-left">
                                 <div class="logo">
-                                    <a href="Home.html">
+                                    <a href="../../../store/templates/store/Home.html">
                                         <img src="images/logo.png" alt="logo" class=" img-responsive">
                                     </a>
                                 </div>
@@ -115,10 +240,10 @@
                                 <div class="navbar-main">
                                     <ul class="navbar-menu">
                                         <li class="dropdown">
-                                            <a href="Home.html" class="active-menu">HOME</a>
+                                            <a href="../../../store/templates/store/Home.html" >HOME</a>
                                         </li>
                                           <li class="dropdown productMN">
-                                                    <a href="ProductGrid.html">PRODUCT</a>
+                                                    <a href="../../../store/templates/store/ProductGrid.html">PRODUCT</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
@@ -127,12 +252,12 @@
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Catalog</h3>
                                                                     <ul class="slide-left-list">
-                                                                        <li><a href="ProductGrid.html">Kitchen</a></li>
-                                                                        <li><a href="ProductGrid.html">Living room</a></li>
-                                                                        <li><a href="ProductGrid.html">Office</a></li>
-                                                                        <li><a href="ProductGrid.html">Gadgets</a></li>
-                                                                        <li><a href="ProductGrid.html">Accessories</a></li>
-                                                                        <li><a href="ProductGrid.html">Tool kits</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Kitchen</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Living room</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Office</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Gadgets</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Accessories</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Tool kits</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -141,10 +266,10 @@
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Categories</h3>
                                                                     <ul class="slide-left-list">
-                                                                        <li><a href="ProductGrid.html">New Product</a></li>
-                                                                        <li><a href="ProductGrid.html">Most Poupular</a></li>
-                                                                        <li><a href="ProductGrid.html">Top Trending</a></li>
-                                                                        <li><a href="ProductGrid.html">On Sale</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">New Product</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Most Poupular</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">Top Trending</a></li>
+                                                                        <li><a href="../../../store/templates/store/ProductGrid.html">On Sale</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -153,28 +278,28 @@
                                                                     <h3 class="slider-left-title" style="margin-bottom: 10px">Best sellers</h3>
                                                                     <div class="box-slideNewproduct">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="SingleProduct.html"><img src="images/Product/1P5.jpg" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/SingleProduct.html"><img src="images/Product/1P5.jpg" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="SingleProduct.html">Trailer</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/SingleProduct.html">Trailer</a></h5>
                                                                             <p class="slideProduct-price">$32.00</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="box-slideNewproduct ">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="SingleProduct.html"><img src="images/Product/1P3.jpg" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/SingleProduct.html"><img src="images/Product/1P3.jpg" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="SingleProduct.html">Magic Clock</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/SingleProduct.html">Magic Clock</a></h5>
                                                                             <p class="slideProduct-price">$32.00</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="box-slideNewproduct">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="SingleProduct.html"><img src="images/Product/1P1.jpg" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/SingleProduct.html"><img src="images/Product/1P1.jpg" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="SingleProduct.html">Obraz Mechaniczny</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/SingleProduct.html">Obraz Mechaniczny</a></h5>
                                                                             <p class="slideProduct-price">$32.00</p>
                                                                         </div>
                                                                     </div>
@@ -184,7 +309,7 @@
                                                             <div class="col-md-3 ">
                                                                 <h3 class="slider-left-title">Woody Store</h3>
                                                                 <div  class="box-gallery">
-                                                                    <a href="AboutUs.html">
+                                                                    <a href="../../../store/templates/store/AboutUs.html">
                                                                         <img src="images/MN2.png" alt="banner slideBar" class="img-responsive" style="width: 100%">
                                                                         <div class="arrIcon">
                                                                         </div>
@@ -196,7 +321,7 @@
                                                     </div>
                                                 </li>
                                                 <li class="dropdown productMN">
-                                                    <a href="Gallery.html">EXPLORE</a>
+                                                    <a href="../../../store/templates/store/Gallery.html">EXPLORE</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
@@ -205,11 +330,11 @@
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">About Bussiness</h3>
                                                                     <ul class="slide-left-list">
-                                                                        <li><a href="Policy.html">Policy</a></li>
-                                                                        <li><a href="FAQ.html">FAQ</a></li>
-                                                                        <li><a href="Policy.html">Term & Conditions</a></li>
-                                                                        <li><a href="Policy.html">Private Policy</a></li>
-                                                                        <li><a href="Policy.html">Term of User</a></li>
+                                                                        <li><a href="../../../store/templates/store/Policy.html">Policy</a></li>
+                                                                        <li><a href="../../../store/templates/store/FAQ.html">FAQ</a></li>
+                                                                        <li><a href="../../../store/templates/store/Policy.html">Term & Conditions</a></li>
+                                                                        <li><a href="../../../store/templates/store/Policy.html">Private Policy</a></li>
+                                                                        <li><a href="../../../store/templates/store/Policy.html">Term of User</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -218,8 +343,8 @@
                                                                 <div class=" slideSort">
                                                                     <h3 class="slider-left-title">Other link</h3>
                                                                     <ul class="slide-left-list">
-                                                                        <li><a href="Blogs.html">Blogs</a></li>
-                                                                        <li><a href="Gallery.html">Gallery</a></li>
+                                                                        <li><a href="../../../store/templates/store/Blogs.html">Blogs</a></li>
+                                                                        <li><a href="../../../store/templates/store/Gallery.html">Gallery</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -228,28 +353,28 @@
                                                                     <h3 class="slider-left-title" style="margin-bottom: 10px">Recent news</h3>
                                                                     <div class="box-slideNewproduct">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="BlogSingle.html"><img src="images/recen1.png" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/BlogSingle.html"><img src="images/recen1.png" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jul 19,2019 / 4 Comments</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jul 19,2019 / 4 Comments</a></h5>
                                                                             <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Waxy latest also use</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="box-slideNewproduct ">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="BlogSingle.html"><img src="images/recen2.png" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/BlogSingle.html"><img src="images/recen2.png" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jun 26 , 2019 / 15 Comments</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jun 26 , 2019 / 15 Comments</a></h5>
                                                                             <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Decorating your home</p>
                                                                         </div>
                                                                     </div>
                                                                     <div class="box-slideNewproduct">
                                                                         <div class="slideNewproduct-item slideNewproduct-img">
-                                                                            <a href="BlogSingle.html"><img src="images/recen3.png" alt="product1" class="img-responsive"></a>
+                                                                            <a href="../../../store/templates/store/BlogSingle.html"><img src="images/recen3.png" alt="product1" class="img-responsive"></a>
                                                                         </div>
                                                                         <div class="slideNewproduct-item slideNewproduct-text">
-                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Feb 12, 2019 / 8 Comments</a></h5>
+                                                                            <h5><a href="../../../store/templates/store/BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Feb 12, 2019 / 8 Comments</a></h5>
                                                                             <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Wood in your house</p>
                                                                         </div>
                                                                     </div>
@@ -259,7 +384,7 @@
                                                             <div class="col-md-3 ">
                                                                 <h3 class="slider-left-title">Our Gallery</h3>
                                                                 <div style="position: relative">
-                                                                    <a href="Gallery.html" class="abbr">
+                                                                    <a href="../../../store/templates/store/Gallery.html" class="abbr">
                                                                         <img style=" width: 100%;" src="images/MN1.png" alt="banner slideBar" class="img-responsive">
                                                                     </a>
                                                                 </div>
@@ -268,13 +393,13 @@
                                                     </div>
                                                 </li>
                                         <li class="dropdown">
-                                            <a href="AboutUs.html">ABOUTS US</a>
+                                            <a href="../../../store/templates/store/AboutUs.html">ABOUTS US</a>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="Contact.html">CONTACT</a>
+                                            <a href="../../../store/templates/store/Contact.html">CONTACT</a>
                                         </li>
                                         <li class="dropdown">
-                                            <a href="../../../user/templates/user/MyAccount.html">ACCOUNT</a>
+                                            <a href="MyAccount.html">ACCOUNT</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -284,7 +409,7 @@
                                             <input type="text" name="Search" placeholder="Search" class="">
                                         </li>
                                         <li>
-                                            <a class="fa fa-search " href="404.html"></a>
+                                            <a class="fa fa-search " href="../../../store/templates/store/404.html"></a>
                                         </li>
                                     </ul>
 
@@ -311,31 +436,31 @@
                 <div class="col-md-3">
                     <ul class="myAccSidebar">
                         <li class="clearfix " style=" border-top: 1px solid #d9d9d9;">
-                            <a href="../../../user/templates/user/AccountDetail.html">
+                            <a href="AccountDetail.html">
                                 <p>Account Detail</p>
                                 <i class="la la-user"></i>
                             </a>
                         </li>
-                        <li class="clearfix active">
-                            <a href="Address.html">
+                        <li class="clearfix">
+                            <a href="../../../store/templates/store/Address.html">
                                 <p>Address</p>
                                 <i class="la la-home"></i>
                             </a>
                         </li>
-                        <li class="clearfix ">
-                            <a href="PaymentMenthod.html">
+                        <li class="clearfix">
+                            <a href="../../../store/templates/store/PaymentMenthod.html">
                                 <p>Payment Menthod</p>
                                 <i class="la la-cc-mastercard"></i>
                             </a>
                         </li>
-                        <li class="clearfix ">
-                            <a href="../../../user/templates/user/RecentOrder.html">
+                        <li class="clearfix active">
+                            <a href="RecentOrder.html">
                                 <p>Recent Order</p>
                                 <i class="la la-shopping-cart"></i>
                             </a>
                         </li>
                         <li class="clearfix">
-                            <a href="Home.html">
+                            <a href="../../../store/templates/store/Home.html">
                                 <p>Logout</p>
                                 <i class="la la-sign-out"></i>
                             </a>
@@ -343,70 +468,129 @@
                     </ul>
                 </div>
                 <div class="col-md-9">
-                    <h3 style="margin-bottom: 30px;text-align: left">SHIPPING ADDRESS</h3>
+                    <h3 style="margin-bottom: 30px;text-align: left">recent order</h3>
                     <div class="panel-group" id="faqAccordion">
                         <div class="panel panel-default faq-coat" style="border: none;    box-shadow: none;">
                             <div class="panel-heading faq-head bd-color-left-setting active" data-toggle="collapse"
                                  data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
                                  style="background: rgb(193, 155, 118);   ">
                                 <h4 class="panel-title">
-                                    4201 Still Pastures Drive
+                                    2019-08-19
                                 </h4>
                                 <span class="accordion-toggle question-toggle collapsed"><i
                                         class="fa color-setting fa-minus" aria-hidden="true"></i></span>
-                                <a href="#"><p style="  position: absolute;
+                                <p style="  position: absolute;
                                             right: 19px;
                                             top: 14px;
                                             font-size: 16px;
-                                            color: #fff;"><i class="la la-map-o"></i> Set as Default</p></a>
+                                            color: #fff;">$860</p>
                             </div>
                             <div id="question0" class="panel-collapse collapse in" aria-expanded="true" style="">
                                 <div class="panel-body " style=" background: #fff;padding: 30px">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="accInput">
-                                                <p>First Name</p>
-                                                <input type="text" class="inputText" placeholder="Enter your username or email address">
+                                        <div class="col-md-2">
+                                            <img src="images/2.png" alt="product" class="img-responsive">
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                                            Milf
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                            $75.00
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 50px;">
+                                            <div class="sidebar-filter-color">
+                                                <ul class="clearfix">
+                                                    <li class="tooltip"
+                                                        style="background: #ffd098;margin-bottom: 0px;margin-right: 0px;float: right;">
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="accInput">
-                                                <p>Last Name</p>
-                                                <input type="text" class="inputText" placeholder="Enter your username or email address">
+                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                            width: 50px;
+                                               font-weight: bold;
+                                            text-align: center;
+                                            float: right;
+                                            padding-bottom: 10px;">
+                                                2
                                             </div>
                                         </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> $174</div>
                                     </div>
-                                    <div class="accInput">
-                                        <p>Company Name (Optional)</p>
-                                        <input type="text" class="inputText" placeholder="Enter your password">
+                                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="images/4.png" alt="product"
+                                                 class="product-img-first img-responsive">
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                                            Milf
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                            $75.00
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 50px;">
+                                            <div class="sidebar-filter-color">
+                                                <ul class="clearfix">
+                                                    <li class="tooltip"
+                                                        style="background: #af793a;margin-bottom: 0px;margin-right: 0px;float: right;">
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                            width: 50px;
+                                                 font-weight: bold;
+                                            text-align: center;
+                                            float: right;
+                                            padding-bottom: 10px;">
+                                                2
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> $174</div>
                                     </div>
-                                    <div class="accInput">
-                                        <p>Country *</p>
-                                        <select class="sidebar-select">
-                                            <option selected="">Viet Nam</option>
-                                            <option>Lao</option>
-                                            <option>Thai Lan</option>
-                                            <option>Campuchia</option>
-                                        </select>
+                                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <img src="images/6.png" alt="product"
+                                                 class="product-img-first img-responsive">
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                                            World
+                                            Map XL
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                            $75.00
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 50px;">
+                                            <div class="sidebar-filter-color">
+                                                <ul class="clearfix">
+                                                    <li class="tooltip"
+                                                        style="background: #f7bb66;margin-bottom: 0px;margin-right: 0px;float: right;">
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                            width: 50px;
+                                            font-weight: bold;
+                                            text-align: center;
+                                            float: right;
+                                            padding-bottom: 10px;">
+                                                2
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> $174</div>
                                     </div>
-                                    <div class="accInput">
-                                        <p>Street Address *</p>
-                                        <input type="text" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Town / City *</p>
-                                        <input type="text" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Zipcode / Postcode (Optianal)</p>
-                                        <input type="text" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Phone *</p>
-                                        <input type="text" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <a href="#" style="" class="trash"><div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div></a>
                                 </div>
+
 
                             </div>
                         </div>
@@ -415,57 +599,66 @@
                             <div class="panel-heading faq-head bd-color-left-setting" data-toggle="collapse"
                                  data-parent="#faqAccordion" data-target="#question1">
                                 <h4 class="panel-title">
-                                    1736 Kidd Avenue
+                                    2019-01-22
                                 </h4>
                                 <span class=" accordion-toggle question-toggle collapsed"><i
                                         class="fa fa-plus color-setting" aria-hidden="true"></i></span>
-                                <a href="#"><p style="  position: absolute;
+                                <p style="  position: absolute;
                                             right: 19px;
                                             top: 14px;
                                             font-size: 16px;
-                                            color: #fff;"><i class="la la-map-o"></i> Set as Default</p></a>
-
+                                            color: #fff;">$732</p>
                             </div>
-                            <div id="question1" class="panel-collapse collapse "  >
+                            <div id="question1" class="panel-collapse collapse ">
                                 <div class="panel-body " style=" background: #fff;padding: 30px">
-                                    <div class="accInput">
-                                        <p>Cardholder Name</p>
-                                        <input type="text" class="inputText" placeholder="Enter your card number" style="background: transparent;">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Card Number</p>
-                                        <input type="text" class="inputText" placeholder="0000-0000-0000-0000" style="background: transparent;">
-                                    </div>
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="accInput">
-                                                <p>EXP Date</p>
-                                                <input type="text" class="inputText" placeholder="mm/yy" style="background: transparent;">
+                                        <div class="col-md-2">
+                                            <img src="images/2.png" alt="product" class="img-responsive">
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                                            Magic
+                                            Clock
+                                        </div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                            $75.00
+                                        </div>
+                                        <div class="col-md-2" style="padding-top: 50px;">
+                                            <div class="sidebar-filter-color">
+                                                <ul class="clearfix">
+                                                    <li class="tooltip"
+                                                        style="background: #ffd098;margin-bottom: 0px;margin-right: 0px;float: right;">
+                                                        <span class="tooltiptext">Tooltip text</span>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="accInput">
-                                                <p>CVV</p>
-                                                <input type="text" class="inputText" placeholder="*****" style="background: transparent;">
+                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                            width: 50px;
+                                            /* margin-left: 0; */
+                                            text-align: center;
+                                            float: right;
+                                            padding-bottom: 10px;">
+                                                2
                                             </div>
                                         </div>
-                                        <div class="col-md-4"></div>
+                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> $174</div>
                                     </div>
-                                    <div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
+
                                 </div>
 
                             </div>
-
                         </div>
-                        <div class="panel panel-default faq-coat">
-                            <div class="panel-heading faq-head bd-color-left-setting addMore" >
-                                <h4 class="panel-title" style="text-align: center;display: block;">
-                                    <i class="fa fa-plus color-setting" aria-hidden="true" style="margin-right: 9px;"></i> Add More
-                                </h4>
+<!--                        <div class="panel panel-default faq-coat">-->
+<!--                            <div class="panel-heading faq-head addMore">-->
+<!--                                <h4 class="panel-title" style="text-align: center;display: block;">-->
+<!--                                    <i class="fa fa-plus color-setting" aria-hidden="true"-->
+<!--                                       style="margin-right: 9px;"></i> Add More-->
+<!--                                </h4>-->
 
-                            </div>
+<!--                            </div>-->
 
-                        </div>
+<!--                        </div>-->
 
                     </div>
                 </div>
@@ -493,10 +686,10 @@
                                 <h4>Menu</h4>
                             </div>
                             <div class="list-support">
-                                <a href="Home.html" ><p>Home</p></a>
-                                <a href="ProductGrid.html"><p>Product</p></a>
-                                <a href="AboutUs.html" ><p>About Us</p></a>
-                                <a href="Contact.html"><p>Contact</p></a>
+                                <a href="../../../store/templates/store/Home.html" ><p>Home</p></a>
+                                <a href="../../../store/templates/store/ProductGrid.html"><p>Product</p></a>
+                                <a href="../../../store/templates/store/AboutUs.html" ><p>About Us</p></a>
+                                <a href="../../../store/templates/store/Contact.html"><p>Contact</p></a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -504,10 +697,10 @@
                                 <h4>Explore</h4>
                             </div>
                             <div class="list-support">
-                                <a href="Policy.html"> <p>Policy</p></a>
-                                <a href="FAQ.html"> <p>FAQ</p></a>
-                                <a href="Blogs.html"> <p>Blog</p></a>
-                                <a href="Gallery.html"> <p>Gallery</p></a>
+                                <a href="../../../store/templates/store/Policy.html"> <p>Policy</p></a>
+                                <a href="../../../store/templates/store/FAQ.html"> <p>FAQ</p></a>
+                                <a href="../../../store/templates/store/Blogs.html"> <p>Blog</p></a>
+                                <a href="../../../store/templates/store/Gallery.html"> <p>Gallery</p></a>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -515,9 +708,9 @@
                                 <h4>Other</h4>
                             </div>
                             <div class="list-support">
-                                <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
+                                <a href="AccountDetail.html" > <p>Account</p></a>
                                 <a href="Cart.html"> <p>Cart</p></a>
-                                <a href="WishList.html"> <p>Wishlist</p></a>
+                                <a href="../../../store/templates/store/WishList.html"> <p>Wishlist</p></a>
                             </div>
                         </div>
                     </div>
@@ -563,9 +756,9 @@
                     <p style="float: left">Copyrights @ 2019 All Woody by Arena Muiltimedia</p>
                     <div class="mr-icon" style="float: right;    width: 50%;    margin-top: 16px;">
                        <ul>
-                                    <li><a href="Policy.html">Term of user</a></li>
-                                    <li><a href="Policy.html">Private Policy</a></li>
-                                    <li><a href="Contact.html">Site map</a></li>
+                                    <li><a href="../../../store/templates/store/Policy.html">Term of user</a></li>
+                                    <li><a href="../../../store/templates/store/Policy.html">Private Policy</a></li>
+                                    <li><a href="../../../store/templates/store/Contact.html">Site map</a></li>
                                     <li><a href="#">Languages: ENG</a></li>
                                 </ul>
                     </div>

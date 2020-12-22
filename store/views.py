@@ -151,6 +151,7 @@ def logout(request):
     return redirect("/")
 
 # Them item vao gio hang
+@login_required(login_url='/user/login/')
 def updateItem(request):
     data = json.loads(request.body)
     productID = data['productID']

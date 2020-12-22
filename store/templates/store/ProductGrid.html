@@ -60,9 +60,18 @@
     {#                                    <div class="box-posi">HOT</div>#}
                                         <div class="arrIcon2">
                                             <ul>
-                                                <li>
-                                                        <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
-                                                </li>
+                                                {% if user.is_authenticated %}
+                                                    <li>
+                                                    <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
+                                                    </li>
+                                                {% else %}
+                                                    <a href="{% url 'user:login' %}">
+                                                        <li>
+                                                        <i  class="la la-shopping-cart"></i>
+                                                        </li>
+                                                    </a>
+                                                {% endif %}
+
                                                 <li style="margin-left: 6px;margin-right: 6px;">
                                                     <a href="{% url 'store:detailProduct' all_product.id %}">
                                                     <i class="la la-eye"></i>
@@ -124,6 +133,96 @@
                     </div>
 {% endblock content %}
 {% block left-navbar %}
+    <div class=" slideSort">
+                        <h3 class="slider-left-title">Danh Mục</h3>
+                        <ul class="slide-left-list">
+                            <li><a href="#">Sản phẩm mới</a></li>
+                            <li><a href="#">Nhiều người mua</a></li>
+{#                            <li><a href="#">Giảm giá</a></li>#}
+                        </ul>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
+                    <div class=" slideSort">
+                        <h3 class="slider-left-title">Loại Sản Phẩm</h3>
+                    {#        ---- Category-------                #}
+                        <ul class="slide-left-list">
+                            {% for items in category %}
+                                <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    {#        ---- Category-------                #}
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px"></div>
+{#                    <div class="sidebar-filter-color">#}
+{#                        <h3 class="slider-left-title">CATALOG</h3>#}
+{#                        <h3 class="slider-left-title" style="font-size: 16px;margin-top: 15px;margin-bottom: 15px;">#}
+{#                            PRICE</h3>#}
+{#                        <div class="sidebar-box">#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>Under 10$</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$10-$20</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$20-$30</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>$30-$40</p>#}
+{#                            </div>#}
+{#                            <div class="custom-checkbox">#}
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <p>Above $40</p>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 0;"></div>#}
 
+                    <div class="box-slider-left slideNewproduct slideNewproduct2">
+                        <h3 class="slider-left-title">Best sellers</h3>
+{#                    -------------Best seller---------#}
+                        {% for best_seller in best_sellers %}
+                            <div class="box-slideNewproduct">
+                            <div class="slideNewproduct-item slideNewproduct-img">
+                                <a href="SingleProduct.html"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1"
+                                                 class="img-responsive"/></a>
+                            </div>
+                            <div class="slideNewproduct-item slideNewproduct-text">
+                                <h5><a href="SingleProduct.html"> {{ best_seller.title }}</a></h5>
+                                <p class="slideProduct-price"> {{ best_seller.price }} VND</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+{#                    ------------- end Best seller---------#}
+                    </div>
 {% endblock left-navbar %}
 

@@ -15,12 +15,21 @@ from django.contrib.auth import authenticate, login, decorators
 # Dic check login class base view
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from cart.models import Cart
+from order.models import Order
 from .forms import  CreateUserForm
 from django.http import HttpResponseRedirect
 
 def accountDetail(request):
     context = {}
     return render(request, 'user/AccountDetail.html', context)
+
+def recentOrder(request):
+    user = request.user
+    orders = Order.objects.filter(user_id=user.id)
+    context = {'orders':orders,
+               }
+    return render(request, 'user/RecentOrder.html', context)
 
 
 def RegisterPage(request):
@@ -52,7 +61,7 @@ def LoginPage(request):
 
 def LogoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('/')
 
 
 

@@ -1,0 +1,81 @@
+{% extends 'store/base_simple.html' %}
+{% load humanize %}
+{% load  static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Giỏ Hàng</h3>
+                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Cart</p>
+            </div>
+        </div>
+{% endblock banner %}
+
+{% block content %}
+    <section class="myAcc myAcc2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    {% for cartitem in cart.cartitem_set.all %}
+                        <div class="row">
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            <a href="#"> <i class="la la-close" style="font-size: 20px;"></i></a>
+                        </div>
+                        <div class="col-md-2">
+                            <img src="{{ cartitem.product.image.url }}" alt="product" class="img-responsive">
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+
+                        </div>
+                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
+                            {{ cartitem.product.price|intcomma }}
+                        </div>
+                        <div class="col-md-1" style="padding-top: 50px;">
+                            <div class="sidebar-filter-color">
+                                <ul class="clearfix">
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="text-align: right;padding-top: 42px;">
+                            <div class="cart-product-two shopping-cart-quantity cartConver">
+                                <div class="pd-c-quantity quantity add-card add-card-product">
+
+                                    <input type="number" min="1" max="100" step="1" value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+                                    <div class="quantity-button quantity-down">
+                                        <span><i class="la la-minus"></i></span>
+                                    </div>
+                                    <div class="quantity-button quantity-up">
+                                        <span><i class="la la-plus"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> {{ cartitem.get_total|intcomma }}</div>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                    {% endfor %}
+                </div>
+                <div class="col-md-4">
+                    <div class="form-tax">
+                        <h4>cart totals</h4>
+
+                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
+
+                        <div class="box-formTax-total">
+                            <div class="row">
+                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Total</div>
+                                <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">
+                                    {{ cart.get_cart_total|intcomma }}</div>
+                            </div>
+                        </div>
+                        <a href="{% url 'checkout:checkout' %}" class="btn-formTax">
+                            <div >Proceed To Checkout</div>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock content %}
