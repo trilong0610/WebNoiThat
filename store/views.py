@@ -151,7 +151,23 @@ def logout(request):
     return redirect("/")
 
 # Them item vao gio hang
-@login_required(login_url='/user/login/')
+def addItemToCart(request):
+    data = json.loads(request.body)
+    productID = data['productID']
+    quantity = data['quantity']
+    print('quantity:', quantity)
+    print('productId:', productID)
+    customer = request.user
+    product = Product.objects.get(id = productID)
+    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cartItem.quantity = int(quantity)
+    cartItem.save()
+    if cartItem.quantity <= 0:
+        cartItem.delete()
+    return JsonResponse('Item was added', safe=False)
+
+
 def updateItem(request):
     data = json.loads(request.body)
     productID = data['productID']
@@ -170,7 +186,6 @@ def updateItem(request):
     if cartItem.quantity <= 0:
         cartItem.delete()
     return JsonResponse('Item was added', safe=False)
-
 #them, xoa, sua san pham
 
 # Xem san pham
@@ -199,7 +214,18 @@ def hot_product(request):
 
 # lien hệ
 def contact(request):
-    context = {}
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    context = {
+        'cartItems':cartItems
+    }
     return render(request, 'store/Contact.html')
 
 def detailProduct(request, product_id):

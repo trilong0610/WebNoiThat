@@ -17,11 +17,25 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from cart.models import Cart
 from order.models import Order
+from product.models import Category
 from .forms import  CreateUserForm
 from django.http import HttpResponseRedirect
 
 def accountDetail(request):
-    context = {}
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+    context = {
+        'cartItems': cartItems,
+        'category':category,
+    }
     return render(request, 'user/AccountDetail.html', context)
 
 def recentOrder(request):

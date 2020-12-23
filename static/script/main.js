@@ -1,5 +1,6 @@
 console.log("Loadded update-carts")
 
+//Tang giam so luong san pham trong gio hang 1 don vi
 var updateBtns = document.getElementsByClassName('update-carts')
 for (i = 0; i < updateBtns.length; i++){
     updateBtns[i].addEventListener('click', function (){
@@ -37,6 +38,55 @@ function updateUserOrder(productID, action){
         window.location.reload(true)
     })
 }
+
+
+console.log("Loadded add-item-carts")
+
+//Tang giam so luong san pham trong gio hang theo so luong nhap vao
+var addToCartBtns = document.getElementsByClassName('add-item-carts')
+for (i = 0; i < addToCartBtns.length; i++){
+    addToCartBtns[i].addEventListener('click', function (){
+        var productID = this.dataset.product
+        var quantity = document.getElementById("quantity_product").value;
+        console.log('productID:', productID, 'quantity', quantity)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            addItemToCart(productID, quantity)
+        }
+    })
+}
+function addItemToCart(productID, quantity){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/addItemToCart/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'productID': productID, 'quantity':quantity})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(true)
+    })
+}
+
+
+function getCartItemQuantity(){
+    var inputVal = document.getElementById("quantity_product").value;
+}
+
+
 
 console.log("Loadded permission")
 var updatePerms = document.getElementsByClassName('update-permission')

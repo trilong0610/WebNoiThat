@@ -11,6 +11,8 @@ urlpatterns = [
     path('productGrid/', views.view_product, name = 'productGrid'),
     # thanh toan
     path('updateItem/', views.updateItem, name="updateItem"),
+    path('addItemToCart/', views.addItemToCart, name="addItemToCart"),
+
     path('contact/', views.contact, name="contact"),
     # xem san pham trong danh muc
     path('category/<int:category_id>/', views.view_category.as_view(), name = "category"),
