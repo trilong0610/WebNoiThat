@@ -44,8 +44,20 @@ from .models import Address
 
 def recentOrder(request):
     user = request.user
-    orders = Order.objects.filter(user_id=user.id)
+    orders = Order.objects.filter(user_id=user.id).order_by('-date_ordered')
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
     context = {'orders':orders,
+               'category':category,
+               'cartItems':cartItems
                }
     return render(request, 'user/RecentOrder.html', context)
 
@@ -84,13 +96,28 @@ def LogoutUser(request):
 def changeInfoUser(request):
     data = json.loads(request.body)
     user = request.user
+    user_address, created = Address.objects.get_or_create(user = user)
+
     firstName = data['firstName']
     lastName = data['lastName']
     email = data['email']
+    phone = data['phone']
+    province = data['province']
+    district = data['district']
+    wards = data['wards']
+    address = data['address']
+
     user.first_name = firstName
     user.last_name = lastName
     user.email = email
     user.save()
+
+    user_address.phone = phone
+    user_address.province = province
+    user_address.district = district
+    user_address.wards = wards
+    user_address.address = address
+    user_address.save()
     return JsonResponse('Info was change', safe=False)
 
 def accountDetail(request):
@@ -104,7 +131,7 @@ def accountDetail(request):
         cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = cart['get_cart_items']
     category = Category.objects.all()
-    address = Address.objects.get(user = user)
+    address, created = Address.objects.get_or_create(user = user)
     context = {
         'cartItems': cartItems,
         'category': category,

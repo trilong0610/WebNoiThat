@@ -16,17 +16,25 @@ class Order(models.Model):
         ('6', 'Tạm ngưng'),
     )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    fistName = models.TextField(max_length=100, default='')
+    lastName = models.TextField(max_length=100, default='')
+    email = models.EmailField(default='')
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
-    date_ordered = models.DateField(auto_now_add=True)
+    date_ordered = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=100, choices=STATUS, default='1')
     transaction_id = models.CharField(max_length=100, null=True)
-    address = models.CharField(max_length=200, null=False)
-    city = models.CharField(max_length=200, null=False)
-    state = models.CharField(max_length=200, null=False)
-    zipcode = models.CharField(max_length=200, null=False)
-    date_added = models.DateTimeField(auto_now_add=True)
+    # tỉnh
+    province = models.TextField(max_length=50, default='')
+    # huyện
+    district = models.TextField(max_length=50, default='')
+    # xã
+    wards = models.TextField(max_length=50, default='')
+    # số nhà, tên đường
+    address = models.TextField(max_length=50, default='')
+
+    phone = models.CharField(max_length=12, default='')
     def __str__(self):
-        return str(self.user.username)
+        return str(self.cart.id)
 
     #
     # @property

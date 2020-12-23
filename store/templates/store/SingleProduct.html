@@ -125,6 +125,22 @@
 
             </div>
         </div>
+
+    </section>
+    <section class="tabProduct">
+        <div class="container">
+            <div class="menuTabPro">
+                <ul class="">
+                    <li class="active"><a data-toggle="tab" href="#home">Description</a></li>
+                </ul>
+            </div>
+
+            <div class="tab-content">
+                <div id="home" class="tab-pane fade in active tabProText">
+                    <p>{{ product.description }}</p>
+                </div>
+            </div>
+        </div>
     </section>
 {% endblock content %}
 <!DOCTYPE html>
@@ -558,21 +574,7 @@
             </div>
         </div>
     </section>
-    <section class="tabProduct">
-        <div class="container">
-            <div class="menuTabPro">
-                <ul class="">
-                    <li class="active"><a data-toggle="tab" href="#home">Description</a></li>
-                </ul>
-            </div>
 
-            <div class="tab-content">
-                <div id="home" class="tab-pane fade in active tabProText">
-                    <p>{{ product.description }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
     <section class="page-shop-slidebar" style="    padding-top: 60px;">
         <div class="container">
         </div>

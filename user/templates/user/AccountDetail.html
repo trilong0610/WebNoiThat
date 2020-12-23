@@ -37,23 +37,23 @@
                     </div>
                     <div class="accInput">
                         <p>Số điện thoại</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" id="phone" class="inputText" value="{{ address.phone }}" placeholder="Nhập số điện thoại của bạn">
                     </div>
                     <div class="accInput">
                         <p>Tỉnh/Thành phố</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" id="province" class="inputText" value="{{ address.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
                     </div>
                     <div class="accInput">
                         <p>Quận/Huyện</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" id="district" class="inputText" value="{{ address.district }}" placeholder="Nhập Quận/Huyện của bạn">
                     </div>
                     <div class="accInput">
                         <p>Phường/Xã</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" id="wards" class="inputText" value="{{ address.wards }}" placeholder="Nhập Phường/Xã của bạn">
                     </div>
                     <div class="accInput">
                         <p>Số nhà/Đường</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" id="address" class="inputText" value="{{ address.address }}" placeholder="Nhập Số nhà/Đường của bạn">
                     </div>
 
 {#                    <form action="{% url 'user:accountDetail' %}" method="post">#}
@@ -78,9 +78,7 @@
 {#                    </div>#}
 {#                        <button type="submit" class="viewMore change-info-user"> Lưu Thay Đổi</button>#}
 {#                    </form>#}
-                <div class="viewMore">
-                    <p>Lưu Thay Đổi</p>
-                </div>
+                <button class="viewMore change-info-user"> Lưu Thay Đổi</button>
                 </div>
 {% endblock content %}
 {% block left-navbar %}

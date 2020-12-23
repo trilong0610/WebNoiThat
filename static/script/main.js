@@ -1,3 +1,301 @@
+console.log("Loadded update-carts")
+//---------------Tang giam so luong san pham trong gio hang 1 don vi----------------
+var updateBtns = document.getElementsByClassName('update-carts')
+for (i = 0; i < updateBtns.length; i++){
+    updateBtns[i].addEventListener('click', function (){
+        var productID = this.dataset.product
+        var action = this.dataset.action
+        console.log('productID:', productID, 'Action:', action)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            updateUserOrder(productID, action)
+        }
+    })
+}
+function updateUserOrder(productID, action){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/updateItem/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'productID': productID, 'action':action})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(true)
+    })
+}
+
+//---------------Xoa san pham trong gio hang----------------
+console.log("Loadded add-item-carts")
+//Tang giam so luong san pham trong gio hang theo so luong nhap vao
+var addToCartBtns = document.getElementsByClassName('add-item-carts')
+for (i = 0; i < addToCartBtns.length; i++){
+    addToCartBtns[i].addEventListener('click', function (){
+        var productID = this.dataset.product
+        var quantity = document.getElementById("quantity_product").value;
+        console.log('productID:', productID, 'quantity', quantity)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            addItemToCart(productID, quantity)
+        }
+    })
+}
+function addItemToCart(productID, quantity){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/addItemToCart/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'productID': productID, 'quantity':quantity})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(true)
+    })
+}
+
+
+
+//---------------Tang giam so luong san pham trong gio hang theo so luong nhap vao---------------
+console.log("Loadded remove-item-carts")
+var removeToCartBtns = document.getElementsByClassName('remove-item-carts')
+for (i = 0; i < removeToCartBtns.length; i++){
+    removeToCartBtns[i].addEventListener('click', function (){
+        var productID = this.dataset.product
+        var quantity = 0
+        console.log('productID:', productID, 'quantity', quantity)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            addItemToCart(productID, quantity)
+        }
+    })
+}
+function removeItemToCart(productID, quantity){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/addItemToCart/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'productID': productID, 'quantity':quantity})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        window.location.reload(true)
+    })
+}
+
+//---------------Sua thong tin ca nhan---------------
+console.log("Loadded change-info-user")
+var InfoUser = document.getElementsByClassName('change-info-user')
+for (i = 0; i < InfoUser.length; i++){
+    InfoUser[i].addEventListener('click', function (){
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var province = document.getElementById("province").value;
+        var district = document.getElementById("district").value;
+        var wards = document.getElementById("wards").value;
+        var address = document.getElementById("address").value;
+        console.log('firstName:', firstName, 'lastName:', lastName, 'email:', email)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            changeInfoUser(firstName, lastName, email, phone, province, district, wards, address)
+        }
+    })
+}
+function changeInfoUser(firstName, lastName, email, phone, province, district, wards, address){
+    console.log('user is authenticated, sending data..')
+    var url = '/user/changeInfoUser/'
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'firstName': firstName, 'lastName':lastName, 'email':email, 'phone':phone, 'province':province, 'district':district, 'wards':wards, 'address':address})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(true)
+    })
+}
+
+//-----------------------------------------------------------
+
+//---------------addOrder---------------
+console.log("Loadded add-order")
+var order = document.getElementsByClassName('add-order')
+for (i = 0; i < order.length; i++){
+    order[i].addEventListener('click', function (){
+        var cart = this.dataset.cart
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var province = document.getElementById("province").value;
+        var district = document.getElementById("district").value;
+        var wards = document.getElementById("wards").value;
+        var address = document.getElementById("address").value;
+        console.log('firstName:', firstName,
+            'lastName:', lastName,
+            'cart:', cart,
+            'email:', email,
+            'phone:', phone,
+            'province:', province,
+            'district:', district,
+            'wards:', wards,
+            'address:', address,
+        )
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            addOrder(cart,firstName, lastName, email, phone, province, district, wards, address)
+        }
+    })
+}
+function addOrder(cart,firstName, lastName, email, phone, province, district, wards, address){
+    console.log('user is authenticated, sending data..')
+    var url = '/order/addOrder/'
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'cart':cart,'firstName': firstName, 'lastName':lastName, 'email':email, 'phone':phone, 'province':province, 'district':district, 'wards':wards, 'address':address})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(true)
+    })
+}
+
+//-----------------------------------------------------------
+
+
+console.log("Loadded permission")
+var updatePerms = document.getElementsByClassName('update-permission')
+for (i = 0; i < updatePerms.length; i++){
+    updatePerms[i].addEventListener('click', function (){
+        var user = this.dataset.user
+        var permission = this.dataset.permission
+        var action = this.dataset.action
+        console.log('user:', user, 'permission:', permission, 'action:', action)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            updatePermission(user, permission,action)
+        }
+    })
+}
+
+function updatePermission(user, permission, action){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/manager/gains_permission/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'user': user, 'permission':permission, 'action': action})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(false)
+    })
+}
+
+console.log("Loadded Shipping")
+var updateShip = document.getElementsByClassName('update-shipping')
+for (i = 0; i < updateShip.length; i++){
+    updateShip[i].addEventListener('click', function (){
+        var orderid = this.dataset.orderid
+        var status = this.dataset.status
+        console.log('orderid:', orderid, 'status:', status)
+        updateShipping(orderid, status)
+    })
+}
+
+function updateShipping(orderid, status){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/manager/update_shipping/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'orderid': orderid, 'status':status})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(false)
+    })
+}
 $(function() {
     //User Trict
     "user strict";

@@ -7,4 +7,5 @@ app_name = 'order'
 urlpatterns = [
     # gio hang
     path('', views.cart, name="order"),
+    path('addOrder/', views.addOrder, name="addOrder"),
 ]

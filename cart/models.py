@@ -16,7 +16,7 @@ class Cart(models.Model):
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
     def __str__(self):
-        return str(self.user.username)
+        return str(self.id)
 
     @property
     def get_cart_total(self):
@@ -46,7 +46,7 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_add = models.DateTimeField(auto_now_add=True)
     def __str__(self):
-        return str(self.cart.user)
+        return str(self.cart.id)
     @property
     def get_total(self):
         total = self.product.price * self.quantity
