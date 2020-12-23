@@ -5,55 +5,82 @@
     <div class="banner relative">
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
             <div class="banner-arrival">
-                <h3>Tài Khoản của tôi</h3>
+                <h3>Tài Khoản</h3>
                 <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Account</p>
             </div>
         </div>
 {% endblock banner %}
 {% block content %}
 <div class="col-md-9">
-                    <h3 style="margin-bottom: 30px;text-align: left">USER PROFILE</h3>
+                    <h3 style="margin-bottom: 30px;text-align: left">Thông Tin Cá Nhân</h3>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="accInput">
-                                <p>First Name</p>
-                                <input type="text" class="inputText" placeholder="Enter your username or email address">
+                                <p>Tên</p>
+                                <input type="text" id="firstName" class="inputText" value="{{ user.first_name }}" placeholder="Nhập tên của bạn">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="accInput">
-                                <p>Last Name</p>
-                                <input type="text" class="inputText" placeholder="Enter your username or email address">
+                                <p>Họ</p>
+                                <input type="text" id="lastName"  class="inputText" value="{{ user.last_name }}" placeholder="Nhập họ của bạn">
                             </div>
                         </div>
                     </div>
+{#                    <div class="accInput">#}
+{#                        <p>Display Name *</p>#}
+{#                        <input type="text" class="inputText" placeholder="Enter your password">#}
+{#                    </div>#}
                     <div class="accInput">
-                        <p>Display Name *</p>
-                        <input type="text" class="inputText" placeholder="Enter your password">
+                        <p>Email</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
                     </div>
                     <div class="accInput">
-                        <p>Email Address</p>
-                        <input type="text" class="inputText" placeholder="Enter your password">
+                        <p>Số điện thoại</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="accInput">
+                        <p>Tỉnh/Thành phố</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="accInput">
+                        <p>Quận/Huyện</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="accInput">
+                        <p>Phường/Xã</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                    </div>
+                    <div class="accInput">
+                        <p>Số nhà/Đường</p>
+                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
                     </div>
 
-                    <div class="boxAcc2">
-                        <h4>Password Change</h4>
-                        <div class="accInput">
-                            <p>Currently Password (Leave Blank If Unchage)</p>
-                            <input type="text" class="inputText" placeholder="Enter your password">
-                        </div>
-                        <div class="accInput">
-                            <p>New Password (Leave Blank If Unchage)</p>
-                            <input type="text" class="inputText" placeholder="Enter your password">
-                        </div>
-                        <div class="accInput">
-                            <p>Confirm New Password</p>
-                            <input type="text" class="inputText" placeholder="Enter your password">
-                        </div>
-                    </div>
-                    <div class="viewMore" style="margin: 0;margin-top: 45px;">
-                        <p>SAVE CHANGE</p>
-                    </div>
+{#                    <form action="{% url 'user:accountDetail' %}" method="post">#}
+{#                        {% csrf_token %}#}
+{#                        <div class="boxAcc2">#}
+{#                        <h4>Đổi Mật Khẩu</h4>#}
+{#                        <div class="accInput">#}
+{#                            <p>Mật Khẩu Hiện Tại</p>#}
+{#                            {{ form.old_password }}#}
+{#                            <input type="text" class="inputText" >#}
+{#                        </div>#}
+{#                        <div class="accInput">#}
+{#                            <p>Mật Khẩu Mới</p>#}
+{#                            {{ form.new_password1 }}#}
+{#                            <input type="text" class="inputText">#}
+{#                        </div>#}
+{#                        <div class="accInput">#}
+{#                            <p>Nhập Lại Mật Khẩu Mới</p>#}
+{#                            {{ form.new_password2 }}#}
+{#                            <input type="text" class="inputText">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                        <button type="submit" class="viewMore change-info-user"> Lưu Thay Đổi</button>#}
+{#                    </form>#}
+                <div class="viewMore">
+                    <p>Lưu Thay Đổi</p>
+                </div>
                 </div>
 {% endblock content %}
 {% block left-navbar %}

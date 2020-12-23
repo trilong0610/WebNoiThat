@@ -19,7 +19,7 @@
                     {% for cartitem in cart.cartitem_set.all %}
                         <div class="row">
                         <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <a href="#"> <i class="la la-close" style="font-size: 20px;"></i></a>
+                            <a href="#"> <i class="la la-close remove-item-carts" data-product="{{ cartitem.product.id }}" style="font-size: 20px;"></i></a>
                         </div>
                         <div class="col-md-2">
                             <img src="{{ cartitem.product.image.url }}" alt="product" class="img-responsive">
@@ -41,7 +41,7 @@
                             <div class="cart-product-two shopping-cart-quantity cartConver">
                                 <div class="pd-c-quantity quantity add-card add-card-product">
 
-                                    <input type="number" min="1" max="100" step="1" value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+                                    <input id="quantity_product" type="number" min="1" max="100" step="1" value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
                                     <div class="quantity-button quantity-down " >
                                         <span><i class="la la-minus update-carts" data-product="{{ cartitem.product.id }}" data-action="remove"></i></span>
                                     </div>

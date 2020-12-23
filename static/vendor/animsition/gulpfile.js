@@ -54,15 +54,15 @@ gulp.task('css', function () {
 
 gulp.task('js', function(){
   return gulp
-    .src(dirs.src + '/script/' + pkg.name + '.script')
+    .src(dirs.src + '/js/' + pkg.name + '.js')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish))
     .pipe(header(banner, { pkg:pkg }))
-    .pipe(gulp.dest(dirs.dist + '/script'))
+    .pipe(gulp.dest(dirs.dist + '/js'))
     .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
     .pipe(header(banner, { pkg:pkg }))
-    .pipe(gulp.dest(dirs.dist + '/script'));
+    .pipe(gulp.dest(dirs.dist + '/js'));
 });
 
 gulp.task('serve', function() {
@@ -73,9 +73,9 @@ gulp.task('serve', function() {
     }
   });
   gulp.watch([dirs.src + '/css/**/*.css'], ['css']);
-  gulp.watch([dirs.src + '/script/*.script'], ['js']);
+  gulp.watch([dirs.src + '/js/*.js'], ['js']);
   gulp.watch([
-    dirs.dist + '/**/*.min.{css,script}',
+    dirs.dist + '/**/*.min.{css,js}',
     dirs.sandbox + '/*.{css,html}'
   ]).on('change', browserReload);
 });

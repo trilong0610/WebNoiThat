@@ -1,5 +1,5 @@
 /* ========================================================================
- * Bootstrap: tab.script v3.3.7
+ * Bootstrap: tab.js v3.3.7
  * http://getbootstrap.com/javascript/#tabs
  * ========================================================================
  * Copyright 2011-2016 Twitter, Inc.

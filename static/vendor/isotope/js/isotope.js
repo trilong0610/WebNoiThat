@@ -719,7 +719,7 @@ utils.toDashed = function( str ) {
 
 var console = window.console;
 /**
- * allow user to initialize classes via [data-namespace] or .script-namespace class
+ * allow user to initialize classes via [data-namespace] or .js-namespace class
  * htmlInit( Widget, 'widgetName' )
  * options are parsed from data-namespace-options
  */
@@ -728,7 +728,7 @@ utils.htmlInit = function( WidgetClass, namespace ) {
     var dashedNamespace = utils.toDashed( namespace );
     var dataAttr = 'data-' + dashedNamespace;
     var dataAttrElems = document.querySelectorAll( '[' + dataAttr + ']' );
-    var jsDashElems = document.querySelectorAll( '.script-' + dashedNamespace );
+    var jsDashElems = document.querySelectorAll( '.js-' + dashedNamespace );
     var elems = utils.makeArray( dataAttrElems )
       .concat( utils.makeArray( jsDashElems ) );
     var dataOptionsAttr = dataAttr + '-options';
@@ -1490,7 +1490,7 @@ proto._create = function() {
   }
 };
 
-// goes through all children again and gets bricks in proper carts
+// goes through all children again and gets bricks in proper order
 proto.reloadItems = function() {
   // collection of item elements
   this.items = this._itemize( this.element.children );
@@ -2268,7 +2268,7 @@ return Outlayer;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/script/item',[
+    define( 'isotope/js/item',[
         'outlayer/outlayer'
       ],
       factory );
@@ -2299,7 +2299,7 @@ var proto = Item.prototype = Object.create( Outlayer.Item.prototype );
 
 var _create = proto._create;
 proto._create = function() {
-  // assign id, used for original-carts sorting
+  // assign id, used for original-order sorting
   this.id = this.layout.itemGUID++;
   _create.call( this );
   this.sortData = {};
@@ -2346,7 +2346,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/script/layout-mode',[
+    define( 'isotope/js/layout-mode',[
         'get-size/get-size',
         'outlayer/outlayer'
       ],
@@ -2746,7 +2746,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/script/layout-modes/masonry',[
+    define( 'isotope/js/layout-modes/masonry',[
         '../layout-mode',
         'masonry/masonry'
       ],
@@ -2819,7 +2819,7 @@ return Item;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/script/layout-modes/fit-rows',[
+    define( 'isotope/js/layout-modes/fit-rows',[
         '../layout-mode'
       ],
       factory );
@@ -2888,7 +2888,7 @@ return FitRows;
   /* jshint strict: false */ /*globals define, module, require */
   if ( typeof define == 'function' && define.amd ) {
     // AMD
-    define( 'isotope/script/layout-modes/vertical',[
+    define( 'isotope/js/layout-modes/vertical',[
         '../layout-mode'
       ],
       factory );
@@ -2954,12 +2954,12 @@ return Vertical;
         'get-size/get-size',
         'desandro-matches-selector/matches-selector',
         'fizzy-ui-utils/utils',
-        'isotope/script/item',
-        'isotope/script/layout-mode',
+        'isotope/js/item',
+        'isotope/js/layout-mode',
         // include default layout modes
-        'isotope/script/layout-modes/masonry',
-        'isotope/script/layout-modes/fit-rows',
-        'isotope/script/layout-modes/vertical'
+        'isotope/js/layout-modes/masonry',
+        'isotope/js/layout-modes/fit-rows',
+        'isotope/js/layout-modes/vertical'
       ],
       function( Outlayer, getSize, matchesSelector, utils, Item, LayoutMode ) {
         return factory( window, Outlayer, getSize, matchesSelector, utils, Item, LayoutMode );
@@ -2972,12 +2972,12 @@ return Vertical;
       require('get-size'),
       require('desandro-matches-selector'),
       require('fizzy-ui-utils'),
-      require('isotope/script/item'),
-      require('isotope/script/layout-mode'),
+      require('isotope/js/item'),
+      require('isotope/js/layout-mode'),
       // include default layout modes
-      require('isotope/script/layout-modes/masonry'),
-      require('isotope/script/layout-modes/fit-rows'),
-      require('isotope/script/layout-modes/vertical')
+      require('isotope/js/layout-modes/masonry'),
+      require('isotope/js/layout-modes/fit-rows'),
+      require('isotope/js/layout-modes/vertical')
     );
   } else {
     // browser global
@@ -3054,7 +3054,7 @@ var trim = String.prototype.trim ?
 
   proto._itemize = function() {
     var items = Outlayer.prototype._itemize.apply( this, arguments );
-    // assign ID for original-carts
+    // assign ID for original-order
     for ( var i=0; i < items.length; i++ ) {
       var item = items[i];
       item.id = this.itemGUID++;
@@ -3336,7 +3336,7 @@ var trim = String.prototype.trim ?
 
   // ----- sort method ----- //
 
-  // sort filteredItem carts
+  // sort filteredItem order
   proto._sort = function() {
     if ( !this.options.sortBy ) {
       return;

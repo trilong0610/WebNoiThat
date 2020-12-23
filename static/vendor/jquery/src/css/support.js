@@ -42,7 +42,7 @@ define([
 		docElem.removeChild( container );
 	}
 
-	// Support: node.script jsdom
+	// Support: node.js jsdom
 	// Don't assume that getComputedStyle is a property of the global object
 	if ( window.getComputedStyle ) {
 		jQuery.extend( support, {

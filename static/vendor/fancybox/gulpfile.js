@@ -6,11 +6,11 @@ var gulp = require("gulp"),
     $ = require("gulp-load-plugins")();
 var config = {
         js: [
-            "lib/jquery.mousewheel.pack.script",
-            "source/jquery.fancybox.pack.script",
-            "source/helpers/jquery.fancybox-buttons.script",
-            "source/helpers/jquery.fancybox-thumbs.script",
-            "source/helpers/jquery.fancybox-media.script"
+            "lib/jquery.mousewheel.pack.js",
+            "source/jquery.fancybox.pack.js",
+            "source/helpers/jquery.fancybox-buttons.js",
+            "source/helpers/jquery.fancybox-thumbs.js",
+            "source/helpers/jquery.fancybox-media.js"
         ],
         css: [
             "source/jquery.fancybox.css",
@@ -25,7 +25,7 @@ var config = {
     dist = {
         images: "dist/images/fancybox",
         css: "dist/css",
-        js: "dist/script"
+        js: "dist/js"
     };
 
 
@@ -46,7 +46,7 @@ gulp.task("clean", function () {
 gulp.task("scripts", function () {
     return gulp.src(config.js)
         .pipe($.plumberNotifier())
-        .pipe($.concat("jquery.fancybox.min.script"))
+        .pipe($.concat("jquery.fancybox.min.js"))
         .pipe($.uglify())
         .pipe(gulp.dest(dist.js));
 });

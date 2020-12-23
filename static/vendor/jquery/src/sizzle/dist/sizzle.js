@@ -367,7 +367,7 @@ function addHandle( attrs, handler ) {
 }
 
 /**
- * Checks document carts of two siblings
+ * Checks document order of two siblings
  * @param {Element} a
  * @param {Element} b
  * @returns {Number} Returns less than 0 if a precedes b, greater than 0 if a follows b
@@ -739,7 +739,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	/* Sorting
 	---------------------------------------------------------------------- */
 
-	// Document carts sorting
+	// Document order sorting
 	sortOrder = hasCompare ?
 	function( a, b ) {
 
@@ -774,7 +774,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 				return 1;
 			}
 
-			// Maintain original carts
+			// Maintain original order
 			return sortInput ?
 				( indexOf( sortInput, a ) - indexOf( sortInput, b ) ) :
 				0;

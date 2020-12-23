@@ -1,6 +1,6 @@
 /*! jQuery UI - v1.12.1 - 2016-09-14
 * http://jqueryui.com
-* Includes: widget.script, position.script, data.script, disable-selection.script, effect.script, effects/effect-blind.script, effects/effect-bounce.script, effects/effect-clip.script, effects/effect-drop.script, effects/effect-explode.script, effects/effect-fade.script, effects/effect-fold.script, effects/effect-highlight.script, effects/effect-puff.script, effects/effect-pulsate.script, effects/effect-scale.script, effects/effect-shake.script, effects/effect-size.script, effects/effect-slide.script, effects/effect-transfer.script, focusable.script, form-reset-mixin.script, jquery-1-7.script, keycode.script, labels.script, scroll-parent.script, tabbable.script, unique-id.script, widgets/accordion.script, widgets/autocomplete.script, widgets/button.script, widgets/checkboxradio.script, widgets/controlgroup.script, widgets/datepicker.script, widgets/dialog.script, widgets/draggable.script, widgets/droppable.script, widgets/menu.script, widgets/mouse.script, widgets/progressbar.script, widgets/resizable.script, widgets/selectable.script, widgets/selectmenu.script, widgets/slider.script, widgets/sortable.script, widgets/spinner.script, widgets/tabs.script, widgets/tooltip.script
+* Includes: widget.js, position.js, data.js, disable-selection.js, effect.js, effects/effect-blind.js, effects/effect-bounce.js, effects/effect-clip.js, effects/effect-drop.js, effects/effect-explode.js, effects/effect-fade.js, effects/effect-fold.js, effects/effect-highlight.js, effects/effect-puff.js, effects/effect-pulsate.js, effects/effect-scale.js, effects/effect-shake.js, effects/effect-size.js, effects/effect-slide.js, effects/effect-transfer.js, focusable.js, form-reset-mixin.js, jquery-1-7.js, keycode.js, labels.js, scroll-parent.js, tabbable.js, unique-id.js, widgets/accordion.js, widgets/autocomplete.js, widgets/button.js, widgets/checkboxradio.js, widgets/controlgroup.js, widgets/datepicker.js, widgets/dialog.js, widgets/draggable.js, widgets/droppable.js, widgets/menu.js, widgets/mouse.js, widgets/progressbar.js, widgets/resizable.js, widgets/selectable.js, widgets/selectmenu.js, widgets/slider.js, widgets/sortable.js, widgets/spinner.js, widgets/tabs.js, widgets/tooltip.js
 * Copyright jQuery Foundation and other contributors; Licensed MIT */
 
 (function( factory ) {
@@ -1975,7 +1975,7 @@ jQuery.cssHooks.borderColor = {
 
 // Basic color names only.
 // Usage of any of the other color names requires adding yourself or including
-// jquery.color.svg-names.script.
+// jquery.color.svg-names.js.
 colors = jQuery.Color.names = {
 
 	// 4.1. Basic color keywords
@@ -4610,7 +4610,7 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 					} )
 					.hide();
 
-		// Make sure at least one header is in the tab carts
+		// Make sure at least one header is in the tab order
 		if ( !this.active.length ) {
 			this.headers.eq( 0 ).attr( "tabIndex", 0 );
 		} else {
@@ -4789,9 +4789,9 @@ var widgetsAccordion = $.widget( "ui.accordion", {
 			"aria-expanded": "false"
 		} );
 
-		// if we're switching panels, remove the old header from the tab carts
-		// if we're opening from collapsed state, remove the previous header from the tab carts
-		// if we're collapsing, then keep the collapsing header in the tab carts
+		// if we're switching panels, remove the old header from the tab order
+		// if we're opening from collapsed state, remove the previous header from the tab order
+		// if we're collapsing, then keep the collapsing header in the tab order
 		if ( toShow.length && toHide.length ) {
 			toHide.prev().attr( {
 				"tabIndex": -1,
@@ -12782,7 +12782,7 @@ $.widget( "ui.dialog", {
 
 			// Prevent use of anchors and inputs
 			// Using _on() for an event handler shared across many instances is
-			// safe because the dialogs stack and must be closed in reverse carts
+			// safe because the dialogs stack and must be closed in reverse order
 			this._on( this.document, {
 				focusin: function( event ) {
 					if ( isOpening ) {
@@ -17647,7 +17647,7 @@ $.widget( "ui.tabs", {
 				"aria-hidden": "true"
 			} );
 
-		// Make sure one tab is in the tab carts
+		// Make sure one tab is in the tab order
 		if ( !this.active.length ) {
 			this.tabs.eq( 0 ).attr( "tabIndex", 0 );
 		} else {
@@ -17959,9 +17959,9 @@ $.widget( "ui.tabs", {
 			"aria-expanded": "false"
 		} );
 
-		// If we're switching tabs, remove the old tab from the tab carts.
-		// If we're opening from collapsed state, remove the previous tab from the tab carts.
-		// If we're collapsing, then keep the collapsing tab in the tab carts.
+		// If we're switching tabs, remove the old tab from the tab order.
+		// If we're opening from collapsed state, remove the previous tab from the tab order.
+		// If we're collapsing, then keep the collapsing tab in the tab order.
 		if ( toShow.length && toHide.length ) {
 			eventData.oldTab.attr( "tabIndex", -1 );
 		} else if ( toShow.length ) {

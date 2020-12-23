@@ -1,10 +1,12 @@
+import json
+
 from django.contrib import messages, auth
 from django.shortcuts import render, redirect
 from django.views import View
-from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
+from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
@@ -21,22 +23,24 @@ from product.models import Category
 from .forms import  CreateUserForm
 from django.http import HttpResponseRedirect
 
-def accountDetail(request):
-    if request.user.is_authenticated:
-        user = request.user
-        cart, created = Cart.objects.get_or_create(user=user, complete=False)
-        items = cart.cartitem_set.all()
-        cartItems = cart.get_cart_items
-    else:
-        items = []
-        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = cart['get_cart_items']
-    category = Category.objects.all()
-    context = {
-        'cartItems': cartItems,
-        'category':category,
-    }
-    return render(request, 'user/AccountDetail.html', context)
+# def accountDetail(request):
+#     if request.user.is_authenticated:
+#         user = request.user
+#         cart, created = Cart.objects.get_or_create(user=user, complete=False)
+#         items = cart.cartitem_set.all()
+#         cartItems = cart.get_cart_items
+#     else:
+#         items = []
+#         cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+#         cartItems = cart['get_cart_items']
+#     category = Category.objects.all()
+#     context = {
+#         'cartItems': cartItems,
+#         'category':category,
+#     }
+#     return render(request, 'user/AccountDetail.html', context)
+from .models import Address
+
 
 def recentOrder(request):
     user = request.user
@@ -77,6 +81,53 @@ def LogoutUser(request):
     logout(request)
     return redirect('/')
 
+def changeInfoUser(request):
+    data = json.loads(request.body)
+    user = request.user
+    firstName = data['firstName']
+    lastName = data['lastName']
+    email = data['email']
+    user.first_name = firstName
+    user.last_name = lastName
+    user.email = email
+    user.save()
+    return JsonResponse('Info was change', safe=False)
+
+def accountDetail(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+    address = Address.objects.get(user = user)
+    context = {
+        'cartItems': cartItems,
+        'category': category,
+        'address': address,
+    }
+    return render(request, 'user/AccountDetail.html', context)
+
+def changePassword(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('user:accountDetail')
+        else:
+            messages.error(request, 'Sai thông tin, vui lòng nhập lại.')
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        'form': form
+    }
+    return render(request, 'user/AccountDetail.html', context)
 
 
 

@@ -14,40 +14,40 @@
 
                     <img src="{% static 'images/Product/1P.jpg' %}" alt="product1" class="img-responsive"/>
                     <h3 style="font-size: 18px;font-weight: bold;margin-top: 30px;margin-bottom: 10px">Our Product</h3>
-                    <div class="box-fitter clearfix">
-                        <div class="box-fitter-left">
-                            <ul>
-                                <li style="margin-right: 5px">
-                                    <a href="ProductGrid.html">
-                                        <div ><i class="la la-th-large"></i></div>
-                                    </a>
-                                </li>
-                                <li class="active">
-                                    <a href="ProductGroup.html">
-                                        <div ><i class="la la-list-ul"></i></div>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="box-fitter-right">
-                            <ul>
-                                <li>Sort by:</li>
-                                <li>
-                                    <div class="dropdown filterDrop">
-                                        <a class=" dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-                                            Alphabetically, A-Z
-                                            <span class="fa fa-angle-down"></span>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="#">USD</a></li>
-                                            <li><a href="#">VND</a></li>
-                                            <li><a href="#">EURO</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+{#                    <div class="box-fitter clearfix">#}
+{#                        <div class="box-fitter-left">#}
+{#                            <ul>#}
+{#                                <li style="margin-right: 5px">#}
+{#                                    <a href="ProductGrid.html">#}
+{#                                        <div ><i class="la la-th-large"></i></div>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                                <li class="active">#}
+{#                                    <a href="ProductGroup.html">#}
+{#                                        <div ><i class="la la-list-ul"></i></div>#}
+{#                                    </a>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                        <div class="box-fitter-right">#}
+{#                            <ul>#}
+{#                                <li>Sort by:</li>#}
+{#                                <li>#}
+{#                                    <div class="dropdown filterDrop">#}
+{#                                        <a class=" dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">#}
+{#                                            Alphabetically, A-Z#}
+{#                                            <span class="fa fa-angle-down"></span>#}
+{#                                        </a>#}
+{#                                        <ul class="dropdown-menu">#}
+{#                                            <li><a href="#">USD</a></li>#}
+{#                                            <li><a href="#">VND</a></li>#}
+{#                                            <li><a href="#">EURO</a></li>#}
+{#                                        </ul>#}
+{#                                    </div>#}
+{#                                </li>#}
+{#                            </ul>#}
+{#                        </div>#}
+{#                    </div>#}
                     <div class="row">
 {#                       ---------- All product---------#}
                             {% for all_product in all_product %}
@@ -96,41 +96,41 @@
                             {% endfor %}
                         {#                       ---------- end All product---------#}
                     </div>
-                    <div class="paginate">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Previous
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div style="width: 30px;height: 30px;background: #000;color: #fff;text-align: center;padding-top: 8px">
-                                        1
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div style="width: 30px;height: 30px;background: #c19876;color: #fff;text-align: center;padding-top: 8px">
-                                        2
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <div style="width: 30px;height: 30px;background: #000;color: #fff;text-align: center;padding-top: 8px">
-                                        3
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Next
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+{#                    <div class="paginate">#}
+{#                        <ul>#}
+{#                            <li>#}
+{#                                <a href="#">#}
+{#                                    Previous#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">#}
+{#                                    <div style="width: 30px;height: 30px;background: #000;color: #fff;text-align: center;padding-top: 8px">#}
+{#                                        1#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">#}
+{#                                    <div style="width: 30px;height: 30px;background: #c19876;color: #fff;text-align: center;padding-top: 8px">#}
+{#                                        2#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">#}
+{#                                    <div style="width: 30px;height: 30px;background: #000;color: #fff;text-align: center;padding-top: 8px">#}
+{#                                        3#}
+{#                                    </div>#}
+{#                                </a>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <a href="#">#}
+{#                                    Next#}
+{#                                </a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </div>#}
 {% endblock content %}
 {% block left-navbar %}
     <div class=" slideSort">
@@ -213,7 +213,7 @@
                         {% for best_seller in best_sellers %}
                             <div class="box-slideNewproduct">
                             <div class="slideNewproduct-item slideNewproduct-img">
-                                <a href="SingleProduct.html"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1"
+                                <a href="{% url 'store:detailProduct' best_seller.id %}"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1"
                                                  class="img-responsive"/></a>
                             </div>
                             <div class="slideNewproduct-item slideNewproduct-text">

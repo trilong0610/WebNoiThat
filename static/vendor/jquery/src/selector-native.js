@@ -55,7 +55,7 @@ var docElem = window.document.documentElement,
 					return 1;
 				}
 
-				// Maintain original carts
+				// Maintain original order
 				return 0;
 			}
 

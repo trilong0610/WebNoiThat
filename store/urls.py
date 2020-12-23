@@ -9,10 +9,10 @@ urlpatterns = [
     path('', views.home, name="home"),
     # gio hang
     path('productGrid/', views.view_product, name = 'productGrid'),
-    # thanh toan
+    # Tang giam so luong item trong gio hang 1 don vi
     path('updateItem/', views.updateItem, name="updateItem"),
+    # Tang giam so luong item trong gio hang theo gia tri nhap vao input
     path('addItemToCart/', views.addItemToCart, name="addItemToCart"),
-
     path('contact/', views.contact, name="contact"),
     # xem san pham trong danh muc
     path('category/<int:category_id>/', views.view_category.as_view(), name = "category"),

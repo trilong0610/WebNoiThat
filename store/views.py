@@ -79,10 +79,20 @@ def home(request):
         cartItems = cart['get_cart_items']
     category = Category.objects.all()
     # sam pham moi nhat
-    hot_product = Product.objects.all().order_by('-id')[:3]
-    product_main = Product.objects.all()
-    context = {'category':category,'hot_product':hot_product, 'items': items, 'cartItems' : cartItems, 'products':product_main}
-    return render(request, 'store/Home.html', context)
+    hot_product = Product.objects.all().order_by('-id')[:6]
+    # best seller
+    best_seller = Product.objects.all().order_by('-amount_sell')[:6]
+
+    all_product = Product.objects.all()
+
+    context = {'category': category,
+               'hot_product': hot_product,
+               'items': items,
+               'cartItems': cartItems,
+               'all_product': all_product,
+               'best_sellers': best_seller,
+               }
+    return render(request, 'store/ProductGrid.html', context)
 
 
 class view_category(View):
