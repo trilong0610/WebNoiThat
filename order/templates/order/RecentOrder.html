@@ -20,7 +20,13 @@
                                  data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
                                  style="background: rgb(193, 155, 118);   ">
                                 <h4 class="panel-title">
-                                    {{ order.date_ordered }}
+                                    ID: {{ order.id }}
+                                </h4>
+                                <h4 class="panel-title">
+                                    {{ order.date_ordered|date:'H:i d-m-Y' }}
+                                </h4>
+                                 <h4 class="panel-title">
+                                    {{ order.get_status_display }}
                                 </h4>
                                 <span class="accordion-toggle question-toggle collapsed"><i
                                         class="fa color-setting fa-minus" aria-hidden="true"></i></span>

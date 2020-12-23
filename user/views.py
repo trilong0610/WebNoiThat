@@ -59,7 +59,7 @@ def recentOrder(request):
                'category':category,
                'cartItems':cartItems
                }
-    return render(request, 'user/RecentOrder.html', context)
+    return render(request, 'order/RecentOrder.html', context)
 
 
 def RegisterPage(request):

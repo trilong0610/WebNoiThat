@@ -34,7 +34,7 @@ class Order(models.Model):
 
     phone = models.CharField(max_length=12, default='')
     def __str__(self):
-        return str(self.cart.id)
+        return str(self.id)
 
     #
     # @property
