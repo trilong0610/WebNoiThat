@@ -13,6 +13,7 @@ urlpatterns = [
     path('updateItem/', views.updateItem, name="updateItem"),
     # Tang giam so luong item trong gio hang theo gia tri nhap vao input
     path('addItemToCart/', views.addItemToCart, name="addItemToCart"),
+    path('deleteProductCart/', views.deleteProductCart, name="deleteProductCart"),
     path('contact/', views.contact, name="contact"),
     # xem san pham trong danh muc
     path('category/<int:category_id>/', views.view_category.as_view(), name = "category"),

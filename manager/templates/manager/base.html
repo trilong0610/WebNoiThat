@@ -1,15 +1,67 @@
+{% load humanize %}
 {% load static %}
 <!DOCTYPE html>
+<!-- <html class="no-js" lang="en"> -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS -->
-{#    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">#}
-{#    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/script/bootstrap.min.script"></script>#}
-{#    <script src="//code.jquery.com/jquery-1.11.1.min.script"></script>#}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>TL Store</title>
+    <meta name="author" content="ThemePunch"/>
+    <meta name="description" content="The Garden theme tempalte">
+    <meta name="keywords" content="The Garden theme template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16"> -->
+    <!--Icons fonts-->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/line-awesome/css/line-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/themify-icons/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap2-toggle.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Overpass:100,100i,200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap"
+          rel="stylesheet">
+    <!--Styles-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .checkbox label .toggle,.checkbox-inline .toggle{margin-left:-20px;margin-right:5px}
+    .toggle{position:relative;overflow:hidden}
+    .toggle input[type=checkbox]{display:none}
+    .toggle-group{position:absolute;width:200%;top:0;bottom:0;left:0;transition:left .35s;-webkit-transition:left .35s;-moz-user-select:none;-webkit-user-select:none}
+    .toggle.off .toggle-group{left:-100%}
+    .toggle-on{position:absolute;top:0;bottom:0;left:0;right:50%;margin:0;border:0;border-radius:0}
+    .toggle-off{position:absolute;top:0;bottom:0;left:50%;right:0;margin:0;border:0;border-radius:0}
+    .toggle-handle{position:relative;margin:0 auto;padding-top:0;padding-bottom:0;height:100%;width:0;border-width:0 1px}
+    .toggle.btn{min-width:59px;min-height:34px}
+    .toggle-on.btn{padding-right:24px}
+    .toggle-off.btn{padding-left:24px}
+    .toggle.btn-lg{min-width:79px;min-height:45px}
+    .toggle-on.btn-lg{padding-right:31px}
+    .toggle-off.btn-lg{padding-left:31px}
+    .toggle-handle.btn-lg{width:40px}
+    .toggle.btn-sm{min-width:50px;min-height:30px}
+    .toggle-on.btn-sm{padding-right:20px}
+    .toggle-off.btn-sm{padding-left:20px}
+    .toggle.btn-xs{min-width:35px;min-height:22px}
+    .toggle-on.btn-xs{padding-right:12px}
+    .toggle-off.btn-xs{padding-left:12px}
+    </style>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/animsition/dist/css/animsition.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/animate.css/source/slide_fwd_center/slide_fwd_center.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/owl-carousel/css/owl.carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/css-hamburgers/css/hamburgers.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/slick/css/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/range_filter/css/jquery-ui.css' %}" rel="stylesheet">
+    <!-- Revolution -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/settings.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/layers.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/navigation.css' %}">
+    <!--Theme style-->
+    <link href="{% static 'css/bootstrap4-toggle.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
     <script type="text/javascript">
         var user = '{{ request.user }}'
 
@@ -30,138 +82,429 @@
         }
         const csrftoken = getToken('csrftoken');
     </script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
-    <title>DuyThai</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="{% url 'store' %}">DuyThai</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+<div class="page-loader">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<div class="the-garden">
+    <div class="search">
+        <input type="text" class="ip-search" placeholder="Search for...">
+    </div>
+    <header id="header" class="header-serviceV2 scollView">
+        <div class="home-top" style="margin-top: 0">
+            <div class="container">
+                <div class="header-top clearfix">
+                    <div class="header-tleft pull-left">
+                        <div class="link-list link-list-first">
+                            <span>Welcome to Our Wood Store !</span>
+                        </div>
+                    </div>
+                    <div class="header-dropdown pull-right">
+                        <div class="check-account dp-iblock">
+                            <p>
+                                {% if user.is_authenticated %}
+                                    <a href="{% url 'user:accountDetail' %}" class="check link-color">Xin chào: {{ user.username }}</a>  {# / <a href="{% url 'user:logout' %}" class="check link-color">Đăng xuất</a> #}
+                                                {% else %}
+                                                    <a href="{% url 'user:login' %}" class="check link-color">Đăng nhập/Đăng kí</a>
+                                                {% endif %}
+                            </p>
+                            <a href="{% url 'cart:view_cart' %}" class="check link-color">Giỏ Hàng: {{ cartItems }}</a>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-{#                  Menu Quan Li Khach Hang#}
-{#                              -----------------Dropdown Menu NavBar------------------#}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Khách Hàng
-                </a>
-{#              ------------------Item----------------------------------------#}
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item" href="#">Thêm Khách Hàng</a>
-                  <a class="dropdown-item" href="#">Quản Lí Khách Hàng</a>
-              </div>
-              </li>
-
-                {#              Menu Quan Li Sản Phẩm#}
-             {#                              -----------------Dropdown Menu NavBar------------------#}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sản Phẩm
-                </a>
-{#              ------------------Item----------------------------------------#}
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      {# Kiem tra quyen#}
-                      {% if perms.product.add_product %}
-                        <a class="dropdown-item" href="{% url 'manager:add_product' %}">Thêm Sản Phẩm</a>
-                      {% endif %}
-                      {% if perms.product.change_product %}
-                        <a class="dropdown-item" href="{% url 'manager:dashboard' %}">Quản Lí Sản Phẩm</a>
-                      {% endif %}
-                  </div>
-
-
-
-              </li>
-              {#              Menu Quan Li Danh Mục#}
-              {#                              -----------------Dropdown Menu NavBar------------------#}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Danh Mục
-                </a>
-{#              ------------------Item----------------------------------------#}
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              {# Kiem tra quyen#}
-                  {% if perms.product.add_category %}
-                    <a class="dropdown-item" href="{% url 'manager:add_category' %}">Thêm Danh Mục</a>
-                  {% endif %}
-                  {% if perms.product.change_category %}
-                    <a class="dropdown-item" href="#">Quản Lí Danh Mục</a>
-                  {%  endif %}
-              </div>
-              </li>
-              {#              Menu Quan Li Đơn Đặt Hàng#}
-               {#                              -----------------Dropdown Menu NavBar------------------#}
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Đặt Hàng
-                </a>
-{#              ------------------Item----------------------------------------#}
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                 <a class="dropdown-item" href="{% url 'manager:purchase_product' %}">Thêm Đơn Đặt Hàng</a>
-                  <a class="dropdown-item" href="#">Quản Lí Đơn Đặt Hàng</a>
-              </div>
-              </li>
-{#          <li class="nav-item">#}
-{#            <a class="nav-link" href="#">Link</a>#}
-{#          </li>#}
-{#              -----------------Dropdown Menu NavBar------------------#}
-{#          <li class="nav-item dropdown">#}
-{#            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">#}
-{#                Danh mục#}
-{#            </a>#}
-{#          ------------------Danh Muc----------------------------------------#}
-{#          <div class="dropdown-menu" aria-labelledby="navbarDropdown">#}
-{#             <a class="dropdown-item" href="#">Khách Hàng</a>#}
-{#              <a class="dropdown-item" href="#">Sản Phẩm</a>#}
-{#              <a class="dropdown-item" href="#">Nhập hàng</a>#}
-{#          </div>#}
-{#          </li>#}
-{#      <li class="nav-item">#}
-{#        <a class="nav-link disabled" href="#">Disabled</a>#}
-{#      </li>#}
-          </ul>
-            <div class="form-inline my-2 my-lg-1">
-                {% if perms.auth.view_user %}
-                    <a href="{% url 'manager:view_user' %}"class="btn btn-warning">Quan Li User</a>
-                {% endif %}
-            </div>
-            <div class="form-inline my-2 my-lg-1">
-                {% if user.is_authenticated %}
-                    <a href="http://127.0.0.1:8000/admin/"class="btn btn-warning">ADMIN</a>
-                {% endif %}
-            </div>
-{#                Manage button#}
-            <div class="form-inline my-2 my-lg-1">
-                {% if user.is_authenticated %}
-                    <a href=" {% url 'manager:home' %}"class="btn btn-warning">Manage</a>
-                {% endif %}
-            </div>
-{#                Login Logout#}
-          <div class="form-inline my-2 my-lg-0">
-                <span class="hello-msg mr-1 ml-1">Hello, {{request.user}}</span>
-                <span class="hello-msg"><a href="{% url 'logout' %}">Logout</a></span>
-                <a href="{% url 'orders:orders' %}">
-                    <img  id="cart-icon" src="{% static 'store/images/../../../static/images/carts.png' %}"  >
-                </a>
-                <p id="cart-total">{{ cartItems }}</p>
-
+                        </div>
+                    </div>
+                    <!--                            <div class="header-tleft pull-right">-->
+                    <!--                                -->
+                    <!--                                <div class="link-list link-list-first">-->
+                    <!--                                    <span><i class="fa fa-phone" aria-hidden="true"></i>(88) 0111 223 445</span>-->
+                    <!--                                </div>-->
+                    <!--                                <div class="link-list ">-->
+                    <!--                                    <span><i class="fa fa-home" aria-hidden="true"></i>20 Green Farm, New Zealand</span>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                </div>
             </div>
         </div>
-    </nav>
+        <div class="home-menu">
+            <nav class="navbar-core navbar-white navbar-v1 headroom headroom--not-bottom headroom--pinned headroom--top">
+                <div class="s-wrapper s-wrapper-service">
+                    <div class="container">
+                        <div class="s-inner clearfix">
+                            <div class="pull-left nav-left">
+                                <div class="logo">
+                                    <a href="{% url 'store:home' %}">
+                                        <img src="{% static 'images/logo.png' %}" alt="logo" class=" img-responsive">
+                                    </a>
+                                </div>
+                            </div>
+                            <button class="hamburger has-animation hamburger--collapse" id="toggle-icon">
+                                    <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                    </span>
+                            </button>
+                            <div class="pull-right nav-right">
+                                <div class="navbar-main">
+                                    <ul class="navbar-menu">
+                                        <li class="dropdown">
+                                            <a href="{% url 'store:home' %}" >Trang Chủ</a>
+                                        </li>
+                                          <li class="dropdown productMN">
+                                                    <a href="{% url 'store:productGrid' %}" class="active-menu">Sản Phẩm</a>
+                                                    <i class="fa fa-angle-down"></i>
+                                                    <div class="box-menu">
+                                                        <div class="row">
+                                                            <div class="col-md-5 ">
+                                                                <div class=" slideSort">
+                                                                    <h3 class="slider-left-title">Loại Sản Phẩm</h3>
+                                                                    <ul class="slide-left-list">
+                                                                        {% for items in category %}
+                                                                            <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 ">
+
+                                                                <div class=" slideSort">
+                                                                    <h3 class="slider-left-title">Danh Mục</h3>
+                                                                    <ul class="slide-left-list">
+                                                                        <li><a href="{% url 'store:hotProduct' %}">Sản phẩm mới</a></li>
+                                                                        <li><a href="{% url 'store:mostPopular' %}">Nhiều người mua</a></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+{#                                                            <div class="col-md-3 ">#}
+{#                                                                <div class="box-slider-left slideNewproduct slideNewproduct2">#}
+{#                                                                    <h3 class="slider-left-title" style="margin-bottom: 10px">Best sellers</h3>#}
+{#                                                                    <div class="box-slideNewproduct">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P5.jpg' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="SingleProduct.html">Trailer</a></h5>#}
+{#                                                                            <p class="slideProduct-price">$32.00</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                    <div class="box-slideNewproduct ">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P3.jpg' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="SingleProduct.html">Magic Clock</a></h5>#}
+{#                                                                            <p class="slideProduct-price">$32.00</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                    <div class="box-slideNewproduct">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P1.jpg' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="SingleProduct.html">Obraz Mechaniczny</a></h5>#}
+{#                                                                            <p class="slideProduct-price">$32.00</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{##}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                            <div class="col-md-3 ">#}
+{#                                                                <h3 class="slider-left-title">Woody Store</h3>#}
+{#                                                                <div  class="box-gallery">#}
+{#                                                                    <a href="AboutUs.html">#}
+{#                                                                        <img src="{% static 'images/MN2.png' %}" alt="banner slideBar" class="img-responsive" style="width: 100%">#}
+{#                                                                        <div class="arrIcon">#}
+{#                                                                        </div>#}
+{#                                                                    </a>#}
+{#                                                                </div>#}
+{##}
+{#                                                            </div>#}
+                                                        </div>
+                                                    </div>
+                                                </li>
+{#                                                <li class="dropdown productMN">#}
+{#                                                    <a href="Gallery.html">EXPLORE</a>#}
+{#                                                    <i class="fa fa-angle-down"></i>#}
+{#                                                    <div class="box-menu">#}
+{#                                                        <div class="row">#}
+{##}
+{#                                                            <div class="col-md-3 ">#}
+{#                                                                <div class=" slideSort">#}
+{#                                                                    <h3 class="slider-left-title">About Bussiness</h3>#}
+{#                                                                    <ul class="slide-left-list">#}
+{#                                                                        <li><a href="Policy.html">Policy</a></li>#}
+{#                                                                        <li><a href="FAQ.html">FAQ</a></li>#}
+{#                                                                        <li><a href="Policy.html">Term & Conditions</a></li>#}
+{#                                                                        <li><a href="Policy.html">Private Policy</a></li>#}
+{#                                                                        <li><a href="Policy.html">Term of user</a></li>#}
+{#                                                                    </ul>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                            <div class="col-md-3 ">#}
+{##}
+{#                                                                <div class=" slideSort">#}
+{#                                                                    <h3 class="slider-left-title">Other link</h3>#}
+{#                                                                    <ul class="slide-left-list">#}
+{#                                                                        <li><a href="Blogs.html">Blogs</a></li>#}
+{#                                                                        <li><a href="Gallery.html">Gallery</a></li>#}
+{#                                                                    </ul>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                            <div class="col-md-3 ">#}
+{#                                                                <div class="box-slider-left slideNewproduct slideNewproduct2">#}
+{#                                                                    <h3 class="slider-left-title" style="margin-bottom: 10px">Recent news</h3>#}
+{#                                                                    <div class="box-slideNewproduct">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="BlogSingle.html"><img src="{% static 'images/recen1.png' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jul 19,2019 / 4 Comments</a></h5>#}
+{#                                                                            <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Waxy latest also use</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                    <div class="box-slideNewproduct ">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="BlogSingle.html"><img src="{% static 'images/recen2.png' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Jun 26 , 2019 / 15 Comments</a></h5>#}
+{#                                                                            <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Decorating your home</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{#                                                                    <div class="box-slideNewproduct">#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
+{#                                                                            <a href="BlogSingle.html"><img src="{% static 'images/recen3.png' %}" alt="product1" class="img-responsive"></a>#}
+{#                                                                        </div>#}
+{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
+{#                                                                            <h5><a href="BlogSingle.html" style="font-size: 12px;color: #a8a8a8">Feb 12, 2019 / 8 Comments</a></h5>#}
+{#                                                                            <p class="slideProduct-price" style="font-size: 16px;margin-top: 0;">Wood in your house</p>#}
+{#                                                                        </div>#}
+{#                                                                    </div>#}
+{##}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                            <div class="col-md-3 ">#}
+{#                                                                <h3 class="slider-left-title">Our Gallery</h3>#}
+{#                                                                <div style="position: relative">#}
+{#                                                                    <a href="Gallery.html" class="abbr">#}
+{#                                                                        <img style=" width: 100%;" src="{% static 'images/MN1.png' %}" alt="banner slideBar" class="img-responsive">#}
+{#                                                                    </a>#}
+{#                                                                </div>#}
+{#                                                            </div>#}
+{#                                                        </div>#}
+{#                                                    </div>#}
+{#                                                </li>#}
+{#                                        <li class="dropdown">#}
+{#                                            <a href="{% url 'store:contact' %}">Liên Hệ</a>#}
+{#                                        </li>#}
+                                        <li class="dropdown">
+                                            {% if user.is_authenticated %}
+                                               <a href="{% url 'user:accountDetail' %}">
+                                                    Tài Khoản
+                                                </a>
+                                            {% else %}
+                                                <a href="{% url 'user:login' %}">
+                                                    Tài Khoản
+                                                </a>
+                                            {% endif %}
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="search2">
+                                    <ul>
+                                        <li>
+                                            <input type="text" name="Search" placeholder="Search" class="">
+                                        </li>
+                                        <li>
+                                            <a class="fa fa-search " href="404.html"></a>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+{#    ----------------Banner and title----------------#}
+        {% block banner %}
+        {% endblock banner %}
+        {#    ----------------Banner and title----------------#}
+    </header>
+    <section class="page-shop-slidebar" style="    padding-top: 60px;">
     <div class="container">
-        {% block content %}
+        <div class="row">
+            <div class="col-md-9 col-md-push-3">
+            {#    ----------------Content----------------#}
+                {% block content %}
+                {% endblock content %}
+            {#    ----------------Content----------------#}
+            </div>
+            <div class="col-md-3 col-md-pull-10">
+            {#    ----------------Left navbar----------------#}
+{#                {% block left-navbar %}#}
+                    <ul class="myAccSidebar">
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+                            <a href="{% url 'manager:view_user' %}">
+                                <p>Tài khoản</p>
+                                <i class="la la-user"></i>
+                            </a>
+                        </li>
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+                            <a href="{% url 'manager:product_control' %}">
+                                <p>Sản phẩm</p>
+                                <i class="la la-user"></i>
+                            </a>
+                        </li>
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+                            <a href="{% url 'user:accountDetail' %}">
+                                <p>Đặt hàng từ nhà cung cấp</p>
+                                <i class="la la-user"></i>
+                            </a>
+                        </li>
+                    </ul>
+{#                {% endblock left-navbar %}#}
 
-        {% endblock content %}
+            {#    ----------------Left navbar----------------#}
+            </div>
+        </div>
     </div>
-    <!-- jQuery and JS bundle w/ Popper.script -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+    </section>
 
+
+<footer id="footerV2">
+    <div class="container" style="position: relative">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                <div class="footer-contentV2">
+                    <div class="footer-titleV2">
+                        <h4 style="font-size: 32px;font-weight: 700">WOODY STORE</h4>
+                    </div>
+                    <p>Woody integrates design, technology and <br>
+                        nature. We offer innovative wooden<br>
+                        products to a more sustainable and<br>
+                        durable envoriment.</p>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="footer-titleV2">
+                            <h4>Menu</h4>
+                        </div>
+                        <div class="list-support">
+                            <a href="Home.html" ><p>Home</p></a>
+                            <a href="ProductGrid.html" class="active"><p>Product</p></a>
+                            <a href="AboutUs.html" ><p>About Us</p></a>
+                            <a href="Contact.html"><p>Contact</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-titleV2">
+                            <h4>Explore</h4>
+                        </div>
+                        <div class="list-support">
+                            <a href="Policy.html"> <p>Policy</p></a>
+                            <a href="FAQ.html"> <p>FAQ</p></a>
+                            <a href="Blogs.html"> <p>Blog</p></a>
+                            <a href="Gallery.html"> <p>Gallery</p></a>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-titleV2">
+                            <h4>Other</h4>
+                        </div>
+                        <div class="list-support">
+                            <a href="../../../user/templates/user/AccountDetail.html" > <p>Account</p></a>
+                            <a href="Cart.html"> <p>Cart</p></a>
+                            <a href="WishList.html"> <p>Wishlist</p></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="footer-titleV2">
+                    <h4>Follow Us On</h4>
+                </div>
+                <div class="follow-list-icon">
+                    <div class="mr-icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="footer-titleV2">
+                    <h4 style="    margin-top: 30px;">Payment Menthod</h4>
+                </div>
+                <div class="follow-list-icon">
+                    <div class="mr-icon">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-visa" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-paypal" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-jcb" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-fw fa-cc-mastercard" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div id="bttop" style="display: block;">
+            <i class="fa fa-chevron-up"></i>
+        </div>
+    </div>
+    <div class="copy-right">
+        <div class="container">
+            <div class="clearfix">
+                <p style="float: left">Copyrights @ 2019 All Woody by Arena Muiltimedia</p>
+                <div class="mr-icon" style="float: right;    width: 50%;    margin-top: 16px;">
+                   <ul>
+                                    <li><a href="Policy.html">Term of user</a></li>
+                                    <li><a href="Policy.html">Private Policy</a></li>
+                                    <li><a href="Contact.html">Site map</a></li>
+                                    <li><a href="#">Languages: ENG</a></li>
+                                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+<script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'vendor/jquery_easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/owl-carousel/js/owl.carousel.js' %}"></script>
+<script src="{% static 'vendor/slick/js/slick.js' %}"></script>
+<script src="{% static 'vendor/isotope/js/isotope.js' %}"></script>
+<script src="{% static 'vendor/isotope/js/imagesloaded.pkgd.js' %}"></script>
+<script src="{% static 'vendor/range_filter/js/jquery-ui.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/jquery.themepunch.tools.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/jquery.themepunch.revolution.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.actions.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.carousel.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.kenburn.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.layeranimation.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.migration.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.navigation.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.parallax.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.slideanims.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.video.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+<script src="{% static 'script/bootstrap4-toggle.min.js' %}"></script>
+<script>
+    +function(a){"use strict";function b(b){return this.each(function(){var d=a(this),e=d.data("bs.toggle"),f="object"==typeof b&&b;e||d.data("bs.toggle",e=new c(this,f)),"string"==typeof b&&e[b]&&e[b]()})}var c=function(b,c){this.$element=a(b),this.options=a.extend({},this.defaults(),c),this.render()};c.VERSION="2.2.0",c.DEFAULTS={on:"On",off:"Off",onstyle:"primary",offstyle:"default",size:"normal",style:"",width:null,height:null},c.prototype.defaults=function(){return{on:this.$element.attr("data-on")||c.DEFAULTS.on,off:this.$element.attr("data-off")||c.DEFAULTS.off,onstyle:this.$element.attr("data-onstyle")||c.DEFAULTS.onstyle,offstyle:this.$element.attr("data-offstyle")||c.DEFAULTS.offstyle,size:this.$element.attr("data-size")||c.DEFAULTS.size,style:this.$element.attr("data-style")||c.DEFAULTS.style,width:this.$element.attr("data-width")||c.DEFAULTS.width,height:this.$element.attr("data-height")||c.DEFAULTS.height}},c.prototype.render=function(){this._onstyle="btn-"+this.options.onstyle,this._offstyle="btn-"+this.options.offstyle;var b="large"===this.options.size?"btn-lg":"small"===this.options.size?"btn-sm":"mini"===this.options.size?"btn-xs":"",c=a('<label class="btn">').html(this.options.on).addClass(this._onstyle+" "+b),d=a('<label class="btn">').html(this.options.off).addClass(this._offstyle+" "+b+" active"),e=a('<span class="toggle-handle btn btn-default">').addClass(b),f=a('<div class="toggle-group">').append(c,d,e),g=a('<div class="toggle btn" data-toggle="toggle">').addClass(this.$element.prop("checked")?this._onstyle:this._offstyle+" off").addClass(b).addClass(this.options.style);this.$element.wrap(g),a.extend(this,{$toggle:this.$element.parent(),$toggleOn:c,$toggleOff:d,$toggleGroup:f}),this.$toggle.append(f);var h=this.options.width||Math.max(c.outerWidth(),d.outerWidth())+e.outerWidth()/2,i=this.options.height||Math.max(c.outerHeight(),d.outerHeight());c.addClass("toggle-on"),d.addClass("toggle-off"),this.$toggle.css({width:h,height:i}),this.options.height&&(c.css("line-height",c.height()+"px"),d.css("line-height",d.height()+"px")),this.update(!0),this.trigger(!0)},c.prototype.toggle=function(){this.$element.prop("checked")?this.off():this.on()},c.prototype.on=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._offstyle+" off").addClass(this._onstyle),this.$element.prop("checked",!0),void(a||this.trigger()))},c.prototype.off=function(a){return this.$element.prop("disabled")?!1:(this.$toggle.removeClass(this._onstyle).addClass(this._offstyle+" off"),this.$element.prop("checked",!1),void(a||this.trigger()))},c.prototype.enable=function(){this.$toggle.removeAttr("disabled"),this.$element.prop("disabled",!1)},c.prototype.disable=function(){this.$toggle.attr("disabled","disabled"),this.$element.prop("disabled",!0)},c.prototype.update=function(a){this.$element.prop("disabled")?this.disable():this.enable(),this.$element.prop("checked")?this.on(a):this.off(a)},c.prototype.trigger=function(b){this.$element.off("change.bs.toggle"),b||this.$element.change(),this.$element.on("change.bs.toggle",a.proxy(function(){this.update()},this))},c.prototype.destroy=function(){this.$element.off("change.bs.toggle"),this.$toggleGroup.remove(),this.$element.removeData("bs.toggle"),this.$element.unwrap()};var d=a.fn.bootstrapToggle;a.fn.bootstrapToggle=b,a.fn.bootstrapToggle.Constructor=c,a.fn.toggle.noConflict=function(){return a.fn.bootstrapToggle=d,this},a(function(){a("input[type=checkbox][data-toggle^=toggle]").bootstrapToggle()}),a(document).on("click.bs.toggle","div[data-toggle^=toggle]",function(b){var c=a(this).find("input[type=checkbox]");c.bootstrapToggle("toggle"),b.preventDefault()})}(jQuery);
+//# sourceMappingURL=bootstrap-toggle.min.js.map
+</script>
 </body>
 </html>

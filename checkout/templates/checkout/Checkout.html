@@ -15,19 +15,22 @@
     <section class="myAcc myAcc2">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
-                    <h3 style="margin-bottom: 30px;text-align: left">SHIPPING ADDRESS</h3>
+                <form action="{% url 'order:addOrder' cart.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="col-md-8">
+                    <h3 style="margin-bottom: 30px;text-align: left">ĐỊA CHỈ GIAO HÀNG</h3>
+
                     <div class="accInput">
                         <p>Tên</p>
-                        <input type="text" id="firstName" class="inputText" value="{{ user.first_name }}" placeholder="Nhập tên của bạn">
+                        <input type="text" name="firstName" class="inputText" value="{{ user.first_name }}" placeholder="Nhập tên của bạn">
                     </div>
                     <div class="accInput">
                         <p>Họ</p>
-                        <input type="text" id="lastName"  class="inputText" value="{{ user.last_name }}" placeholder="Nhập họ của bạn">
+                        <input type="text" name="lastName"  class="inputText" value="{{ user.last_name }}" placeholder="Nhập họ của bạn">
                     </div>
                     <div class="accInput">
                         <p>Số điện thoại</p>
-                        <input type="text" id="phone" class="inputText" value="{{ address.phone }}" placeholder="Nhập số điện thoại của bạn">
+                        <input type="text" name="phone" class="inputText" value="{{ address.phone }}" placeholder="Nhập số điện thoại của bạn">
 
 {#                        <select class="sidebar-select">#}
 {#                            <option selected="">Viet Nam</option>#}
@@ -38,33 +41,33 @@
                     </div>
                     <div class="accInput">
                         <p>Email</p>
-                        <input type="text" id="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
+                        <input type="text" name="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
                     </div>
 
                     <div class="accInput">
                         <p>Tỉnh/Thành phố</p>
-                        <input type="text" id="province" class="inputText" value="{{ address.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
+                        <input type="text" name="province" class="inputText" value="{{ address.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
                     </div>
                     <div class="accInput">
                         <p>Quận/Huyện</p>
-                        <input type="text" id="district" class="inputText" value="{{ address.district }}" placeholder="Nhập Quận/Huyện của bạn">
+                        <input type="text" name="district" class="inputText" value="{{ address.district }}" placeholder="Nhập Quận/Huyện của bạn">
                     </div>
                     <div class="accInput">
                         <p>Phường/Xã</p>
-                        <input type="text" id="wards" class="inputText" value="{{ address.wards }}" placeholder="Nhập Phường/Xã của bạn">
+                        <input type="text" name="wards" class="inputText" value="{{ address.wards }}" placeholder="Nhập Phường/Xã của bạn">
                     </div>
 
                     <div class="accInput">
                         <p>Số nhà/Đường</p>
-                        <input type="text" id="address" class="inputText" value="{{ address.address }}" placeholder="Nhập Số nhà/Đường của bạn">
+                        <input type="text" name="address" class="inputText" value="{{ address.address }}" placeholder="Nhập Số nhà/Đường của bạn">
                     </div>
                     <a href="#" style="" class="trash">
                         <div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
                     </a>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-tax">
-                        <h4>your order</h4>
+                    <div class="col-md-4">
+                        <div class="form-tax">
+                        <h4>ĐƠN HÀNG</h4>
                         <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
                         <div class="box-formTax-content">
@@ -75,29 +78,33 @@
                                 <div class="col-md-4" style="text-align: right;">{{ cartitem.get_total|intcomma }}</div>
                             </div>
                         {% endfor %}
-                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
-
-                        <div class="box-formTax-count">
-                            <div class="row">
-                                <div class="col-md-6">Shipping:</div>
-                                <div class="col-md-6" style="text-align: right;">30,000</div>
-                            </div>
-                        </div>
+{#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>#}
+{##}
+{#                        <div class="box-formTax-count">#}
+{#                            <div class="row">#}
+{#                                <div class="col-md-6">Phí giao hàng:</div>#}
+{#                                <div class="col-md-6" style="text-align: right;">30,000</div>#}
+{#                            </div>#}
+{#                        </div>#}
                         <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
                         <div class="box-formTax-total">
                             <div class="row">
-                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Total</div>
+                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
                                 <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">{{ cart.get_cart_total|intcomma }}</div>
                             </div>
                         </div>
 {#                        <a href="" data-cartID="{{ cart.id }}" class="btn-formTax add-order">#}
-                            <button data-cart="{{ cart.id }}" class="btn-formTax add-order" >PLACE ORDER</button>
+                        <div  style="    margin-top: 25px;" >
+                            <div><input class="btn-arrival" type="submit" value="ĐẶT HÀNG"></div>
+                        </div>
 {#                        </a>#}
                     </div>
                 </div>
 
             </div>
+                </form>
+
         </div>
         </div>
     </section>

@@ -1,0 +1,23 @@
+{% extends 'store/base_simple.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Bạn đã đặt hàng thành công</h3>
+                <h4>ID đơn hàng: {{ cart_id }}</h4>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'order:recentOrder' %}" class="btn-formTax">
+                                <div >Xem đơn hàng</div>
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'store:home' %}" class="btn-formTax">
+                                <div >Tiếp tục mua sắm</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock banner %}

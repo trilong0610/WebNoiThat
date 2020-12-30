@@ -64,6 +64,7 @@ def most_popular(request):
                'items': items,
                'cartItems' : cartItems,
                'all_product':best_seller,
+               'best_sellers':best_seller,
                }
     return render(request, 'store/ProductGrid.html', context)
 
@@ -169,14 +170,35 @@ def addItemToCart(request):
     print('productId:', productID)
     customer = request.user
     product = Product.objects.get(id = productID)
-    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-    cartItem.quantity = int(quantity)
-    cartItem.save()
-    if cartItem.quantity <= 0:
-        cartItem.delete()
+    if product.amount <= 0:
+        return JsonResponse('Item out stock', safe=False)
+    else:
+        cart, created = Cart.objects.get_or_create(user = customer, complete=False)
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        cartItem.quantity =  quantity
+        cartItem.save()
+        if cartItem.quantity <= 0:
+            cartItem.delete()
     return JsonResponse('Item was added', safe=False)
 
+def deleteProductCart(request):
+    data = json.loads(request.body)
+    productID = data['productID']
+    quantity = data['quantity']
+    print('quantity:', quantity)
+    print('productId:', productID)
+    customer = request.user
+    product = Product.objects.get(id=productID)
+    if product.amount <= 0:
+        return JsonResponse('Item out stock', safe=False)
+    else:
+        cart, created = Cart.objects.get_or_create(user=customer, complete=False)
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        cartItem.quantity = cartItem.quantity - cartItem.quantity
+        cartItem.save()
+        if cartItem.quantity <= 0:
+            cartItem.delete()
+    return JsonResponse('Item was added', safe=False)
 
 def updateItem(request):
     data = json.loads(request.body)
@@ -186,15 +208,18 @@ def updateItem(request):
     print('productId:', productID)
     customer = request.user
     product = Product.objects.get(id = productID)
-    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-    if action == 'add':
-        cartItem.quantity = (cartItem.quantity + 1)
-    elif action == 'remove':
-        cartItem.quantity = (cartItem.quantity - 1)
-    cartItem.save()
-    if cartItem.quantity <= 0:
-        cartItem.delete()
+    if product.amount <= 0:
+        return JsonResponse('Item out stock', safe=False)
+    else:
+        cart, created = Cart.objects.get_or_create(user = customer, complete=False)
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+        if action == 'add':
+            cartItem.quantity = (cartItem.quantity + 1)
+        elif action == 'remove':
+            cartItem.quantity = (cartItem.quantity - 1)
+        cartItem.save()
+        if cartItem.quantity <= 0:
+            cartItem.delete()
     return JsonResponse('Item was added', safe=False)
 #them, xoa, sua san pham
 
@@ -213,10 +238,15 @@ def hot_product(request):
         cartItems = cart['get_cart_items']
     category = Category.objects.all()
     # sam pham moi nhat
+    hot_product = Product.objects.all().order_by('-id')[:6]
+    # best seller
+    best_seller = Product.objects.all().order_by('-amount_sell')[:6]
+    # sam pham moi nhat
     all_product = Product.objects.all().order_by('-id')[:10]
     context = {'category':category,
                'hot_product':hot_product,
                'items': items,
+               'best_sellers':best_seller,
                'cartItems' : cartItems,
                'all_product':all_product,
                }

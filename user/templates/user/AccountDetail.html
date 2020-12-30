@@ -11,7 +11,7 @@
         </div>
 {% endblock banner %}
 {% block content %}
-<div class="col-md-9">
+    <div class="col-md-9">
                     <h3 style="margin-bottom: 30px;text-align: left">Thông Tin Cá Nhân</h3>
                     <div class="row">
                         <div class="col-md-6">
@@ -85,7 +85,7 @@
                     <ul class="myAccSidebar">
                         <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
                             <a href="{% url 'user:accountDetail' %}">
-                                <p>Account Detail</p>
+                                <p>Thông tin tài khoản</p>
                                 <i class="la la-user"></i>
                             </a>
                         </li>
@@ -102,14 +102,14 @@
 {#                            </a>#}
 {#                        </li>#}
                         <li class="clearfix">
-                            <a href="{% url 'user:recentOrder' %}">
-                                <p>Recent Order</p>
+                            <a href="{% url 'order:recentOrder' %}">
+                                <p>Đơn hàng của tôi</p>
                                 <i class="la la-shopping-cart"></i>
                             </a>
                         </li>
                         <li class="clearfix">
                             <a href="{% url 'user:logout' %}">
-                                <p>Logout</p>
+                                <p>Đăng xuất</p>
                                 <i class="la la-sign-out"></i>
                             </a>
                         </li>

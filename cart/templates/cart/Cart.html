@@ -58,19 +58,19 @@
                 </div>
                 <div class="col-md-4">
                     <div class="form-tax">
-                        <h4>cart totals</h4>
+                        <h4>Giỏ hàng</h4>
 
                         <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
                         <div class="box-formTax-total">
                             <div class="row">
-                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Total</div>
+                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
                                 <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">
                                     {{ cart.get_cart_total|intcomma }}</div>
                             </div>
                         </div>
                         <a href="{% url 'checkout:checkout' %}" class="btn-formTax">
-                            <div >Proceed To Checkout</div>
+                            <div >Tiến hành đặt hàng</div>
                         </a>
                     </div>
                 </div>

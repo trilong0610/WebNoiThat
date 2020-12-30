@@ -1,0 +1,19 @@
+{% extends 'store/base_simple.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Bạn đã đăng kí thành công</h3>
+                <p></p>
+                <p><h4>Tên đăng nhập: {{ username }}</h4></p>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'user:login' %}" class="btn-formTax">
+                                <div >Đăng nhập ngay ?</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock banner %}

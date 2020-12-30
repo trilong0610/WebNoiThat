@@ -1,0 +1,71 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Phân Quyền</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <ul class="myAccSidebar">
+{#User#}
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+                <div class="col-md-9">
+                        <p>Tài khoản</p>
+                    <div class="col-md-3">
+                        <input type="checkbox" checked data-toggle="toggle">
+                    </div>
+                </div>
+
+                <!-- Rounded switch -->
+
+
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Sản phẩm</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Danh mục sản phẩm</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Đơn hàng</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Giỏ hàng</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Chi tiết giỏ hàng</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Đặt hàng từ nhà cung cấp</p>
+                
+            
+        </li>
+        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+            
+                <p>Nhà cung cấp</p>
+                
+            
+        </li>
+    </ul>
+{% endblock content %}

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.contrib.auth import views as auth_views
 app_name = 'manager'
 urlpatterns = [
-    path('', views.home, name = 'home'),
+    path('', views.home.as_view(), name = 'home'),
     path('purchase_product/', views.purchase_product.as_view(), name = 'purchase_product'),
     # quan li them xoa sua hang hoa
     path('add_category/', views.add_category.as_view(), name = "add_category"),
@@ -18,9 +18,11 @@ urlpatterns = [
     path('update_shipping/', views.updateShipping, name = 'update_shipping'),
 
     #them, xoa, sua sp
-    path('dashboad/', views.dashboard, name="dashboard"),
+    path('product_control/', views.dashboard, name="product_control"),
     path('edit/<int:id>', views.edit, name = 'edit_product'),
     path('update/<int:id>', views.update, name = 'update_product'),
     path('delete/<int:id>', views.destroy, name = 'delete_product'),
+    path('test/', views.test, name="test"),
+
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

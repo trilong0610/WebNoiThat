@@ -12,7 +12,7 @@ class Product(models.Model):
     title = models.CharField(default='',max_length=255)
     price  = models.IntegerField(default=0)
     description = models.TextField(default='', blank=True)
-    amount = models.FloatField(default=0)
+    amount = models.IntegerField(default=0)
     active = models.BooleanField(default=True)
     date_add = models.DateField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

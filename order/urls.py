@@ -6,6 +6,6 @@ from django.contrib.auth import views as auth_views
 app_name = 'order'
 urlpatterns = [
     # gio hang
-    path('', views.cart, name="order"),
-    path('addOrder/', views.addOrder, name="addOrder"),
+    path('', views.recentOrder.as_view(), name="recentOrder"),
+    path('addOrder/<int:cart_id>', views.addOrder, name="addOrder"),
 ]

@@ -8,7 +8,7 @@ from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
 
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 
 from django.contrib import messages
 
@@ -41,53 +41,33 @@ from django.http import HttpResponseRedirect
 #     return render(request, 'user/AccountDetail.html', context)
 from .models import Address
 
-
-def recentOrder(request):
-    user = request.user
-    orders = Order.objects.filter(user_id=user.id).order_by('-date_ordered')
-    if request.user.is_authenticated:
-        user = request.user
-        cart, created = Cart.objects.get_or_create(user=user, complete=False)
-        items = cart.cartitem_set.all()
-        cartItems = cart.get_cart_items
-    else:
-        items = []
-        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
-        cartItems = cart['get_cart_items']
-    category = Category.objects.all()
-    context = {'orders':orders,
-               'category':category,
-               'cartItems':cartItems
-               }
-    return render(request, 'order/RecentOrder.html', context)
-
-
 def RegisterPage(request):
-    form = CreateUserForm()
     if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-
-            messages.success(request,'Account was created for ' + user)
-            return redirect('login')
-    context = {'form': form}
-    return  render(request, 'user/register.html', context)
-
-
-def LoginPage(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('store')
+        username = request.POST["user"]
+        email = request.POST["email"]
+        password1 = request.POST["password1"]
+        password2 = request.POST["password2"]
+        if password1 == password2 and password1 != '' and password2 != '':
+            user = User.objects.create_user(username=username, email=email, password=password2)
         else:
-            messages.info(request, 'Username or password is incorrect')
-    context = {}
-    return render(request, 'user/MyAccount.html', context)
+            return render(request, 'user/MyAccount.html', {'error': 0})
+        return render(request, 'user/RegisterSuccess.html', {'username': user.username})
+
+def Login(request):
+    if request.user.is_authenticated:
+        return redirect('user:accountDetail')
+    else:
+        if request.method == 'POST':
+            username = request.POST['user']
+            password = request.POST['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('store:home')
+            else:
+                messages.info(request, 'Username or password is incorrect')
+        context = {}
+        return render(request, 'user/MyAccount.html', context)
 
 def LogoutUser(request):
     logout(request)

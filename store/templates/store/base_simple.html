@@ -4,6 +4,7 @@
 <!-- <html class="no-js" lang="en"> -->
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TL Store</title>
@@ -14,13 +15,79 @@
     <!-- <link rel="icon" href="images/favicon.ico" type="image/gif" sizes="16x16"> -->
     <!--Icons fonts-->
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="{% static 'vendor/line-awesome/css/line-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/themify-icons/themify-icons.css' %}" rel="stylesheet">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Overpass:100,100i,200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap"
           rel="stylesheet">
     <!--Styles-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <link href="{% static 'vendor/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/animsition/dist/css/animsition.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/animate.css/source/slide_fwd_center/slide_fwd_center.css' %}" rel="stylesheet">
@@ -33,6 +100,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/layers.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/navigation.css' %}">
     <!--Theme style-->
+    <link href="{% static 'css/bootstrap4-toggle.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/main.css' %}" rel="stylesheet">
     <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
     <script type="text/javascript">
@@ -83,7 +151,7 @@
                         <div class="check-account dp-iblock">
                             <p>
                                 {% if user.is_authenticated %}
-                                                    Xin chào: {{ user.username }}
+                                    <a href="{% url 'user:accountDetail' %}" class="check link-color">Xin chào: {{ user.username }}</a>
                                                 {% else %}
                                                     <a href="{% url 'user:login' %}" class="check link-color">Đăng nhập/Đăng kí</a>
                                                 {% endif %}
@@ -437,5 +505,6 @@
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.slideanims.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'vendor/slider-revolution/js/revolution.extension.video.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'script/main.js' %}"></script>
+<script src="{% static 'script/bootstrap4-toggle.min.js' %}"></script>
 </body>
 </html>

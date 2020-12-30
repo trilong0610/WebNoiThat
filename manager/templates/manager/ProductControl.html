@@ -1,0 +1,78 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Phân Quyền</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+{#    <section class="myAcc myAcc2">#}
+        <div class="container">
+            <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>
+            <div class="row">
+{#            Tieue de#}
+                <div class="col-md-10">
+                        <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
+                            <h4>Tên sản phẩm</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
+                            <h4>Giá</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            <h4>Số lượng trong kho</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            <h4>Đã bán</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            <h4>Danh mục</h4>
+                        </div>
+                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                        </div>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                </div>
+{#            Danh sach san pham#}
+                <div class="col-md-10">
+                    {% for product in products %}
+                        <div class="row">
+                        <div class="col-md-2">
+                            <img src="{{ product.image.url }}" alt="product" class="img-responsive">
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
+                            {{ product.title }}
+                        </div>
+                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
+                            {{ product.price|intcomma }}
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            {{ product.amount }}
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            {{ product.amount_sell }}
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            {{ product.category }}
+                        </div>
+                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                            <i >
+                                <a href="{% url 'manager:view_permission' user.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                <a href="{% url 'manager:view_permission' user.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
+                            </i>
+                        </div>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{#    </section>#}
+{% endblock content %}

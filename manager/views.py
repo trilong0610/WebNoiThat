@@ -19,13 +19,15 @@ from datetime import datetime
 from django.http import HttpResponse, JsonResponse
 
 
-@decorators.login_required(login_url='/login/')
-def home(request):
-    perm = ["A"]
-    if request.user.has_perm('Product.add_product'):
-        perm.append("add_product")
-    context = {"perm": perm}
-    return render(request, "manager/base.html", context)
+class home(PermissionRequiredMixin,View):
+    permission_required = ('auth.view_user')
+    def get(self,request):
+        # Neu la superuser moi cho vao trang phan quyen
+            list_users = User.objects.all()
+            # Gui OBJ user hien tai de check permission
+            request_user = User.objects.get(id = request.user.id)
+            context = {'users': list_users, 'request_user': request_user}
+            return render(request, 'manager/ListUser.html', context)
 
 # Nhap San Pham Tu NCC
 class purchase_product(LoginRequiredMixin,View):
@@ -58,7 +60,7 @@ class add_product(LoginRequiredMixin,View):
     login_url = '/login/'
     def get(self, request):
             product = ProductForm()
-            return render(request, "manager/manage_Action.html", {"add_product": product})
+            return render(request, "manager/AddProduct.html", {"add_product": product})
     def post(self,request):
         form = ProductForm(data = request.POST, files= request.FILES)
         if form.is_valid():
@@ -76,7 +78,7 @@ class view_User(PermissionRequiredMixin,View):
             # Gui OBJ user hien tai de check permission
             request_user = User.objects.get(id = request.user.id)
             context = {'users': list_users, 'request_user': request_user}
-            return render(request, 'manager/view_user.html', context)
+            return render(request, 'manager/ListUser.html', context)
 
 # Xem quyen user
 class gains_permission(LoginRequiredMixin,View):
@@ -86,7 +88,7 @@ class gains_permission(LoginRequiredMixin,View):
         # Neu la superuser moi cho vao trang phan quyen
         if request.user.is_superuser:
             user = User.objects.get(id=user_id)
-            return render(request, 'manager/gains_permission.html', {'user_permission':user})
+            return render(request, 'manager/Permission.html', {'user_permission':user})
         else:
             return HttpResponse("Ban khong co quyen truy cap")
 
@@ -131,10 +133,14 @@ def updateShipping(request):
     return JsonResponse('Update shipping complete', safe=False)
 
 #load tat ca san pham len bang tren dashboard.html
+def test(request):
+    context = {
+    }
+    return  render(request,'manager/test.html', context)
 
 def dashboard(request):
     products = Product.objects.all()
-    return render(request, 'manager/dashboard.html', {'products':products})
+    return render(request, 'manager/ProductControl.html', {'products':products})
 
 # xoa, sua san pham
 def edit(request, id):

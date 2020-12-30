@@ -1,0 +1,23 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Phân Quyền</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <form action="{% url 'manager:add_product' %}" method="post" >
+    {% csrf_token %}
+
+    </form>
+    <select class="sidebar-select">
+        <option selected="">Viet Nam</option>
+        <option>Lao</option>
+        <option>Thai Lan</option>
+        <option>Campuchia</option>
+    </select>
+{% endblock content %}

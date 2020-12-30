@@ -3,39 +3,49 @@ import json
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
+from django.views import View
 
 from cart.models import Cart,CartItem
 # Create your views here.
 from order.models import Order
 from datetime import datetime
 
-def cart(request):
-    if request.user.is_authenticated:
-        customer = User.objects.get(pk = request.user.id)
-        cart, created = Cart.objects.get_or_create( user = request.user, complete=False)
-        # carts = Order.objects.get(pk = customer)
-        items = cart.orderitem_set.all()
-        cartItems = cart.get_cart_items
-    else:
-        items = []
-        order = {'get_cart_total' : 0, 'get_cart_items' : 0, 'shipping':False}
-        cartItems = order['get_cart_items']
+from product.models import Category, Product
 
-    context = {'items': items, 'carts':cart, 'cartItems':cartItems}
-    return render(request, 'cart/cart.html', context)
 
-def addOrder(request):
-    data = json.loads(request.body)
+class recentOrder(View):
+    def get(self, request):
+        user = request.user
+        orders = Order.objects.filter(user_id=user.id).order_by('-date_ordered')
+        if request.user.is_authenticated:
+            user = request.user
+            cart, created = Cart.objects.get_or_create(user=user, complete=False)
+            items = cart.cartitem_set.all()
+            cartItems = cart.get_cart_items
+        else:
+            items = []
+            cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+            cartItems = cart['get_cart_items']
+        category = Category.objects.all()
+        context = {'orders': orders,
+                   'category': category,
+                   'cartItems': cartItems
+                   }
+        return render(request, 'order/RecentOrder.html', context)
+
+
+def addOrder(request, cart_id):
     user = request.user
-    cart = data['cart']
-    firstName = data['firstName']
-    lastName = data['lastName']
-    email = data['email']
-    phone = data['phone']
-    province = data['province']
-    district = data['district']
-    wards = data['wards']
-    address = data['address']
+    cart = cart_id
+    firstName = request.POST['firstName']
+    lastName = request.POST['lastName']
+    email = request.POST['email']
+    phone = request.POST['phone']
+    province = request.POST['province']
+    district = request.POST['district']
+    wards = request.POST['wards']
+    address = request.POST['address']
+
 
     order, created = Order.objects.get_or_create(user = user, cart_id = cart)
 
@@ -52,6 +62,14 @@ def addOrder(request):
     order.save()
     updateCart = Cart.objects.get(id = cart)
     updateCart.complete = True
-    updateCart.save()
+    # cap nhat so luong da ban va ton kho cua san pham
+    cart = Cart.objects.get(id = cart_id)
+    for item in cart.cartitem_set.all():
+        product = Product.objects.get(id = item.product.id)
+        product.amount = product.amount - item.quantity
+        product.amount_sell = product.amount_sell + item.quantity
+        product.save()
 
-    return JsonResponse('Order was added', safe=False)
+    updateCart.save()
+    context = {'cart_id':cart_id}
+    return render(request,'order/OrderComplete.html', context)

@@ -13,7 +13,7 @@
 {% block content %}
 
                     <img src="{% static 'images/Product/1P.jpg' %}" alt="product1" class="img-responsive"/>
-                    <h3 style="font-size: 18px;font-weight: bold;margin-top: 30px;margin-bottom: 10px">Our Product</h3>
+                    <h3 style="font-size: 18px;font-weight: bold;margin-top: 30px;margin-bottom: 10px">Danh Sách Sản Phẩm</h3>
 {#                    <div class="box-fitter clearfix">#}
 {#                        <div class="box-fitter-left">#}
 {#                            <ul>#}
@@ -60,10 +60,13 @@
     {#                                    <div class="box-posi">HOT</div>#}
                                         <div class="arrIcon2">
                                             <ul>
+{#                                                ---------------Thêm vào giỏ hàng-------------- #}
                                                 {% if user.is_authenticated %}
-                                                    <li>
-                                                    <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
-                                                    </li>
+                                                    {% if all_product.amount > 0 %}
+                                                        <li>
+                                                        <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
+                                                        </li>
+                                                    {% endif %}
                                                 {% else %}
                                                     <a href="{% url 'user:login' %}">
                                                         <li>
@@ -208,7 +211,7 @@
 {#                    <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 0;"></div>#}
 
                     <div class="box-slider-left slideNewproduct slideNewproduct2">
-                        <h3 class="slider-left-title">Best sellers</h3>
+                        <h3 class="slider-left-title">Bán Chạy Nhất</h3>
 {#                    -------------Best seller---------#}
                         {% for best_seller in best_sellers %}
                             <div class="box-slideNewproduct">
@@ -217,7 +220,7 @@
                                                  class="img-responsive"/></a>
                             </div>
                             <div class="slideNewproduct-item slideNewproduct-text">
-                                <h5><a href="SingleProduct.html"> {{ best_seller.title }}</a></h5>
+                                <h5><a href="{% url 'store:detailProduct' best_seller.id %}"> {{ best_seller.title }}</a></h5>
                                 <p class="slideProduct-price"> {{ best_seller.price }} VND</p>
                             </div>
                         </div>
