@@ -1,0 +1,43 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Thêm sản phẩm</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <form action="{% url 'manager:edit_product' product.id %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="accInput">
+            <p>Danh mục:</p>
+            <select name="category_id">
+              {% for category in  category %}
+                <option value="{{ category.id }}">{{ category.title }}</option>
+              {% endfor %}
+            </select>
+        </div>
+        <div class="accInput">
+            <p>Tên sản phẩm:</p>
+            <input type="text" name="title" class="inputText" value="{{ product.title }}">
+        </div>
+        <div class="accInput">
+            <p>Giá:</p>
+            <input type="number" name="price" class="inputText" value="{{ product.price }}">
+        </div>
+        <div class="accInput">
+            <p>Chi tiết sản phẩm:</p>
+            <input type="text" name="description" class="inputText" value="{{ product.description }}">
+        </div>
+        <div class="accInput">
+            <p>Số lượng:</p>
+            <input type="number" name="amount" class="inputText" value="{{ product.amount }}">
+        </div>
+
+    <p><input class="btn-arrival" type="submit" value="Sửa sản phẩm"></p>
+    </form>
+
+{% endblock content %}

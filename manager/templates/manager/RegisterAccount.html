@@ -1,0 +1,54 @@
+{% extends 'store/base_simple.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Đăng nhập/Đăng kí</h3>
+                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Account</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <section class="myAcc">
+                <div class="container">
+                    <div style="  width: calc(100% - 200px);margin: 0 auto">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <form action="{% url 'manager:register' %}" method="post">
+                                {% csrf_token%}
+                                <div class="col-md-6">
+                                    <div class="accInput"><p>Register</p></div>
+                                    <div class="accInput">
+                                        <div class="accInput">
+                                        <p>Username or Email Address *</p>
+                                        <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
+                                    </div>
+                                    <div class="accInput">
+                                        <p>Email Address *</p>
+                                        <input type="email" name="email" class="inputText" placeholder="Enter your email address">
+                                    </div>
+                                    <div class="accInput">
+                                        <p>Password *</p>
+                                        <input type="password" name="password1" class="inputText" placeholder="Enter your password">
+                                    </div>
+                                    <div class="accInput">
+                                        <p>Password 2</p>
+                                        <input type="password" name="password2" class="inputText" placeholder="Enter your password">
+                                    </div>
+{#                                    <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
+{#                                        <div class="btn-arrival" style="    margin-top: 25px;">#}
+{#                                            <div>REGISTER <img src="{% static 'images/arr.png' %}" alt="logo"></div>#}
+{#                                        </div>#}
+{#                                    </a>#}
+                        </div>
+                            <div  style="    margin-top: 25px;" >
+                                <div><input class="btn-arrival" type="submit" value="REGISTER"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

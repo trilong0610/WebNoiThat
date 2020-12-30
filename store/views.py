@@ -107,7 +107,7 @@ class view_category(View):
             items = []
             cart = {'get_cart_total': 0, 'get_cart_items': 0}
             cartItems = cart['get_cart_items']
-        q = Category.objects.get(pk=category_id)
+        q = Category.objects.get( id =category_id)
         all_product = q.product_set.all()
         category = Category.objects.all()
         # sam pham moi nhat
@@ -170,15 +170,12 @@ def addItemToCart(request):
     print('productId:', productID)
     customer = request.user
     product = Product.objects.get(id = productID)
-    if product.amount <= 0:
-        return JsonResponse('Item out stock', safe=False)
-    else:
-        cart, created = Cart.objects.get_or_create(user = customer, complete=False)
-        cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        cartItem.quantity =  quantity
-        cartItem.save()
-        if cartItem.quantity <= 0:
-            cartItem.delete()
+    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cartItem.quantity =  cartItem.quantity +  int(quantity)
+    cartItem.save()
+    if cartItem.quantity <= 0:
+        cartItem.delete()
     return JsonResponse('Item was added', safe=False)
 
 def deleteProductCart(request):

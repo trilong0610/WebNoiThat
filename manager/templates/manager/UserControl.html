@@ -10,19 +10,18 @@
         </div>
 {% endblock banner %}
 {% block content %}
-
+    <a href="{% url 'manager:register' %}"><button type="button" class="btn btn-success">Thêm tài khoản</button></a>
     <ul class="myAccSidebar">
     {#User#}
         <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
-            <button type="button" class="btn btn-success">Thêm tài khoản</button>
         </li>
         {% for user in users %}
             <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
-                    <p>{{ user.username }}</p>
+                    {{ user.username }}
                     <i class="la la-user">
                         <a href="{% url 'manager:view_permission' user.id %}"><button type="button" class="btn btn-dark">Phân quyền</button></a>
-                        <a href="{% url 'manager:view_permission' user.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
-                        <a href="{% url 'manager:view_permission' user.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
+                        <a href="{% url 'manager:editUser' user.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                        <a href="{% url 'manager:delete_user' user.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
                     </i>
             </li>
         {% endfor %}

@@ -101,12 +101,22 @@
 {#                                <i class="la la-cc-mastercard"></i>#}
 {#                            </a>#}
 {#                        </li>#}
-                        <li class="clearfix">
-                            <a href="{% url 'order:recentOrder' %}">
-                                <p>Đơn hàng của tôi</p>
-                                <i class="la la-shopping-cart"></i>
-                            </a>
-                        </li>
+                        {% if perms.product.view_product %}
+                            <li class="clearfix">
+                                <a href="{% url 'manager:home' %}">
+                                    <p>Trang dành cho quản lí</p>
+                                    <i class="la la-shopping-cart"></i>
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="clearfix">
+                                <a href="{% url 'order:recentOrder' %}">
+                                    <p>Đơn hàng của tôi</p>
+                                    <i class="la la-shopping-cart"></i>
+                                </a>
+                            </li>
+                        {% endif %}
+
                         <li class="clearfix">
                             <a href="{% url 'user:logout' %}">
                                 <p>Đăng xuất</p>
