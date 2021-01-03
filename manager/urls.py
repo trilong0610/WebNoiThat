@@ -20,8 +20,6 @@ urlpatterns = [
     #them, xoa, sua sp
     path('product_control/', views.dashboard, name="product_control"),
     path('editProduct/<int:product_id>', views.editProduct.as_view(), name = 'edit_product'),
-    path('update/<int:id>', views.update, name = 'update_product'),
-    path('delete/<int:id>', views.destroy, name = 'delete_product'),
     path('test/', views.test, name="test"),
     path('register/', views.register, name="register"),
     #them, xoa, sua user
@@ -32,5 +30,8 @@ urlpatterns = [
     path('viewPurchase/', views.viewPurchaseProduct, name="viewPurchase"),
     path('deletePurchase/<int:purchase_id>', views.destroyPurchase, name = 'delete_purchase'),
     path('editPurchase/<int:purchase_id>', views.editPurchase.as_view(), name="editPurchase"),
+    # Order
+    path('orderControl/', views.orderControl, name="orderControl"),
+    path('editOrder/<int:order_id>', views.editOrder.as_view(), name="editOrder"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

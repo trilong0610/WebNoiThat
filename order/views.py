@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 
 from cart.models import Cart,CartItem
@@ -49,8 +49,8 @@ def addOrder(request, cart_id):
 
     order, created = Order.objects.get_or_create(user = user, cart_id = cart)
 
-    order.fistName = firstName
-    order.lastName = lastName
+    order.first_name = firstName
+    order.last_name = lastName
     order.email = email
     order.phone = phone
     order.province = province
@@ -73,3 +73,28 @@ def addOrder(request, cart_id):
     updateCart.save()
     context = {'cart_id':cart_id}
     return render(request,'order/OrderComplete.html', context)
+
+def editOrder(request):
+    data = json.loads(request.body)
+    orderID = data['orderID']
+    productID = data['productID']
+    quantity = data['quantity']
+    product = Product.objects.get(id = productID)
+
+    order = Order.objects.get(id = orderID)
+    cart = order.cart
+    cartItem = CartItem.objects.get(cart=cart, product_id=productID)
+
+    if product.amount > int(quantity):
+        cartItem.quantity = int(quantity)
+    else:
+        context = {
+            'outStock': True,
+            'amount_product': product.amount,
+        }
+        return JsonResponse(context, safe=False)
+    cartItem.save()
+
+    if cartItem.quantity <= 0:
+        cartItem.delete()
+    return JsonResponse('Item was added', safe=False)

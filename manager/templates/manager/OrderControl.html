@@ -1,0 +1,128 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Phân Quyền</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+<div class="col-md-13">
+{#    <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>#}
+       <div >
+           <input type="search" placeholder="Tìm kiếm đơn hàng" style="border: 1px solid #444;
+  padding: 14px 40px 11px 15px;
+  border-radius: 20px;
+  height: 40px;
+  background: transparent;
+  color: #0f0f0f;">
+           <a href=""><button class="fa fa-search"> </button></a>
+       </div>
+
+    <div class="lineAbout" style="width: 100%;height: 0px;margin-top: 20px;"></div>
+    <div class="panel-group" id="faqAccordion">
+        {% for order in order %}
+            <div class="panel panel-default faq-coat" style="border: none;    box-shadow: none;">
+                <div class="panel-heading faq-head bd-color-left-setting active" data-toggle="collapse"
+                     data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
+                     style="background: rgb(193, 155, 118);   ">
+                    <h4 class="panel-title">
+                        ID: {{ order.id }}
+                    </h4>
+                    <h4 class="panel-title">
+                        {{ order.user }}
+                    </h4>
+                    <h4 class="panel-title">
+                        {{ order.date_ordered|date:'H:i d-m-Y' }}
+                    </h4>
+
+                     <h4 class="panel-title">
+                        {{ order.get_status_display }}
+                    </h4>
+                    <span class="accordion-toggle question-toggle collapsed"><i
+                            class="fa color-setting fa-minus" aria-hidden="true"></i></span>
+                    <p style="  position: absolute;
+                                right: 30%;
+                                top: 14px;
+                                font-size: 16px;
+                                color: #fff;">{{ order.cart.get_cart_total|intcomma }} VND</p>
+                    <i style="  position: absolute;
+                                right: 14px;
+                                top: 8px;
+                                font-size: 16px;
+                                color: #fff;" >
+{#                    Kiem tra quyen moi hien thi cac chuc nang     #}
+                        {% if perms.order.change_order %}
+                            <a href=""><button type="button" class="btn btn-info">Giao hàng</button></a>
+                        {% endif %}
+                        {% if perms.order.change_order %}
+                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                        {% endif %}
+                        {% if perms.order.delete_order %}
+                            <a href=""><button type="button" class="btn btn-danger">Xóa</button></a>
+                        {% endif %}
+                    </i>
+                </div>
+                <div  class="panel-collapse collapse in" aria-expanded="true" style="">
+                    <div class="panel-body " style=" background: #fff;padding: 30px">
+                        {% for cartitem in order.cart.cartitem_set.all %}
+                            <div class="row">
+                            <div class="col-md-2">
+                                <img src="{{ cartitem.product.image.url }}" alt="product"
+                                     class="product-img-first img-responsive">
+                            </div>
+                            <div class="col-md-2" style="text-align: center;padding-top: 25px;">
+                                {{ cartitem.product.title }}
+                            </div>
+                            <div class="col-md-2" style="text-align: right;padding-top: 58px;">
+                                {{ cartitem.product.price|intcomma }}
+                            </div>
+                            <div class="col-md-2" style="padding-top: 50px;">
+                                <div class="sidebar-filter-color">
+                                    <ul class="clearfix">
+{#                                                    <li class="tooltip"#}
+{#                                                        style="background: #f7bb66;margin-bottom: 0px;margin-right: 0px;float: right;">#}
+{#                                                        <span class="tooltiptext">Tooltip text</span>#}
+{#                                                    </li>#}
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="text-align: right;padding-top: 50px;">
+                                <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                width: 50px;
+                                font-weight: bold;
+                                text-align: center;
+                                float: right;
+                                padding-bottom: 10px;">
+                                    {{ cartitem.quantity }}
+                                </div>
+                            </div>
+                            <div class="col-md-2" style="text-align: right;padding-top: 58px;"> {{ cartitem.get_total|intcomma }}</div>
+                        </div>
+                            <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+            </div>
+        {% endfor %}
+<!--                        <div class="panel panel-default faq-coat">-->
+<!--                            <div class="panel-heading faq-head addMore">-->
+<!--                                <h4 class="panel-title" style="text-align: center;display: block;">-->
+<!--                                    <i class="fa fa-plus color-setting" aria-hidden="true"-->
+<!--                                       style="margin-right: 9px;"></i> Add More-->
+<!--                                </h4>-->
+
+<!--                            </div>-->
+
+<!--                        </div>-->
+
+    </div>
+</div>
+{#    </section>#}
+{% endblock content %}

@@ -14,11 +14,8 @@
     {% csrf_token %}
         <div class="accInput">
             <p>Sản phẩm:</p>
-            <select name="product_id">
-              {% for product in  product %}
-                <option value="{{ product.id }}">{{ product.title }}</option>
-              {% endfor %}
-            </select>
+                <input type="hidden" value="{{ product.id }}" name="product_id">
+                <h5>{{ product.title }}</h5>
         </div>
         <div class="accInput">
             <p>Nhà cung cấp:</p>

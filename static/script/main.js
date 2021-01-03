@@ -32,13 +32,15 @@ function updateUserOrder(productID, action){
         return response.json();
     })
     .then((data) => {
-        console.log('data:', data)
+        if(data["outStock"]){
+        alert("Sản phẩm trong kho không đủ, vui lòng kiểm tra lại" + "\nSố lượng còn lại: " + data["amount_product"])
+        }
         // ------------------Không tự reload lại trang----------------------
         window.location.reload(true)
     })
 }
 
-//---------------Xoa san pham trong gio hang----------------
+
 console.log("Loadded add-item-carts")
 //Tang giam so luong san pham trong gio hang theo so luong nhap vao
 var addToCartBtns = document.getElementsByClassName('add-item-carts')
@@ -73,6 +75,9 @@ function addItemToCart(productID, quantity){
         return response.json();
     })
     .then((data) => {
+        if(data["outStock"]){
+        alert("Sản phẩm trong kho không đủ, vui lòng kiểm tra lại" + "\nSố lượng còn lại: " + data["amount_product"])
+    }
         console.log('data:', data)
         // ------------------Không tự reload lại trang----------------------
         window.location.reload(true)
@@ -80,25 +85,116 @@ function addItemToCart(productID, quantity){
 }
 
 
+//auto Tang giam so luong san pham trong gio hang theo so luong nhap vao input trong manager
 
-//---------------Tang giam so luong san pham trong gio hang theo so luong nhap vao---------------
-console.log("Loadded remove-item-carts")
-var removeToCartBtns = document.getElementsByClassName('remove-item-carts')
-for (i = 0; i < removeToCartBtns.length; i++){
-    removeToCartBtns[i].addEventListener('click', function (){
+console.log("Loadded update-item-order")
+var updateToOrderBtns = document.getElementsByClassName('update-item-order')
+for (i = 0; i < updateToOrderBtns.length; i++){
+    updateToOrderBtns[i].addEventListener('keyup', function (){
+        var orderID = this.dataset.order
         var productID = this.dataset.product
-        var quantity = 0
+        var quantity = document.getElementById("quantity_product_order_"+productID).value;
+        console.log('orderID:', orderID, 'productID:', productID, 'quantity', quantity)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            updateItemToOrder(orderID,productID, quantity)
+        }
+    })
+}
+function updateItemToOrder(orderID,productID, quantity){
+console.log('user is authenticated, sending data..')
+
+var url = '/order/editOrder/'
+
+fetch(url,{
+    method: 'POST',
+    headers:{
+        'Content-Type':'application/json',
+        'X-CSRFToken':csrftoken,
+    },
+    body:JSON.stringify({'orderID': orderID,'productID': productID, 'quantity':quantity})
+})
+.then((response) => {
+    return response.json();
+})
+.then((data) => {
+    if(data["outStock"]){
+        alert("Sản phẩm trong kho không đủ, vui lòng kiểm tra lại" + "\nSố lượng còn lại: " + data["amount_product"])
+    }
+
+
+    console.log('data:', data)
+    // ------------------Không tự reload lại trang----------------------
+    window.location.reload(true)
+})
+}
+
+
+//auto Tang giam so luong san pham trong gio hang theo so luong nhap vao input trong cart
+console.log("Loadded update-item-carts")
+var updateToCartBtns = document.getElementsByClassName('update-item-carts')
+for (i = 0; i < updateToCartBtns.length; i++){
+    updateToCartBtns[i].addEventListener('keyup', function (){
+        var productID = this.dataset.product
+        var quantity = document.getElementById("quantity_product_cart_"+productID).value;
         console.log('productID:', productID, 'quantity', quantity)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            addItemToCart(productID, quantity)
+            updateItemToCart(productID, quantity)
+
         }
     })
 }
-function removeItemToCart(productID, quantity){
+function updateItemToCart(productID, quantity){
+console.log('user is authenticated, sending data..')
+
+var url = '/cart/editItemQuantity/'
+
+fetch(url,{
+    method: 'POST',
+    headers:{
+        'Content-Type':'application/json',
+        'X-CSRFToken':csrftoken,
+    },
+    body:JSON.stringify({'productID': productID, 'quantity':quantity})
+})
+.then((response) => {
+    return response.json();
+})
+.then((data) => {
+    if(data["outStock"]){
+        alert("Sản phẩm trong kho không đủ, vui lòng kiểm tra lại" + "\nSố lượng còn lại: " + data["amount_product"])
+    }
+    console.log('data:', data)
+    // ------------------Không tự reload lại trang----------------------
+    window.location.reload(true)
+})
+}
+
+
+//---------------xoa san pham trong gio hang ---------------
+console.log("Loadded remove-item-carts")
+var removeToCartBtns = document.getElementsByClassName('remove-item-carts')
+for (i = 0; i < removeToCartBtns.length; i++){
+    removeToCartBtns[i].addEventListener('click', function (){
+        var productID = this.dataset.product
+        console.log('productID:', productID)
+        console.log('USER:', user)
+        if(user == 'AnonymousUser'){
+            console.log("user is not authenticated")
+        }
+        else {
+            addItemToCart(productID)
+        }
+    })
+}
+function removeItemToCart(productID){
     console.log('user is authenticated, sending data..')
 
     var url = '/deleteProductCart/'
@@ -109,7 +205,7 @@ function removeItemToCart(productID, quantity){
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
         },
-        body:JSON.stringify({'productID': productID, 'quantity':quantity})
+        body:JSON.stringify({'productID': productID})
     })
     .then((response) => {
         return response.json();
@@ -119,6 +215,7 @@ function removeItemToCart(productID, quantity){
         window.location.reload(true)
     })
 }
+
 
 //---------------Sua thong tin ca nhan---------------
 console.log("Loadded change-info-user")
@@ -153,62 +250,6 @@ function changeInfoUser(firstName, lastName, email, phone, province, district, w
             'X-CSRFToken':csrftoken,
         },
         body:JSON.stringify({'firstName': firstName, 'lastName':lastName, 'email':email, 'phone':phone, 'province':province, 'district':district, 'wards':wards, 'address':address})
-    })
-    .then((response) => {
-        return response.json();
-    })
-    .then((data) => {
-        console.log('data:', data)
-        // ------------------Không tự reload lại trang----------------------
-        window.location.reload(true)
-    })
-}
-
-//-----------------------------------------------------------
-
-//---------------addOrder---------------
-console.log("Loadded add-order")
-var order = document.getElementsByClassName('add-order')
-for (i = 0; i < order.length; i++){
-    order[i].addEventListener('click', function (){
-        var cart = this.dataset.cart
-        var firstName = document.getElementById("firstName").value;
-        var lastName = document.getElementById("lastName").value;
-        var email = document.getElementById("email").value;
-        var phone = document.getElementById("phone").value;
-        var province = document.getElementById("province").value;
-        var district = document.getElementById("district").value;
-        var wards = document.getElementById("wards").value;
-        var address = document.getElementById("address").value;
-        console.log('firstName:', firstName,
-            'lastName:', lastName,
-            'cart:', cart,
-            'email:', email,
-            'phone:', phone,
-            'province:', province,
-            'district:', district,
-            'wards:', wards,
-            'address:', address,
-        )
-        console.log('USER:', user)
-        if(user == 'AnonymousUser'){
-            console.log("user is not authenticated")
-        }
-        else {
-            addOrder(cart,firstName, lastName, email, phone, province, district, wards, address)
-        }
-    })
-}
-function addOrder(cart,firstName, lastName, email, phone, province, district, wards, address){
-    console.log('user is authenticated, sending data..')
-    var url = '/order/addOrder/'
-    fetch(url,{
-        method: 'POST',
-        headers:{
-            'Content-Type':'application/json',
-            'X-CSRFToken':csrftoken,
-        },
-        body:JSON.stringify({'cart':cart,'firstName': firstName, 'lastName':lastName, 'email':email, 'phone':phone, 'province':province, 'district':district, 'wards':wards, 'address':address})
     })
     .then((response) => {
         return response.json();
@@ -257,7 +298,7 @@ function updatePermission(user, permission, action){
         return response.json();
     })
     .then((data) => {
-        console.log('data:', data)
+        alert("Complete " + data["action"] + " permission " + data["permission"] )
         // ------------------Không tự reload lại trang----------------------
         window.location.reload(false)
     })
@@ -273,7 +314,6 @@ for (i = 0; i < updateShip.length; i++){
         updateShipping(orderid, status)
     })
 }
-
 function updateShipping(orderid, status){
     console.log('user is authenticated, sending data..')
 
@@ -296,6 +336,8 @@ function updateShipping(orderid, status){
         window.location.reload(false)
     })
 }
+//-----------------------------------------------------------
+
 $(function() {
     //User Trict
     "user strict";

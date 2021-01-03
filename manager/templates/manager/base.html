@@ -351,24 +351,44 @@
             {#    ----------------Left navbar----------------#}
 {#                {% block left-navbar %}#}
                     <ul class="myAccSidebar">
+                    {% if perms.auth.view_user %}
                         <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
-                            <a href="{% url 'manager:view_user' %}">
-                                <p>Tài khoản</p>
-                                <i class="la la-user"></i>
-                            </a>
+                                <a href="{% url 'manager:view_user' %}">
+                                    <p>Tài khoản</p>
+                                    <i class="la la-user"></i>
+                                </a>
+
                         </li>
+                    {% endif %}
+                     {% if perms.product.view_product %}
                         <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
-                            <a href="{% url 'manager:product_control' %}">
-                                <p>Sản phẩm</p>
-                                <i class="la la-user"></i>
-                            </a>
+                                <a href="{% url 'manager:product_control' %}">
+                                    <p>Sản phẩm</p>
+                                    <i class="la la-user"></i>
+                                </a>
+
                         </li>
+                     {% endif %}
+                    {% if perms.order.view_order %}
                         <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
-                            <a href="{% url 'manager:viewPurchase' %}">
-                                <p>Nhập hàng</p>
-                                <i class="la la-user"></i>
-                            </a>
+
+                                <a href="{% url 'manager:orderControl' %}">
+                                    <p>Đơn hàng</p>
+                                    <i class="la la-user"></i>
+                                </a>
+
                         </li>
+                    {% endif %}
+                    {% if perms.purchase.view_purchaseproduct %}
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+
+                                <a href="{% url 'manager:viewPurchase' %}">
+                                    <p>Nhập hàng</p>
+                                    <i class="la la-user"></i>
+                                </a>
+
+                        </li>
+                    {% endif %}
                     </ul>
 {#                {% endblock left-navbar %}#}
 

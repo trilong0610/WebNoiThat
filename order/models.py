@@ -16,8 +16,8 @@ class Order(models.Model):
         ('6', 'Tạm ngưng'),
     )
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    fistName = models.TextField(max_length=100, default='')
-    lastName = models.TextField(max_length=100, default='')
+    first_name = models.TextField(max_length=100, default='')
+    last_name = models.TextField(max_length=100, default='')
     email = models.EmailField(default='')
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)

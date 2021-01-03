@@ -33,8 +33,15 @@
             <input type="text" name="description" class="inputText" value="{{ product.description }}">
         </div>
         <div class="accInput">
-            <p>Số lượng:</p>
-            <input type="number" name="amount" class="inputText" value="{{ product.amount }}">
+            <p>Trạng thái:</p>
+            {% if product.active %}
+                <p><input type="radio" name="active" value="True" checked> Đang bán</p>
+               <p> <input type="radio" name="active" value="False"> Ngừng bán</p>
+            {% else %}
+                <p><input type="radio" name="active" value="True" > Đang bán</p>
+                <p><input type="radio" name="active" value="False" checked> Ngừng bán</p>
+            {% endif %}
+
         </div>
 
     <p><input class="btn-arrival" type="submit" value="Sửa sản phẩm"></p>

@@ -1,11 +1,13 @@
+import json
+
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.shortcuts import render
-from cart.models import Cart
-from product.models import Category
+from cart.models import Cart, CartItem
+from product.models import Category, Product
 
 
 def view_cart(request):
-    user = request.user
     if request.user.is_authenticated:
         user = request.user
         cart, created = Cart.objects.get_or_create(user=user, complete=False)
@@ -29,3 +31,27 @@ def shipping_status(request):
     status = Cart.shipping
     context = {'order_shipping':cart, 'status_ship':status}
     return render(request, 'order/order_shipping.html', context)
+
+# sua so luong theo input
+def editItemQuantity(request):
+    data = json.loads(request.body)
+    productID = data['productID']
+    quantity = data['quantity']
+
+    customer = request.user
+    product = Product.objects.get(id=productID)
+    if product.amount < 0 or product.amount < int(quantity):
+        context = {
+            'outStock': True,
+            'amount_product': product.amount,
+        }
+        return JsonResponse(context, safe=False)
+    cart, created = Cart.objects.get_or_create(user=customer, complete=False)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    cartItem.quantity = int(quantity)
+    cartItem.save()
+
+    if cartItem.quantity <= 0:
+        cartItem.delete()
+    return JsonResponse('Item was added', safe=False)

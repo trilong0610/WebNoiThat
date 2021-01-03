@@ -13,7 +13,9 @@
 {% block content %}
 {#    <section class="myAcc myAcc2">#}
         <div class="container">
+        {% if perms.purchase.add_purchaseproduct %}
             <a href={% url 'manager:purchase_product' %}> <button type="button" class="btn btn-warning">Tạo đơn nhập hàng</button></a>
+        {% endif %}
             <div class="row">
 {#            Tieue de#}
                 <div class="col-md-10">
@@ -77,8 +79,12 @@
                         <div class="col-md-2" style="text-align: right;padding-top: 58px;">
                             <i >
                                 {% if not purchase.complete  %}
-                                    <a href="{% url 'manager:editPurchase' purchase.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                    <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
+                                    {% if perms.purchase.change_purchaseproduct %}
+                                        <a href="{% url 'manager:editPurchase' purchase.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                    {% endif %}
+                                    {% if perms.purchase.delete_purchaseproduct %}
+                                        <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
+                                    {% endif %}
                                 {% endif %}
 
                             </i>

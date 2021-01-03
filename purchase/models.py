@@ -6,6 +6,7 @@ from supplier.models import Supplier
 # Create your models here.
 # Don Nhap hang tu nha cung cap
 
+
 class PurchaseProduct(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE)

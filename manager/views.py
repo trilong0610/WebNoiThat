@@ -1,4 +1,6 @@
 import json
+from itertools import product
+from math import prod
 
 from django.contrib import auth
 from django.contrib.auth import decorators
@@ -8,6 +10,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from cart.models import Cart
+from order.models import Order
 from product.models import Product, Category
 from product.forms import ProductForm,CategoryForm
 from purchase.models import PurchaseProduct
@@ -43,7 +46,7 @@ class purchaseProduct(LoginRequiredMixin,View):
         form = PurchaseProductForm(data = request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/manager/')
+            return redirect('manager:viewPurchase')
         else:
             return HttpResponse('Sai Cu Phap')
 
@@ -92,7 +95,11 @@ class gains_permission(LoginRequiredMixin,View):
         # Neu la superuser moi cho vao trang phan quyen
         if request.user.is_superuser:
             user = User.objects.get(id=user_id)
-            return render(request, 'manager/Permission.html', {'user_permission':user})
+            context =  {
+                'user':user,
+                'permission': user.get_all_permissions()
+            }
+            return render(request, 'manager/Permission.html', context)
         else:
             return HttpResponse("Ban khong co quyen truy cap")
 
@@ -106,15 +113,25 @@ def updatePermission(request):
         print('user:', user)
         print('permission:', permission)
         print('action:', action)
-        user_change_perm = User.objects.get(username = user)
+        user_change_perm = User.objects.get(id = user)
         if action == 'add':
             permission_add = Permission.objects.get(name=permission)
             user_change_perm.user_permissions.add(permission_add)
-            return JsonResponse('Permission was add', safe=False)
+            context = {
+                'action':action,
+                'permission':permission,
+
+            }
+            return JsonResponse(context, safe=False)
         elif action == 'remove':
             permission_add = Permission.objects.get(name=permission)
             user_change_perm.user_permissions.remove(permission_add)
-            return JsonResponse('Permission was remove', safe=False)
+            context = {
+                'action': action,
+                'permission': permission,
+
+            }
+            return JsonResponse(context, safe=False)
         return JsonResponse('Permission changged failed', safe=False)
 
 
@@ -165,7 +182,7 @@ class editProduct(View):
         productUpdate.title = request.POST["title"]
         productUpdate.price = request.POST["price"]
         productUpdate.description = request.POST["description"]
-        productUpdate.amount = request.POST["amount"]
+        productUpdate.active = request.POST["active"]
 
         productUpdate.save()
         context = {
@@ -174,19 +191,6 @@ class editProduct(View):
         }
         return redirect('manager:product_control')
 
-
-def update(request, id):
-    product = Product.objects.get(id=id)
-    form = ProductForm(request.POST, instance = product)
-    if form.is_valid():
-        form.save()
-        return redirect('/')
-    return render(request, 'manager/edit_product.html', {'product':product})
-
-def destroy(request, id):
-    product = Product.objects.get(id=id)
-    product.delete()
-    return redirect('manager:product_control')
 
 def register(request):
     if request.method == 'POST':
@@ -246,9 +250,9 @@ def destroyPurchase(request, purchase_id):
 
 class editPurchase(View):
     def get(self, request, purchase_id):
-        product = Product.objects.all()
         supplier = Supplier.objects.all()
         purchase = PurchaseProduct.objects.get(id = purchase_id)
+        product = Product.objects.get(id = purchase.product.id)
         context = {
             'product': product,
             'supplier': supplier,
@@ -266,7 +270,57 @@ class editPurchase(View):
 
         if purchaseUpdate.complete != True:
             purchaseUpdate.complete = request.POST["complete"]
-
+            product.amount = product.amount + int(purchaseUpdate.amount)
+            product.save()
         purchaseUpdate.save()
-
         return redirect('manager:viewPurchase')
+
+def orderControl(request):
+    order = Order.objects.all().order_by('-id')
+    context = {
+        'order':order
+    }
+    return render(request, 'manager/OrderControl.html', context)
+
+class editOrder(View):
+    def get(self, request, order_id):
+        order = Order.objects.get(id=order_id)
+        context = {
+            'order':order
+        }
+        return render(request,'manager/EditOrder.html', context)
+    def post(self,request, order_id):
+        user = User.objects.get(username= request.POST['user'])
+        firstName = request.POST['firstName']
+        lastName = request.POST['lastName']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        province = request.POST['province']
+        district = request.POST['district']
+        wards = request.POST['wards']
+        address = request.POST['address']
+
+
+        order = Order.objects.get(id=order_id )
+
+        order.first_name = firstName
+        order.last_name = lastName
+        order.email = email
+        order.phone = phone
+        order.province = province
+        order.district = district
+        order.wards = wards
+        order.address = address
+        order.date_ordered = datetime.now()
+        order.transaction_id = order.cart.id
+        order.save()
+
+        # cap nhat so luong da ban va ton kho cua san pham
+        cart = Cart.objects.get(id = order.cart.id)
+        for item in cart.cartitem_set.all():
+            product = Product.objects.get(id = item.product.id)
+            product.amount = product.amount - item.quantity
+            product.amount_sell = product.amount_sell + item.quantity
+            product.save()
+        context = {'cart_id':order.cart.id}
+        return redirect('manager:orderControl')
