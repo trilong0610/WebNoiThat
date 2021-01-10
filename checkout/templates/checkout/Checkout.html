@@ -46,21 +46,37 @@
 
                     <div class="accInput">
                         <p>Tỉnh/Thành phố</p>
-                        <input type="text" name="province" class="inputText" value="{{ address.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
+
+                        <select class="form-select" name="province" id="id_province">
+                          <option value="{{ address.province.id }}" selected>{{ address.province }}</option>
+                            {% for province in province %}
+                                {% if province != address.province %}
+                                    <option value="{{ province.id }}">{{ province.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="accInput">
                         <p>Quận/Huyện</p>
-                        <input type="text" name="district" class="inputText" value="{{ address.district }}" placeholder="Nhập Quận/Huyện của bạn">
+
+                        <select class="form-select" name="district"  id="id_district">
+                          <option value="{{ address.district.id }}" selected>{{ address.district }}</option>
+                        </select>
+
                     </div>
                     <div class="accInput">
                         <p>Phường/Xã</p>
-                        <input type="text" name="wards" class="inputText" value="{{ address.wards }}" placeholder="Nhập Phường/Xã của bạn">
-                    </div>
 
+                        <select class="form-select" name="wards" id="id_wards">
+                          <option value="{{ address.wards.id }}" selected>{{ address.wards }}</option>
+                        </select>
+
+                    </div>
                     <div class="accInput">
                         <p>Số nhà/Đường</p>
                         <input type="text" name="address" class="inputText" value="{{ address.address }}" placeholder="Nhập Số nhà/Đường của bạn">
                     </div>
+
                     <a href="#" style="" class="trash">
                         <div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
                     </a>
@@ -108,4 +124,35 @@
         </div>
         </div>
     </section>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_province").click(function () {
+      var url = "/user/ajax/load_district/";  // get the url of the `load_cities` view
+      var provinceId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'province': provinceId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_district").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+    $("#id_district").click(function () {
+      var url = "/user/ajax/load_wards/";  // get the url of the `load_cities` view
+      var districtId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'district': districtId       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          $("#id_wards").html(data);  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+  </script>
 {% endblock content %}

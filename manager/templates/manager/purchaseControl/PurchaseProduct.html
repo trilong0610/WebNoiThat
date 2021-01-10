@@ -10,20 +10,36 @@
         </div>
 {% endblock banner %}
 {% block content %}
-    <form action="{% url 'manager:purchase_product' %}" method="post">
+    <form action="{% url 'manager:purchase_product' %}" method="post" id="purchaseForm">
     {% csrf_token %}
-        <h4>Tài khoản đặt hàng:</h4>
         <div class="accInput">
-            <p>{{ form.user }}</p>
+            <input  name="user" type="text" value="{{ user.id }}" hidden>
         </div>
         <h4>Nhà cung cấp:</h4>
         <div class="accInput"><p>{{ form.supplier }}</p></div>
         <h4>Tên sản phẩm:</h4>
         <div class="accInput"><p>{{ form.product }}</p></div>
         <h4>Số lượng:</h4>
-        <div class="accInput"><p>{{ form.amount }}</p></div>
+        <div class="accInput">
+            <p><input  name="amount" id="id_amount" type="number"></p>
+            <p><label id="id_lbl"></label></p>
+        </div>
 
-        <div><input class="btn-arrival" type="submit" value="Đặt sản phẩm"></div>
+        <div>
+            <button id="id_submit" class="btn-arrival">Đặt sản phẩm</button></div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_amount").keyup(function () {
+        var amount = $("#id_amount").val();  // get the selected country ID from the HTML input
+        if (amount <= 0 ){
+            $("#id_lbl").html("Số lượng phải lớn hơn 0 !")
+            $("#id_amount").val("")
+        }
+        else {
+            $("#id_lbl").html("")
+        }
+    });
 
+  </script>
 {% endblock content %}

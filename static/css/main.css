@@ -6133,6 +6133,15 @@ ul li {
      margin-bottom: 10px;
  }
 
+.accInput .select{
+     border: none;
+     border-bottom: 1px solid #c19b76;
+     width: 80%;
+     height: 40px;
+     font-size: 14px;
+ }
+
+
  .accInput .inputText{
      border: none;
      border-bottom: 1px solid #c19b76;

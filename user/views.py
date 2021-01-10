@@ -39,7 +39,8 @@ from django.http import HttpResponseRedirect
 #         'category':category,
 #     }
 #     return render(request, 'user/AccountDetail.html', context)
-from .models import Address
+from .models import Address, District, Wards, Province
+
 
 def RegisterPage(request):
     if request.method == 'POST':
@@ -74,31 +75,32 @@ def LogoutUser(request):
     return redirect('/')
 
 def changeInfoUser(request):
-    data = json.loads(request.body)
-    user = request.user
-    user_address, created = Address.objects.get_or_create(user = user)
+    if request.method == "POST":
+        user = request.user
+        user_address, created = Address.objects.get_or_create(user = user)
 
-    firstName = data['firstName']
-    lastName = data['lastName']
-    email = data['email']
-    phone = data['phone']
-    province = data['province']
-    district = data['district']
-    wards = data['wards']
-    address = data['address']
+        firstName = request.POST['firstName']
+        lastName = request.POST['lastName']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        province = Province.objects.get(id = request.POST['province'])
+        district = District.objects.get(id = request.POST['district'])
+        wards = Wards.objects.get(id = request.POST['wards'])
+        address = request.POST['address']
 
-    user.first_name = firstName
-    user.last_name = lastName
-    user.email = email
-    user.save()
+        user.first_name = firstName
+        user.last_name = lastName
+        user.email = email
+        user.save()
 
-    user_address.phone = phone
-    user_address.province = province
-    user_address.district = district
-    user_address.wards = wards
-    user_address.address = address
-    user_address.save()
-    return JsonResponse('Info was change', safe=False)
+        user_address.phone = phone
+        user_address.province = province
+        user_address.district = district
+        user_address.wards = wards
+        user_address.address = address
+        user_address.save()
+        return redirect('user:accountDetail')
+
 
 def accountDetail(request):
     if request.user.is_authenticated:
@@ -111,8 +113,10 @@ def accountDetail(request):
         cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
         cartItems = cart['get_cart_items']
     category = Category.objects.all()
+    province = Province.objects.all()
     address, created = Address.objects.get_or_create(user = user)
     context = {
+        'province':province,
         'cartItems': cartItems,
         'category': category,
         'address': address,
@@ -136,5 +140,15 @@ def changePassword(request):
     }
     return render(request, 'user/AccountDetail.html', context)
 
+
+def load_district(request):
+    province_id = request.GET.get('province')
+    district = District.objects.filter(province_id=province_id).order_by('name')
+    return render(request, 'user/district_dropdown_list_options.html', {'district': district})
+
+def load_wards(request):
+    district_id = request.GET.get('district')
+    wards = Wards.objects.filter(district_id=district_id).order_by('name')
+    return render(request, 'user/ward_dropdown_list_options.html', {'wards': wards})
 
 

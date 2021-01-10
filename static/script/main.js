@@ -46,6 +46,7 @@ console.log("Loadded add-item-carts")
 var addToCartBtns = document.getElementsByClassName('add-item-carts')
 for (i = 0; i < addToCartBtns.length; i++){
     addToCartBtns[i].addEventListener('click', function (){
+        var sizeProduct = document.getElementById("size_product").value;
         var productID = this.dataset.product
         var quantity = document.getElementById("quantity_product").value;
         console.log('productID:', productID, 'quantity', quantity)

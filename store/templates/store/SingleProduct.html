@@ -76,8 +76,7 @@
                         {% if product.amount > 0 %}
                             <div class="lineAbout" style="width: 100%;height: 1px"></div>
                         <div class="details-button clearfix" style="margin-bottom: 0">
-
-                               <div style="width: 50%;float: left">
+                           <div style="width: 50%;float: left">
                                    <h3>Số lượng</h3>
     {#                               --------------So luong--------------------#}
 
@@ -93,9 +92,24 @@
                                    </div>
 
                                </div>
+                           <div style="width: 30%;float: left">
+                                   <h3>Kích thước</h3>
+    {#                               --------------So luong--------------------#}
+                                   <div class="pd-c-quantity">
+                                    <select id="size_product" name="size" class="form-select">
+                                        {% for size in product.sizeproduct_set.all %}
+                                            {% if size.amount > 0 %}
+                                                <option value="{{ size.id }}">{{ size.horizontal }} x {{ size.vertical }}</option>
+                                            {% endif %}
+                                        {% endfor %}
 
-                            <div class="sidebar-filter-color" style="width: 50%;float: left">
-                            </div>
+                                    </select>
+                                   </div>
+
+                               </div>
+
+                           <div class="sidebar-filter-color" style="width: 50%;float: left">
+                           </div>
 
                         </div>
                     {% endif %}

@@ -17,12 +17,28 @@
         <h4>Tên sản phẩm:</h4>
         <div class="accInput"><p>{{ product.title }}</p></div>
         <h4>Giá:</h4>
-        <div class="accInput"><p>{{ product.price }}</p></div>
+        <div class="accInput">
+            <p><input  name="price" id="id_price" type="number"></p>
+            <p><label id="id_lbl_price"></label></p>
+        </div>
         <h4>Chi tiết sản phẩm:</h4>
         <div class="accInput"><p>{{ product.description }}</p></div>
         <h4>Hình ảnh:</h4>
         <div class="accInput"><p>{{ product.image }}</p></div>
     <div><input class="btn-arrival" type="submit" value="Thêm sản phẩm"></div>
     </form>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#id_price").keyup(function () {
+        var amount = $("#id_price").val();  // get the selected country ID from the HTML input
+        if (amount <= 0 ){
+            $("#id_lbl_price").html("Số lượng phải lớn hơn 0 !")
+            $("#id_price").val("")
+        }
+        else {
+            $("#id_lbl_price").html("")
+        }
+    });
 
+  </script>
 {% endblock content %}

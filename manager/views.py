@@ -44,6 +44,10 @@ class purchaseProduct(LoginRequiredMixin,View):
         return render(request, "manager/purchaseControl/PurchaseProduct.html", context)
     def post(self,request):
         form = PurchaseProductForm(data = request.POST)
+        user = request.user
+        amount = request.POST["amount"]
+        form.user = user
+        form.amount = amount
         if form.is_valid():
             form.save()
             return redirect('manager:viewPurchase')
@@ -67,9 +71,11 @@ class add_product(LoginRequiredMixin,View):
     login_url = '/login/'
     def get(self, request):
             product = ProductForm()
+
             return render(request, "manager/productControl/AddProduct.html", {"product": product})
     def post(self,request):
         form = ProductForm(data = request.POST, files= request.FILES)
+        form.price = request.POST["price"]
         if form.is_valid():
             form.save()
             return redirect('manager:product_control')
