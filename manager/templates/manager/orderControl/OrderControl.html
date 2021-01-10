@@ -5,23 +5,46 @@
     <div class="banner relative">
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
             <div class="banner-arrival">
-                <h3>Phân Quyền</h3>
-                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+                <h3>Quản lí đơn hàng</h3>
+                <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> orderControl</p>
             </div>
         </div>
 {% endblock banner %}
 {% block content %}
-<div class="col-md-13">
+<div class="col-md-14">
 {#    <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>#}
-       <div >
-           <input type="search" placeholder="Tìm kiếm đơn hàng" style="border: 1px solid #444;
-  padding: 14px 40px 11px 15px;
-  border-radius: 20px;
-  height: 40px;
-  background: transparent;
-  color: #0f0f0f;">
-           <a href=""><button class="fa fa-search"> </button></a>
-       </div>
+    <form action="" method="post">
+        {% csrf_token %}
+    <div class="row">
+        <div class="col-md-3">
+               <input type="search" placeholder="Tìm kiếm đơn hàng" style="border: 1px solid #444;
+                    padding: 10px 40px 11px 15px;
+                    border-radius: 3px;
+                    height: 30px;
+                    background: transparent;
+                    color: #0f0f0f;" name="searchOrder" >
+            </div>
+        <div class="col-md-2">
+            <input type="submit" value="Tim">
+        </div>
+    </div>
+
+    </form>
+    <form action="" method="post">
+        <div class="row">{#loc don hang theo ngay#}
+            {% csrf_token %}
+                <div class="col-md-4">
+                    <input type="date" class="form-control" name="fromDate" placeholder="Từ ngày">
+                </div>
+                <div class="col-md-4">
+                    <input type="date" class="form-control" name="toDate" placeholder="Đến ngày">
+                </div>
+                <div class="col-md-1">
+                    <input type="submit"  value="Lọc">
+                </div>
+        </div>
+
+    </form>
 
     <div class="lineAbout" style="width: 100%;height: 0px;margin-top: 20px;"></div>
     <div class="panel-group" id="faqAccordion">
@@ -44,7 +67,7 @@
                         {{ order.get_status_display }}
                     </h4>
                     <span class="accordion-toggle question-toggle collapsed"><i
-                            class="fa color-setting fa-minus" aria-hidden="true"></i></span>
+                            class="" aria-hidden="true"></i></span>
                     <p style="  position: absolute;
                                 right: 30%;
                                 top: 14px;
@@ -56,15 +79,15 @@
                                 font-size: 16px;
                                 color: #fff;" >
 {#                    Kiem tra quyen moi hien thi cac chuc nang     #}
-                        {% if perms.order.change_order %}
-                            <a href=""><button type="button" class="btn btn-info">Giao hàng</button></a>
-                        {% endif %}
-                        {% if perms.order.change_order %}
+{#                        {% if perms.order.change_order %}#}
+{#                            <a href=""><button type="button" class="btn btn-info">Giao hàng</button></a>#}
+{#                        {% endif %}#}
+                        {% if perms.order.change_order and order.status != 5 %}
                             <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
                         {% endif %}
-                        {% if perms.order.delete_order %}
-                            <a href=""><button type="button" class="btn btn-danger">Xóa</button></a>
-                        {% endif %}
+{#                        {% if perms.order.delete_order %}#}
+{#                            <a href=""><button type="button" class="btn btn-danger">Xóa</button></a>#}
+{#                        {% endif %}#}
                     </i>
                 </div>
                 <div  class="panel-collapse collapse in" aria-expanded="true" style="">
@@ -121,7 +144,11 @@
 <!--                            </div>-->
 
 <!--                        </div>-->
-
+ <script>
+    $(function () {
+      $("#datepicker").datepicker();
+    });
+  </script>
     </div>
 </div>
 {#    </section>#}

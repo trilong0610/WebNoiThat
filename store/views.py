@@ -95,6 +95,35 @@ def home(request):
                }
     return render(request, 'store/ProductGrid.html', context)
 
+def seacrchProduct(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+    # sam pham moi nhat
+    hot_product = Product.objects.filter(active=True).order_by('-id')[:6]
+    # best seller
+    best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
+    if request.method == "POST":
+        key = request.POST["key"]
+        all_product = Product.objects.filter(title__contains=key)
+    else:
+        all_product = Product.objects.filter(active=True)
+
+    context = {'category': category,
+               'hot_product': hot_product,
+               'items': items,
+               'cartItems': cartItems,
+               'all_product': all_product,
+               'best_sellers': best_seller,
+               }
+    return render(request, 'store/ProductGrid.html', context)
 
 class view_category(View):
     def get(self, request, category_id):

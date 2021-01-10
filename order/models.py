@@ -36,12 +36,7 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-    #
-    # @property
-    # def get_cart_total(self):
-    #     cartitem = self.cartitem.all()
-    #     total = sum([item.get_total for item in cartitem])
-    #     return total
+
     #
     # @property
     # def get_cart_items(self):

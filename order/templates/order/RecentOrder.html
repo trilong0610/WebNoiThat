@@ -13,11 +13,10 @@
 {% block content %}
 <div class="col-md-9">
                     <h3 style="margin-bottom: 30px;text-align: left">ĐƠN HÀNG CỦA TÔI</h3>
-                    <div class="panel-group" id="faqAccordion">
+                    <div class="panel-group" >
                         {% for order in orders %}
                             <div class="panel panel-default faq-coat" style="border: none;    box-shadow: none;">
-                            <div class="panel-heading faq-head bd-color-left-setting active" data-toggle="collapse"
-                                 data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
+                            <div class="panel-heading faq-head bd-color-left-setting active"  aria-expanded="true"
                                  style="background: rgb(193, 155, 118);   ">
                                 <h4 class="panel-title">
                                     ID: {{ order.id }}
@@ -29,7 +28,7 @@
                                     {{ order.get_status_display }}
                                 </h4>
                                 <span class="accordion-toggle question-toggle collapsed"><i
-                                        class="fa color-setting fa-minus" aria-hidden="true"></i></span>
+                                        class="" aria-hidden="true"></i></span>
                                 <p style="  position: absolute;
                                             right: 19px;
                                             top: 14px;

@@ -16,7 +16,11 @@
             <p>Danh mục:</p>
             <select name="category_id">
               {% for category in  category %}
-                <option value="{{ category.id }}">{{ category.title }}</option>
+                  {% if category.title == product.category.title %}
+                    <option value="{{ category.id }}" selected>{{ category.title }}</option>
+                  {% else %}
+                      <option value="{{ category.id }}">{{ category.title }}</option>
+                  {% endif %}
               {% endfor %}
             </select>
         </div>

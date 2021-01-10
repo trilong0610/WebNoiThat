@@ -5,17 +5,17 @@
     <div class="banner relative">
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
             <div class="banner-arrival">
-                <h3>Phân Quyền</h3>
-                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> Permission</p>
+                <h3>Quản lí sản phẩm</h3>
+                <p>Manager<i class="fa fa-angle-right" aria-hidden="true"></i> product_control</p>
             </div>
         </div>
 {% endblock banner %}
 {% block content %}
 {#    <section class="myAcc myAcc2">#}
         <div class="container">
-        {% if perms.product.add_product %}
+{#        {% if perms.product.add_product %}#}
             <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>
-        {% endif %}
+{#        {% endif %}#}
             <div class="row">
 {#            Tieue de#}
                 <div class="col-md-10">

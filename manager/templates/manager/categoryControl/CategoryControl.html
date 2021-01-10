@@ -1,0 +1,75 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Quản lí danh mục</h3>
+                <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> categoryControl</p>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+{#    <section class="myAcc myAcc2">#}
+        <div class="container">
+        {% if perms.product.add_category %}
+            <a href={% url 'manager:addCategory' %}> <button type="button" class="btn btn-warning">Thêm danh mục</button></a>
+        {% endif %}
+            <div class="row">
+{#            Tieue de#}
+                <div class="col-md-10">
+                        <div class="row">
+                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                            <h4>ID</h4>
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
+                            <h4>Tên danh mục</h4>
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
+                            <h4>Chi tiết</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+                            <h4>Trạng thái</h4>
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+
+                        </div>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                </div>
+{#            Danh sach san pham#}
+                <div class="col-md-10">
+                    {% for category in category %}
+                        <div class="row">
+                        <div class="col-md-2" style="text-align: center;padding-top: 30px;">
+                            {{ category.id }}
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 30px;">
+                            {{ category.title }}
+                        </div>
+                        <div class="col-md-3" style="text-align: center;padding-top: 30px;">
+                            {{ category.description }}
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 30px;">
+                            {% if category.active %}
+                                Đang bán
+                            {% else %}
+                                Ngừng bán
+                            {% endif %}
+                        </div>
+                        <div class="col-md-1" style="text-align: center;padding-top: 30px;">
+                            <i >
+                                {% if perms.product.change_category %}
+                                    <a href="{% url 'manager:editCategory' category.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                {% endif %}
+                            </i>
+                        </div>
+                    </div>
+                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+{#    </section>#}
+{% endblock content %}

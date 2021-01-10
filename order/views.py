@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import View
-
+from django.http import HttpResponse
 from cart.models import Cart,CartItem
 # Create your views here.
 from order.models import Order
@@ -59,6 +59,9 @@ def addOrder(request, cart_id):
     order.address = address
     order.date_ordered = datetime.now()
     order.transaction_id = cart
+    for cartItem in order.cart.cartitem_set.all():
+        if cartItem.product.amount <= 0:
+            return redirect("order:outStock")
     order.save()
     updateCart = Cart.objects.get(id = cart)
     updateCart.complete = True
@@ -98,3 +101,7 @@ def editOrder(request):
     if cartItem.quantity <= 0:
         cartItem.delete()
     return JsonResponse('Item was added', safe=False)
+
+def outStock(request):
+    context ={}
+    return render(request, "order/OutStock.html", context)

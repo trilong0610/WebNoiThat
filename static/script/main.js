@@ -284,7 +284,7 @@ for (i = 0; i < updatePerms.length; i++){
 function updatePermission(user, permission, action){
     console.log('user is authenticated, sending data..')
 
-    var url = '/manager/gains_permission/'
+    var url = '/manager/gainsPermission/'
 
     fetch(url,{
         method: 'POST',
@@ -326,6 +326,38 @@ function updateShipping(orderid, status){
             'X-CSRFToken':csrftoken,
         },
         body:JSON.stringify({'orderid': orderid, 'status':status})
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log('data:', data)
+        // ------------------Không tự reload lại trang----------------------
+        window.location.reload(false)
+    })
+}
+//---------------Tìm sản phẩm---------------
+console.log("Loadded search")
+var keySearch = document.getElementsByClassName('search-product')
+for (i = 0; i < keySearch.length; i++){
+    keySearch[i].addEventListener('click', function (){
+        var key = this.dataset.key
+        console.log('key:', key)
+        searchProduct(key)
+    })
+}
+function searchProduct(key){
+    console.log('user is authenticated, sending data..')
+
+    var url = '/search/'
+
+    fetch(url,{
+        method: 'POST',
+        headers:{
+            'Content-Type':'application/json',
+            'X-CSRFToken':csrftoken,
+        },
+        body:JSON.stringify({'key': key})
     })
     .then((response) => {
         return response.json();

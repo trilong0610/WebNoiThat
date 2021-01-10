@@ -1,0 +1,19 @@
+{% extends 'store/base_simple.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <p><h3>Xin lỗi, sản phẩm hiện đã hết hàng</h3></p>
+                <p><h3>Vui lòng chọn sản phẩm khác</h3></p>
+                <p></p>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <a href="{% url 'store:home' %}" class="btn-formTax">
+                                <div >Quay lại trang chủ</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+{% endblock banner %}

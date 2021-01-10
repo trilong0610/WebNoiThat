@@ -1,0 +1,22 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Thêm danh mục</h3>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <form action="{% url 'manager:addCategory' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    {% csrf_token %}
+        <h4>Tên danh mục:</h4>
+        <div class="accInput"><p>{{ form.title }}</p></div>
+        <h4>Chi tiết:</h4>
+        <div class="accInput"><p>{{ form.description }}</p></div>
+    <div><input class="btn-arrival" type="submit" value="Thêm danh mục"></div>
+    </form>
+
+{% endblock content %}
+{#

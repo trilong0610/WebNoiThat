@@ -1,0 +1,36 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block banner %}
+    <div class="banner relative">
+            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+            <div class="banner-arrival">
+                <h3>Sửa danh mục</h3>
+            </div>
+        </div>
+{% endblock banner %}
+{% block content %}
+    <form action="{% url 'manager:editCategory' scategory.id %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="accInput">
+            <p>Tên danh mục:</p>
+            <input type="text" value="{{ scategory.title }}" name="title">
+        </div>
+        <div class="accInput">
+            <p>Chi tiết:</p>
+            <input type="text" value="{{ scategory.description }}" name="description" style="text-align: left;height: 200px; width: 50%">
+        </div>
+        <div class="accInput">
+            <p>Trạng thái:</p>
+            {% if scategory.active %}
+                <p><input type="radio" name="active"  value="False"> Ngừng bán</p>
+                <p><input type="radio" name="active"  value="True" checked> Đang bán</p>
+            {% else %}
+                <p><input type="radio" name="active"  value="False" checked> Ngừng bán</p>
+                <p><input type="radio" name="active"  value="True" > Đang bán</p>
+            {% endif %}
+        </div>
+
+    <p><input class="btn-arrival" type="submit" value="Sửa danh mục"></p>
+    </form>
+
+{% endblock content %}

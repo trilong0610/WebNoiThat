@@ -131,7 +131,7 @@
                                             <a href="{% url 'store:home' %}" >Trang Chủ</a>
                                         </li>
                                           <li class="dropdown productMN">
-                                                    <a href="{% url 'store:productGrid' %}" class="active-menu">Sản Phẩm</a>
+                                                    <a href="{% url 'store:productGrid' %}" class="">Sản Phẩm</a>
                                                     <i class="fa fa-angle-down"></i>
                                                     <div class="box-menu">
                                                         <div class="row">
@@ -140,7 +140,10 @@
                                                                     <h3 class="slider-left-title">Loại Sản Phẩm</h3>
                                                                     <ul class="slide-left-list">
                                                                         {% for items in category %}
-                                                                            <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                                                                            {% if items.active %}
+                                                                                <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                                                                            {% endif %}
+
                                                                         {% endfor %}
                                                                     </ul>
                                                                 </div>
@@ -292,12 +295,18 @@
                                 </div>
                                 <div class="search2">
                                     <ul>
+                                        <form action="{% url 'store:search' %}" method="post">
+                                            {% csrf_token %}
                                         <li>
-                                            <input type="text" name="Search" placeholder="Search" class="">
+
+                                                <input type="text" name="key" placeholder="Search" class="">
+
+
                                         </li>
                                         <li>
-                                            <a class="fa fa-search " href="404.html"></a>
+                                            <input class="fa fa-search" type="submit" value="Tìm kiếm">
                                         </li>
+                                        </form>
                                     </ul>
 
 

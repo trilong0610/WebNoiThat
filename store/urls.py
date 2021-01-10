@@ -20,6 +20,8 @@ urlpatterns = [
     path('hotProduct/', views.hot_product, name="hotProduct"),
     path('mostPopular/', views.most_popular, name="mostPopular"),
     path('detailProduct/<int:product_id>', views.detailProduct, name="detailProduct"),
+#     search
+    path('search/', views.seacrchProduct, name="search"),
 
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

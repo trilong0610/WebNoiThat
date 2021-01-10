@@ -30,7 +30,7 @@ class home(View):
             # Gui OBJ user hien tai de check permission
             request_user = User.objects.get(id = request.user.id)
             context = {'users': list_users, 'request_user': request_user}
-            return render(request, 'manager/UserControl.html', context)
+            return render(request, 'manager/userControl/UserControl.html', context)
 
 # Nhap San Pham Tu NCC
 class purchaseProduct(LoginRequiredMixin,View):
@@ -41,7 +41,7 @@ class purchaseProduct(LoginRequiredMixin,View):
             'form':form,
             'user':user,
         }
-        return render(request, "manager/PurchaseProduct.html", context)
+        return render(request, "manager/purchaseControl/PurchaseProduct.html", context)
     def post(self,request):
         form = PurchaseProductForm(data = request.POST)
         if form.is_valid():
@@ -67,12 +67,12 @@ class add_product(LoginRequiredMixin,View):
     login_url = '/login/'
     def get(self, request):
             product = ProductForm()
-            return render(request, "manager/AddProduct.html", {"product": product})
+            return render(request, "manager/productControl/AddProduct.html", {"product": product})
     def post(self,request):
         form = ProductForm(data = request.POST, files= request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('/manager/')
+            return redirect('manager:product_control')
         else:
             return HttpResponse("Sai cu phap")
 
@@ -85,7 +85,7 @@ class view_User(PermissionRequiredMixin,View):
             # Gui OBJ user hien tai de check permission
             request_user = User.objects.get(id = request.user.id)
             context = {'users': list_users, 'request_user': request_user}
-            return render(request, 'manager/UserControl.html', context)
+            return render(request, 'manager/userControl/UserControl.html', context)
 
 # Xem quyen user
 class gains_permission(LoginRequiredMixin,View):
@@ -99,21 +99,19 @@ class gains_permission(LoginRequiredMixin,View):
                 'user':user,
                 'permission': user.get_all_permissions()
             }
-            return render(request, 'manager/Permission.html', context)
+            return render(request, 'manager/userControl/Permission.html', context)
         else:
             return HttpResponse("Ban khong co quyen truy cap")
 
 # Thay doi quyen user(chi user co quyen thay doi thong tin user moi duoc vao)
-@permission_required('auth.change_user')
 def updatePermission(request):
         data = json.loads(request.body)
         user = data['user']
         permission = data['permission']
         action = data['action']
-        print('user:', user)
-        print('permission:', permission)
-        print('action:', action)
+
         user_change_perm = User.objects.get(id = user)
+
         if action == 'add':
             permission_add = Permission.objects.get(name=permission)
             user_change_perm.user_permissions.add(permission_add)
@@ -161,7 +159,7 @@ def test(request):
 
 def dashboard(request):
     products = Product.objects.all()
-    return render(request, 'manager/ProductControl.html', {'products':products})
+    return render(request, 'manager/productControl/ProductControl.html', {'products':products})
 
 # xoa, sua san pham
 class editProduct(View):
@@ -172,7 +170,7 @@ class editProduct(View):
             'product': detail,
             'category': category,
         }
-        return render(request, 'manager/EditProduct.html', context)
+        return render(request, 'manager/productControl/EditProduct.html', context)
     def post(self,request, product_id):
         productUpdate = Product.objects.get(id = product_id)
         categoryUpdate = Category.objects.get(id = request.POST["category_id"])
@@ -202,9 +200,9 @@ def register(request):
             user = User.objects.create_user(username=username, email=email, password=password2)
             return render(request, 'user/RegisterSuccess.html', {'username': user.username})
         else:
-            return render(request, 'manager/RegisterAccount.html', {'error': 0})
+            return render(request, 'manager/userControl/RegisterAccount.html', {'error': 0})
     context = {}
-    return render(request, 'manager/RegisterAccount.html', context)
+    return render(request, 'manager/userControl/RegisterAccount.html', context)
 
 class editUser(View):
     def get(self, request, user_id):
@@ -212,7 +210,7 @@ class editUser(View):
         context = {
             'userEdit':userEdit,
         }
-        return render(request, 'manager/EditUser.html', context)
+        return render(request, 'manager/userControl/EditUser.html', context)
     def post(self, request, user_id):
         userEdit = User.objects.get( id = user_id )
         pusername = request.POST['username']
@@ -229,7 +227,7 @@ class editUser(View):
         context = {
             'userEdit': userEditted,
         }
-        return render(request, 'manager/EditUser.html', context)
+        return render(request, 'manager/userControl/EditUser.html', context)
 
 def destroyUser(request, user_id):
     userEdit = User.objects.get( id = user_id )
@@ -241,7 +239,7 @@ def viewPurchaseProduct(request):
     context = {
         'purchase':purchase
     }
-    return render(request, 'manager/PurchaseProductControl.html', context)
+    return render(request, 'manager/purchaseControl/PurchaseProductControl.html', context)
 
 def destroyPurchase(request, purchase_id):
     purchase = PurchaseProduct.objects.get( id = purchase_id )
@@ -258,7 +256,7 @@ class editPurchase(View):
             'supplier': supplier,
             'purchase':purchase,
         }
-        return render(request, 'manager/EditPurchase.html', context)
+        return render(request, 'manager/purchaseControl/EditPurchase.html', context)
     def post(self,request, purchase_id):
         purchaseUpdate = PurchaseProduct.objects.get(id = purchase_id)
         supplier = Supplier.objects.get(id = request.POST["supplier_id"])
@@ -275,12 +273,38 @@ class editPurchase(View):
         purchaseUpdate.save()
         return redirect('manager:viewPurchase')
 
-def orderControl(request):
-    order = Order.objects.all().order_by('-id')
-    context = {
-        'order':order
-    }
-    return render(request, 'manager/OrderControl.html', context)
+class orderControl(View):
+    def get(self, request):
+        order = Order.objects.all().order_by('-id')
+        revune = 0
+        for items in order:
+            revune = revune + items.cart.get_cart_total
+        context = {
+            'order':order,
+            'revune':revune
+        }
+        return render(request, 'manager/orderControl/OrderControl.html', context)
+    def post(self, request):
+        searchOrder = request.POST.get('searchOrder')
+        revune = 0
+        if searchOrder:
+            # Tim theo id
+            order = Order.objects.get(id = int(searchOrder))
+            revune = revune + int(order.cart.get_cart_total)
+        else:
+            fromDate = request.POST["fromDate"]
+            toDate = request.POST["toDate"]
+            order = Order.objects.filter(date_ordered__range=[fromDate, toDate]).order_by('-id')
+            for items in order:
+                    revune = revune + int(items.cart.get_cart_total)
+
+
+        context = {
+            'order': order,
+            'revune': revune
+        }
+        return render(request, 'manager/orderControl/OrderControl.html', context)
+
 
 class editOrder(View):
     def get(self, request, order_id):
@@ -288,7 +312,7 @@ class editOrder(View):
         context = {
             'order':order
         }
-        return render(request,'manager/EditOrder.html', context)
+        return render(request, 'manager/orderControl/EditOrder.html', context)
     def post(self,request, order_id):
         user = User.objects.get(username= request.POST['user'])
         firstName = request.POST['firstName']
@@ -299,6 +323,7 @@ class editOrder(View):
         district = request.POST['district']
         wards = request.POST['wards']
         address = request.POST['address']
+        status = request.POST['status']
 
 
         order = Order.objects.get(id=order_id )
@@ -313,6 +338,7 @@ class editOrder(View):
         order.address = address
         order.date_ordered = datetime.now()
         order.transaction_id = order.cart.id
+        order.status = status
         order.save()
 
         # cap nhat so luong da ban va ton kho cua san pham
@@ -324,3 +350,80 @@ class editOrder(View):
             product.save()
         context = {'cart_id':order.cart.id}
         return redirect('manager:orderControl')
+
+# -----------Category--------------------
+
+def categoryControl(request):
+    category = Category.objects.all()
+    context = {
+        'category':category
+    }
+    return render(request, 'manager/categoryControl/CategoryControl.html', context)
+
+class addCategory(View):
+    def get(self, request):
+        form = CategoryForm()
+        context = {
+            "form":form
+        }
+        return render(request, 'manager/categoryControl/AddCategory.html', context)
+    def post(self, request):
+        form = CategoryForm(data= request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('manager:categoryControl')
+        else:
+            return HttpResponse('Sai Cu Phap')
+
+
+class editCategory(View):
+    def get(self, request, category_id):
+        category = Category.objects.get(id = category_id)
+
+        context = {
+            "scategory":category
+        }
+        return render(request, 'manager/categoryControl/EditCategory.html', context)
+    def post(self, request, category_id):
+
+        category = Category.objects.get(id = category_id)
+
+        title = request.POST["title"]
+        description = request.POST["description"]
+        active = request.POST["active"]
+
+        category.title = title
+        category.description = description
+        category.active = active
+        category.save()
+        return redirect("manager:categoryControl")
+
+# Doanh thu
+class revenue(View):
+    def get(self, request):
+        order = Order.objects.all().order_by('-id')
+        revune = 0
+        for items in order:
+            revune = revune + items.cart.get_cart_total
+        context = {
+            'order':order,
+            'revune':revune
+        }
+        return render(request, 'manager/Revenue.html', context)
+    def post(self, request):
+        fromDate = request.POST["fromDate"]
+        toDate = request.POST["toDate"]
+        revune = 0
+        if fromDate == toDate:
+            order = Order.objects.filter(date_ordered=toDate).order_by('-id')
+            for items in order:
+                revune = revune + int(items.cart.get_cart_total)
+        else:
+            order = Order.objects.filter(date_ordered__range=[fromDate, toDate]).order_by('-id')
+            for items in order:
+                revune = revune + int(items.cart.get_cart_total)
+        context = {
+            'order': order,
+            'revune': revune
+        }
+        return render(request, 'manager/Revenue.html', context)

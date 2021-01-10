@@ -54,8 +54,8 @@
                                 <div class="col-md-4">
                                 <a href="{% url 'store:detailProduct' all_product.id %}">
                                     <div class="productG ">
-                                    <div class="sizeImg" style="width: 100%;float: none">
-                                        <img src="{{ all_product.image.url|default_if_none:'#' }}" alt="product1" class="img-thumbnail"/>
+                                    <div class="sizeImg" style="width: 100%; float: none">
+                                        <img style="height: 100%" src="{{ all_product.image.url|default_if_none:'#' }}" alt="product1" class="img-thumbnail"/>
                                         <div class="arrIcon"></div>
     {#                                    <div class="box-posi">HOT</div>#}
                                         <div class="arrIcon2">

@@ -11,37 +11,37 @@
                         <div class="image-preview-container">
                             <!-- - - - - - - - - - - - - - Image Preview Container - - - - - - - - - - - - - - - - -->
                             <div class="image-preview">
-                                <a href="images/SingleProduct/Group 1059.png"
-                                   data-zoom-image="images/SingleProduct/Group 1059.png" data-fancybox="group">
+                                <a href="{{ product.image.url|default_if_none:'#' }}"
+                                   data-zoom-image="{{ product.image.url|default_if_none:'#' }}" data-fancybox="group">
                                     <img class="img-thumbnail" id="zoom-image" src="{{ product.image.url|default_if_none:'#' }}" alt="">
                                 </a>
                             </div>
                             <!--/ .image-preview-->
                             <!-- - - - - - - - - - - - - - End of Image Preview Container - - - - - - - - - - - - - - - - -->
                             <!-- - - - - - - - - - - - - - Thumbnails - - - - - - - - - - - - - - - - -->
-                            <div class="carousel-type-2">
-                                <div class="owl-carousel type-small product-thumbs" id="thumbnails" data-max-items="4">
-                                    <a class="active" href="#" data-image="images/SingleProduct/Group 1059.png"
-                                       data-zoom-image="images/SingleProduct/Group 1059.png">
-                                        <img src="images/SingleProduct/Tractor-photo-3-897x897.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1062.png"
-                                       data-image="images/SingleProduct/Group 1062.png"
-                                       data-zoom-image="images/SingleProduct/Group 1062.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 16.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1060.png"
-                                       data-image="images/SingleProduct/Group 1060.png"
-                                       data-zoom-image="images/SingleProduct/Group 1060.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 17.png" alt="">
-                                    </a>
-                                    <a href="images/SingleProduct/Group 1061.png"
-                                       data-image="images/SingleProduct/Group 1061.png"
-                                       data-zoom-image="images/SingleProduct/Group 1061.png" data-fancybox="group">
-                                        <img src="images/SingleProduct/Image 18.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
+{#                            <div class="carousel-type-2">#}
+{#                                <div class="owl-carousel type-small product-thumbs" id="thumbnails" data-max-items="4">#}
+{#                                    <a class="active" href="#" data-image="images/SingleProduct/Group 1059.png"#}
+{#                                       data-zoom-image="images/SingleProduct/Group 1059.png">#}
+{#                                        <img src="images/SingleProduct/Tractor-photo-3-897x897.png" alt="">#}
+{#                                    </a>#}
+{#                                    <a href="images/SingleProduct/Group 1062.png"#}
+{#                                       data-image="images/SingleProduct/Group 1062.png"#}
+{#                                       data-zoom-image="images/SingleProduct/Group 1062.png" data-fancybox="group">#}
+{#                                        <img src="images/SingleProduct/Image 16.png" alt="">#}
+{#                                    </a>#}
+{#                                    <a href="images/SingleProduct/Group 1060.png"#}
+{#                                       data-image="images/SingleProduct/Group 1060.png"#}
+{#                                       data-zoom-image="images/SingleProduct/Group 1060.png" data-fancybox="group">#}
+{#                                        <img src="images/SingleProduct/Image 17.png" alt="">#}
+{#                                    </a>#}
+{#                                    <a href="images/SingleProduct/Group 1061.png"#}
+{#                                       data-image="images/SingleProduct/Group 1061.png"#}
+{#                                       data-zoom-image="images/SingleProduct/Group 1061.png" data-fancybox="group">#}
+{#                                        <img src="images/SingleProduct/Image 18.png" alt="">#}
+{#                                    </a>#}
+{#                                </div>#}
+{#                            </div>#}
                             <!-- - - - - - - - - - - - - - End of Thumbnails - - - - - - - - - - - - - - - - -->
                         </div>
                         <!--/ .image-preview-container -->

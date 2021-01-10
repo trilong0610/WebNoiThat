@@ -20,23 +20,23 @@
                                 {% csrf_token%}
 
                                 <div class="col-md-6">
-                                    <h3>Login   </h3>
+                                    <h3>Đăng nhập   </h3>
                                 <div class="accInput">
-                                    <p>Username or Email Address *</p>
+                                    <p>Tên đăng nhập</p>
                                     <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
                                 </div>
                                 <div class="accInput">
-                                    <p>Password *</p>
+                                    <p>Mật khẩu</p>
                                     <input type="password" name="password" class="inputText" placeholder="Enter your password">
                                 </div>
-                                <div class="btn-group style-checkbox" data-toggle="buttons">
-                                    <label class="btn btn-success default ">
-                                        <input type="checkbox" checked="">
-                                        <span class="glyphicon glyphicon-ok"></span>
-                                    </label>
+{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
+{#                                    <label class="btn btn-success default ">#}
+{#                                        <input type="checkbox" checked="">#}
+{#                                        <span class="glyphicon glyphicon-ok"></span>#}
+{#                                    </label>#}
 {#                                </div><span style="position: relative;top: 1px;margin-left: 5px;">Remember me</span>#}
 {#                                <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
-
+{##}
 {#                                </a>#}
 {#                                <div class="accInput" style="margin-top: 50px">#}
 {#                                    <p> Or Login with Social Network</p>#}
@@ -51,31 +51,31 @@
 {##}
 {#                                    </div>#}
 {#                                </div>#}
-                                </div>
+{#                                </div>#}
                                     <div  style="    margin-top: 25px;" >
-                                        <div><input class="btn-arrival" type="submit" value="LOG IN"></div>
+                                        <div><input class="btn-arrival" type="submit" value="ĐĂNG NHẬP"></div>
                                     </div>
                                 </div>
                             </form>
                             <form action="{% url 'user:register' %}" method="post">
                                 {% csrf_token%}
                                 <div class="col-md-6">
-                                    <h3>Register</h3>
+                                    <h3>Đăng kí</h3>
                                     <div class="accInput">
                                         <div class="accInput">
-                                        <p>Username or Email Address *</p>
+                                        <p>Tên tài khoản</p>
                                         <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
                                     </div>
                                     <div class="accInput">
-                                        <p>Email Address *</p>
+                                        <p>Email</p>
                                         <input type="email" name="email" class="inputText" placeholder="Enter your email address">
                                     </div>
                                     <div class="accInput">
-                                        <p>Password *</p>
+                                        <p>Mật khẩu </p>
                                         <input type="password" name="password1" class="inputText" placeholder="Enter your password">
                                     </div>
                                     <div class="accInput">
-                                        <p>Password 2</p>
+                                        <p>Nhập lại mật khẩu</p>
                                         <input type="password" name="password2" class="inputText" placeholder="Enter your password">
                                     </div>
 {#                                    <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
@@ -85,7 +85,7 @@
 {#                                    </a>#}
                         </div>
                             <div  style="    margin-top: 25px;" >
-                                <div><input class="btn-arrival" type="submit" value="REGISTER"></div>
+                                <div><input class="btn-arrival" type="submit" value="ĐĂNG KÍ"></div>
                             </div>
                         </div>
                     </form>

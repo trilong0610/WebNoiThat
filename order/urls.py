@@ -9,4 +9,5 @@ urlpatterns = [
     path('', views.recentOrder.as_view(), name="recentOrder"),
     path('addOrder/<int:cart_id>', views.addOrder, name="addOrder"),
     path('editOrder/', views.editOrder, name="editOrder"),
+    path('outStock/', views.outStock, name="outStock"),
 ]
