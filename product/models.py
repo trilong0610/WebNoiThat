@@ -50,7 +50,7 @@ class SizeProduct(models.Model):
     horizontal = models.IntegerField(default=0)
     vertical = models.IntegerField(default=0)
     amount = models.IntegerField(default=0)
-
+    active = models.BooleanField(default=True)
     def __str__(self):
         return self.product.title
 

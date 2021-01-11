@@ -89,9 +89,9 @@
                         <div class="box-formTax-content">
                         {% for cartitem in cart.cartitem_set.all %}
                             <div class="row">
-                                <div class="col-md-5">{{ cartitem.product.title }}</div>
-                                <div class="col-md-3" style="text-align: center;">x{{ cartitem.quantity }}</div>
-                                <div class="col-md-4" style="text-align: right;">{{ cartitem.get_total|intcomma }}</div>
+                                <div class="col-md-4" style="text-align: center"><img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive"></div>
+                                <div class="col-md-4" style="text-align: center;padding-top: 30px;">x{{ cartitem.quantity }}</div>
+                                <div class="col-md-4" style="text-align: right;padding-top: 30px;">{{ cartitem.get_total|intcomma }}</div>
                             </div>
                         {% endfor %}
 {#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>#}

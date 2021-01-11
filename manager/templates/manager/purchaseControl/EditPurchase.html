@@ -14,8 +14,8 @@
     {% csrf_token %}
         <div class="accInput">
             <p>Sản phẩm:</p>
-                <input type="hidden" value="{{ product.id }}" name="product_id">
-                <h5>{{ product.title }}</h5>
+                <input type="hidden" value="{{ sizeproduct.id }}" name="sizeProduct_id">
+                <h4>{{ sizeproduct.product.title }}</h4>
         </div>
         <div class="accInput">
             <p>Nhà cung cấp:</p>

@@ -1,8 +1,9 @@
 from django.contrib import messages, auth
+from django.contrib.postgres import serializers
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
-from product.models import Category,Product
+from product.models import Category, Product, SizeProduct
 from product.forms import ProductForm,CategoryForm
 from django.http import HttpResponse
 from cart.models import Cart, ShippingAddress, CartItem
@@ -191,30 +192,62 @@ def logout(request):
     return redirect("/")
 
 # Them item vao gio hang
+def add_Item_To_Cart(request):
+    response_data = {}
+    if request.is_ajax and request.method == "POST":
+        # Lay data duojc post den
+        p_quantityProduct = request.POST['quantity_product']
+        p_sizeProduct = request.POST['size']
+        sizeProduct = SizeProduct.objects.get(id = p_sizeProduct)
+
+        customer = request.user
+        # data tra ve de
+        # tao gio hang moi neu chua co
+        # hoac get gio hang chua thanh toan(complete = False)
+        cart, created = Cart.objects.get_or_create(user=customer, complete=False)
+        cartItem, created = CartItem.objects.get_or_create(cart=cart, sizeProduct=sizeProduct)
+        # Ktra so luong ton kho cua kich co do co lon hon tong sl trong gio hang + dang them hay khong
+        if sizeProduct.amount >= cartItem.quantity + int(p_quantityProduct):
+            cartItem.quantity = cartItem.quantity + int(p_quantityProduct)
+        else:
+            context = {
+                'action': False,
+                'nameProduct': sizeProduct.product.title,
+            }
+            return JsonResponse({"instance": "OutStock"}, status=400)
+
+
+        cartItem.save()
+        if cartItem.quantity <= 0:
+            cartItem.delete()
+
+        context = {
+            'action': True,
+            'nameProduct': sizeProduct.product.title,
+        }
+        return JsonResponse({"instance": "Success"}, status=200)
+
 def addItemToCart(request):
     data = json.loads(request.body)
-    productID = data['productID']
+    sizeProductID = data['sizeProductID']
     quantity = data['quantity']
-    print('quantity:', quantity)
-    print('productId:', productID)
+
     customer = request.user
-    product = Product.objects.get(id = productID)
-    cart, created = Cart.objects.get_or_create(user = customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
-    if product.amount >= cartItem.quantity + int(quantity):
-        cartItem.quantity =  cartItem.quantity +  int(quantity)
+    sizeProduct = SizeProduct.objects.get(id=sizeProductID)
+    cart, created = Cart.objects.get_or_create(user=customer, complete=False)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, sizeProduct=sizeProduct)
+    if sizeProduct.amount >= cartItem.quantity + int(quantity):
+        cartItem.quantity = cartItem.quantity + int(quantity)
     else:
         context = {
             'outStock': True,
-            'amount_product': product.amount,
+            'amount_product': sizeProduct.amount,
         }
         return JsonResponse(context, safe=False)
     cartItem.save()
     if cartItem.quantity <= 0:
         cartItem.delete()
     return JsonResponse('Item was added', safe=False)
-
-
 
 def deleteProductCart(request):
     data = json.loads(request.body)
@@ -333,3 +366,7 @@ def detailProduct(request, product_id):
                'product': detail
                }
     return render(request, 'store/SingleProduct.html', context)
+
+def get_absolute_url_product(self):
+    from django.urls import reverse
+    return reverse('store:detailProduct', args=[str(self.id)])

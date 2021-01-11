@@ -46,20 +46,19 @@ console.log("Loadded add-item-carts")
 var addToCartBtns = document.getElementsByClassName('add-item-carts')
 for (i = 0; i < addToCartBtns.length; i++){
     addToCartBtns[i].addEventListener('click', function (){
-        var sizeProduct = document.getElementById("size_product").value;
-        var productID = this.dataset.product
-        var quantity = document.getElementById("quantity_product").value;
-        console.log('productID:', productID, 'quantity', quantity)
+        var quantity = document.getElementById("id_quantity_single_product").value;
+        var sizeProductID = document.getElementById("id_size_single_product").value;
+        console.log('sizeProductID:', sizeProductID, 'quantity', quantity)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            addItemToCart(productID, quantity)
+            addItemToCart(sizeProductID, quantity)
         }
     })
 }
-function addItemToCart(productID, quantity){
+function addItemToCart(sizeProductID, quantity){
     console.log('user is authenticated, sending data..')
 
     var url = '/addItemToCart/'
@@ -70,7 +69,7 @@ function addItemToCart(productID, quantity){
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
         },
-        body:JSON.stringify({'productID': productID, 'quantity':quantity})
+        body:JSON.stringify({'sizeProductID': sizeProductID, 'quantity':quantity})
     })
     .then((response) => {
         return response.json();

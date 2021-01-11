@@ -7,14 +7,19 @@ app_name = 'store'
 urlpatterns = [
     # trang chu
     path('', views.home, name="home"),
+
     # gio hang
     path('productGrid/', views.view_product, name = 'productGrid'),
+
     # Tang giam so luong item trong gio hang 1 don vi
     path('updateItem/', views.updateItem, name="updateItem"),
+
     # Tang giam so luong item trong gio hang theo gia tri nhap vao input
+    path('add_Item_To_Cart/', views.add_Item_To_Cart, name="add_Item_To_Cart"),
     path('addItemToCart/', views.addItemToCart, name="addItemToCart"),
     path('deleteProductCart/', views.deleteProductCart, name="deleteProductCart"),
     path('contact/', views.contact, name="contact"),
+
     # xem san pham trong danh muc
     path('category/<int:category_id>/', views.view_category.as_view(), name = "category"),
     path('hotProduct/', views.hot_product, name="hotProduct"),

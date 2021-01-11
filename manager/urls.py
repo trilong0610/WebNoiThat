@@ -20,10 +20,11 @@ urlpatterns = [
     path('updateShipping/', views.updateShipping, name = 'update_shipping'),
 
     #them, xoa, sua sp
-    path('productControl/', views.dashboard, name="product_control"),
+    path('productControl/', views.productControl, name="product_control"),
     path('editProduct/<int:product_id>', views.editProduct.as_view(), name = 'edit_product'),
     path('test/', views.test, name="test"),
     path('register/', views.register, name="register"),
+    path('sizeProductControl/<int:product_id>', views.sizeProductControl.as_view(), name="sizeProductControl"),
 
     #them, xoa, sua user
     path('register/', views.register, name="register"),
@@ -34,6 +35,7 @@ urlpatterns = [
     path('purchaseControl/', views.viewPurchaseProduct, name="viewPurchase"),
     path('deletePurchase/<int:purchase_id>', views.destroyPurchase, name = 'delete_purchase'),
     path('editPurchase/<int:purchase_id>', views.editPurchase.as_view(), name="editPurchase"),
+    path('ajax/load_sizeProduct/', views.load_sizeProduct, name='ajax_load_wards'),
 
     # Order
     path('orderControl/', views.orderControl.as_view(), name="orderControl"),

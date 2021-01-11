@@ -14,7 +14,7 @@
 {#    <section class="myAcc myAcc2">#}
         <div class="container">
 {#        {% if perms.product.add_product %}#}
-            <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>
+            <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm kích thước</button></a>
 {#        {% endif %}#}
             <div class="row">
 {#            Tieue de#}
@@ -25,17 +25,11 @@
                         <div class="col-md-3" style="text-align: center;padding-top: 58px;">
                             <h4>Tên sản phẩm</h4>
                         </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                            <h4>Giá</h4>
+                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                            <h4>Kích thước</h4>
                         </div>
                         <div class="col-md-1" style="text-align: center;padding-top: 58px;">
                             <h4>Số lượng trong kho</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Đã bán</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Danh mục</h4>
                         </div>
                         <div class="col-md-1" style="text-align: center;padding-top: 58px;">
                             <h4>Trạng thái</h4>
@@ -47,45 +41,46 @@
                 </div>
 {#            Danh sach san pham#}
                 <div class="col-md-10">
-                    {% for product in products %}
+                    {% for sizeProduct in sizeProduct %}
                         <div class="row">
                         <div class="col-md-2">
-                            <img src="{{ product.image.url }}" alt="product" class="img-responsive">
+                            <img src="{{ sizeProduct.product.image.url }}" alt="product" class="img-responsive">
                         </div>
                         <div class="col-md-3" style="text-align: center;padding-top: 58px;">
-                            {{ product.title }}
+                            {{ sizeProduct.product.title }}
                         </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                            {{ product.price|intcomma }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.amount }}
+                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                            {{ sizeProduct.horizontal }} X {{ sizeProduct.vertical }}
                         </div>
                         <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.amount_sell }}
+                            {{ sizeProduct.amount }}
                         </div>
                         <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.category }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {% if product.active %}
-                                Đang bán
+                            {% if sizeProduct.active %}
+                               Đang Bán
                             {% else %}
                                 Ngừng bán
                             {% endif %}
                         </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
+                        <form action="{% url 'manager:sizeProductControl' sizeProduct.id %}" method="post">
+                        {% csrf_token %}
+                           <div class="col-md-1" style="text-align: right;padding-top: 58px;">
                             <i >
                                 {% if perms.product.change_product %}
-                                <a href="{% url 'manager:sizeProductControl' product.id %}"><button type="button" class="btn btn-warning">Kích thước</button></a>
-                                {% endif %}
-                            </i>
-                            <i >
-                                {% if perms.product.change_product %}
-                                <a href="{% url 'manager:edit_product' product.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+
+                                    {% if sizeProduct.active %}
+                                        <a href=""><button type="submit" class="btn btn-warning">Ngừng bán</button></a>
+                                        <input name="active_size" value="False" hidden>
+                                    {% else %}
+                                        <a href=""><button type="submit" class="btn btn-warning">Tiếp tục bán</button></a>
+                                        <input name="active_size" value="True" hidden>
+                                    {% endif %}
+
                                 {% endif %}
                             </i>
                         </div>
+                        </form>
+
                     </div>
                     <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
                     {% endfor %}

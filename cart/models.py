@@ -1,5 +1,5 @@
 from django.db import models
-from product.models import Product
+from product.models import Product, SizeProduct
 from django.contrib.auth.models import User
 from os import path
 # Create your models here.
@@ -30,18 +30,11 @@ class Cart(models.Model):
         total = sum([item.quantity for item in cartitem])
         return total
 
-    @property
-    def shipping(self):
-        shipping = False
-        cartitem = self.cartitem_set.all()
-        for i in cartitem:
-            if i.product.digital == False:
-                shipping = True
-        return shipping
+
 
 
 class CartItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.SET_NULL,blank=True, null=True)
+    sizeProduct = models.ForeignKey(SizeProduct, on_delete=models.SET_NULL,blank=True, null=True)
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL,blank=True, null=True)
     quantity = models.IntegerField(default=0, null=True, blank=True)
     date_add = models.DateTimeField(auto_now_add=True)
@@ -51,7 +44,7 @@ class CartItem(models.Model):
         return str(self.cart.id)
     @property
     def get_total(self):
-        total = self.product.price * self.quantity
+        total = self.sizeProduct.product.price * self.quantity
         return total
 
 class ShippingAddress(models.Model):
@@ -59,4 +52,4 @@ class ShippingAddress(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return self.address
+        return self.user
