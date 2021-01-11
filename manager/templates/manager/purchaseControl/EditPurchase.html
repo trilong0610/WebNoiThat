@@ -19,11 +19,15 @@
         </div>
         <div class="accInput">
             <p>Nhà cung cấp:</p>
-            <select name="supplier_id">
+            <select class="form-select" name="supplier_id">
               {% for supplier in  supplier %}
                 <option value="{{ supplier.id }}">{{ supplier.name }}</option>
               {% endfor %}
             </select>
+        </div>
+        <div class="accInput">
+            <p>Kích thước:</p>
+            <h5>{{ sizeproduct.horizontal }}x{{ sizeproduct.vertical }}</h5>
         </div>
         <div class="accInput">
             <p>Số lượng:</p>

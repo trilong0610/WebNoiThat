@@ -3,19 +3,19 @@ console.log("Loadded update-carts")
 var updateBtns = document.getElementsByClassName('update-carts')
 for (i = 0; i < updateBtns.length; i++){
     updateBtns[i].addEventListener('click', function (){
-        var productID = this.dataset.product
+        var sizeProductID = this.dataset.sizeproduct
         var action = this.dataset.action
-        console.log('productID:', productID, 'Action:', action)
+        console.log('sizeProductID:', sizeProductID, 'Action:', action)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            updateUserOrder(productID, action)
+            updateUserOrder(sizeProductID, action)
         }
     })
 }
-function updateUserOrder(productID, action){
+function updateUserOrder(sizeProductID, action){
     console.log('user is authenticated, sending data..')
 
     var url = '/updateItem/'
@@ -26,7 +26,7 @@ function updateUserOrder(productID, action){
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
         },
-        body:JSON.stringify({'productID': productID, 'action':action})
+        body:JSON.stringify({'sizeProductID': sizeProductID, 'action':action})
     })
     .then((response) => {
         return response.json();
@@ -138,20 +138,20 @@ console.log("Loadded update-item-carts")
 var updateToCartBtns = document.getElementsByClassName('update-item-carts')
 for (i = 0; i < updateToCartBtns.length; i++){
     updateToCartBtns[i].addEventListener('keyup', function (){
-        var productID = this.dataset.product
-        var quantity = document.getElementById("quantity_product_cart_"+productID).value;
-        console.log('productID:', productID, 'quantity', quantity)
+        var sizeProductID = this.dataset.sizeproduct
+        var quantity = document.getElementById("quantity_product_cart_"+sizeProductID).value;
+        console.log('productID:', sizeProductID, 'quantity', quantity)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            updateItemToCart(productID, quantity)
+            updateItemToCart(sizeProductID, quantity)
 
         }
     })
 }
-function updateItemToCart(productID, quantity){
+function updateItemToCart(sizeProductID, quantity){
 console.log('user is authenticated, sending data..')
 
 var url = '/cart/editItemQuantity/'
@@ -162,7 +162,7 @@ fetch(url,{
         'Content-Type':'application/json',
         'X-CSRFToken':csrftoken,
     },
-    body:JSON.stringify({'productID': productID, 'quantity':quantity})
+    body:JSON.stringify({'sizeProductID': sizeProductID, 'quantity':quantity})
 })
 .then((response) => {
     return response.json();

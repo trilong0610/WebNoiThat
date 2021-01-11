@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.shortcuts import render
 from cart.models import Cart, CartItem
-from product.models import Category, Product
+from product.models import Category, Product, SizeProduct
 
 
 def view_cart(request):
@@ -35,19 +35,19 @@ def shipping_status(request):
 # sua so luong theo input
 def editItemQuantity(request):
     data = json.loads(request.body)
-    productID = data['productID']
+    sizeProductID = data['sizeProductID']
     quantity = data['quantity']
 
     customer = request.user
-    product = Product.objects.get(id=productID)
-    if product.amount < 0 or product.amount < int(quantity):
+    sizeProduct = SizeProduct.objects.get(id=sizeProductID)
+    if sizeProduct.amount < 0 or sizeProduct.amount < int(quantity):
         context = {
             'outStock': True,
-            'amount_product': product.amount,
+            'amount_product': sizeProduct.amount,
         }
         return JsonResponse(context, safe=False)
     cart, created = Cart.objects.get_or_create(user=customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, sizeProduct=sizeProduct)
 
     cartItem.quantity = int(quantity)
     cartItem.save()

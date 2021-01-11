@@ -29,31 +29,31 @@
                                 <img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive">
                             </div>
                             {#                            sizeProduct   #}
-                            <div class="col-md-1" style="padding-top: 48px;">
+                            <div class="col-md-2" style="text-align: center;padding-top: 48px;">
                                 {{ cartitem.sizeProduct.horizontal }}x{{ cartitem.sizeProduct.vertical }}
                             </div>
                             {#                            product price   #}
-                            <div class="col-md-3" style="text-align: center;padding-top: 48px;">
+                            <div class="col-md-2" style="text-align: center;padding-top: 48px;">
                                 {{ cartitem.sizeProduct.product.price|intcomma }}
                             </div>
 
                             {#                            input quantity   #}
-                            <div class="col-md-2" style="text-align: center;padding-top: 25px;">
+                            <div class="col-md-3" style="text-align: center;padding-top: 25px;">
                                 <div class="cart-product-two shopping-cart-quantity cartConver">
                                     <div class="pd-c-quantity quantity add-card add-card-product">
 
-                                        <input data-product="{{ cartitem.sizeProduct.product.id }}" class="update-item-carts" id="quantity_product_cart_{{ cartitem.product.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+                                        <input data-sizeproduct="{{ cartitem.sizeProduct.id }}" class="update-item-carts" id="quantity_product_cart_{{ cartitem.sizeProduct.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
                                         <div class="quantity-button quantity-down " >
-                                            <span><i class="la la-minus update-carts" data-product="{{ cartitem.sizeProduct.product.id }}" data-action="remove"></i></span>
+                                            <span><i class="la la-minus update-carts" data-sizeproduct="{{ cartitem.sizeProduct.id }}" data-action="remove"></i></span>
                                         </div>
                                         <div class="quantity-button quantity-up">
-                                            <span><i class="la la-plus update-carts" data-product="{{ cartitem.sizeProduct.product.id }}" data-action="add"></i></span>
+                                            <span><i class="la la-plus update-carts" data-sizeproduct="{{ cartitem.sizeProduct.id }}" data-action="add"></i></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             {#                            product total   #}
-                            <div class="col-md-3" style="text-align: right;padding-top: 48px;"> {{ cartitem.get_total|intcomma }}</div>
+                            <div class="col-md-2" style="text-align: right;padding-top: 48px;"> {{ cartitem.get_total|intcomma }}</div>
                         </div>
                     <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
                     {% endfor %}

@@ -10,7 +10,7 @@ from cart.models import Cart,CartItem
 from order.models import Order
 from datetime import datetime
 
-from product.models import Category, Product
+from product.models import Category, Product, SizeProduct
 
 
 class recentOrder(View):
@@ -61,7 +61,7 @@ def addOrder(request, cart_id):
         order.date_ordered = datetime.now()
         order.transaction_id = cart
         for cartItem in order.cart.cartitem_set.all():
-            if cartItem.product.amount <= 0:
+            if cartItem.sizeProduct.product.amount <= 0:
                 return redirect("order:outStock")
         order.save()
         updateCart = Cart.objects.get(id = cart)
@@ -69,9 +69,15 @@ def addOrder(request, cart_id):
         # cap nhat so luong da ban va ton kho cua san pham
         cart = Cart.objects.get(id = cart_id)
         for item in cart.cartitem_set.all():
-            product = Product.objects.get(id = item.product.id)
+            sizeProduct = SizeProduct.objects.get(id=item.sizeProduct.id)
+            product = Product.objects.get(id = item.sizeProduct.product.id)
+            # Giam so cua sizeProduct
+            sizeProduct.amount = sizeProduct.amount - item.quantity
+            # Giam so cua Product
             product.amount = product.amount - item.quantity
             product.amount_sell = product.amount_sell + item.quantity
+
+            sizeProduct.save()
             product.save()
 
         updateCart.save()

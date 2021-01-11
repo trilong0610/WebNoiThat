@@ -265,22 +265,21 @@ def deleteProductCart(request):
 
 def updateItem(request):
     data = json.loads(request.body)
-    productID = data['productID']
+    sizeProductID = data['sizeProductID']
     action = data['action']
-    print('Action:', action)
-    print('productId:', productID)
+
     customer = request.user
-    product = Product.objects.get(id = productID)
+    sizeProduct = SizeProduct.objects.get(id = sizeProductID)
 
     cart, created = Cart.objects.get_or_create(user = customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, sizeProduct=sizeProduct)
     if action == 'add':
-        if product.amount > cartItem.quantity:
+        if sizeProduct.amount > cartItem.quantity:
             cartItem.quantity = (cartItem.quantity + 1)
         else:
             context = {
                 'outStock': True,
-                'amount_product': product.amount,
+                'amount_product': sizeProduct.amount,
             }
             return JsonResponse(context, safe=False)
 

@@ -40,36 +40,31 @@
                                     {% for cartitem in order.cart.cartitem_set.all %}
                                         <div class="row">
                                         <div class="col-md-2">
-                                            <img src="{{ cartitem.product.image.url }}" alt="product"
+                                            <img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product"
                                                  class="product-img-first img-responsive">
                                         </div>
-                                        <div class="col-md-2" style="text-align: center;padding-top: 58px;">
+                                        <div class="col-md-2" style="text-align: center;padding-top: 30px;">
 
                                         </div>
-                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
-                                            {{ cartitem.product.price|intcomma }}
+                                        <div class="col-md-2" style="padding-top: 30px;">
+                                            {{ cartitem.sizeProduct.horizontal }}x{{ cartitem.sizeProduct.vertical }}
                                         </div>
-                                        <div class="col-md-2" style="padding-top: 50px;">
-                                            <div class="sidebar-filter-color">
-                                                <ul class="clearfix">
-{#                                                    <li class="tooltip"#}
-{#                                                        style="background: #f7bb66;margin-bottom: 0px;margin-right: 0px;float: right;">#}
-{#                                                        <span class="tooltiptext">Tooltip text</span>#}
-{#                                                    </li>#}
-                                                </ul>
+
+                                        <div class="col-md-2" style="text-align: right;padding-top: 30px;">
+                                            {{ cartitem.sizeProduct.product.price|intcomma }}
+                                        </div>
+                                        <div class="col-md-2" style="text-align: center;padding-top: 30px;">
+                                           <div style="border-bottom: 1px solid rgb(193, 155, 118);
+                                width: 50px;
+                                font-weight: bold;
+                                text-align: center;
+                                float: right;
+                                padding-bottom: 10px;">
+                                                x{{ cartitem.quantity }}
                                             </div>
                                         </div>
-                                        <div class="col-md-2" style="text-align: right;padding-top: 50px;">
-                                            <div style="border-bottom: 1px solid rgb(193, 155, 118);
-                                            width: 50px;
-                                            font-weight: bold;
-                                            text-align: center;
-                                            float: right;
-                                            padding-bottom: 10px;">
-                                                {{ cartitem.quantity }}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2" style="text-align: right;padding-top: 58px;"> {{ cartitem.get_total|intcomma }}</div>
+
+                                        <div class="col-md-2" style="text-align: right;padding-top: 30px;"> {{ cartitem.get_total|intcomma }}</div>
                                     </div>
                                         <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
                                     {% endfor %}

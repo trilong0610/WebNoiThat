@@ -7,12 +7,13 @@ from django.contrib.auth import decorators
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 
 from cart.models import Cart
 from order.models import Order
 from product.models import Product, Category, SizeProduct
-from product.forms import ProductForm,CategoryForm
+from product.forms import ProductForm, CategoryForm, SizeProductForm
 from purchase.models import PurchaseProduct
 from supplier.models import Supplier
 from supplier.forms import  SupplierForm
@@ -222,8 +223,10 @@ class editProduct(View):
 class sizeProductControl(View):
     def get(self, request, product_id):
         sizeProduct = SizeProduct.objects.filter(product_id=product_id)
+        product = Product.objects.get(id = product_id)
         context = {
             'sizeProduct':sizeProduct,
+            'product': product,
         }
         return render(request, 'manager/productControl/SizeProductControl.html', context)
 
@@ -241,8 +244,25 @@ class addSizeProduct(View):
         }
         return render(request,  'manager/productControl/AddSizeProduct.html', context)
     def post(self, request, product_id):
-        product = Product.objects.get()
+        horizontal = request.POST['horizontal']
+        vertical = request.POST['vertical']
+        sizeProduct = SizeProduct.objects.create(product_id=product_id, horizontal=horizontal, vertical=vertical)
+        sizeProduct.save()
+        product = Product.objects.get(id=product_id)
+        # Neu san pham chua co size thi them size roi bat active
+        if product.sizeproduct_set.count() <= 1:
+            product.active = True
+            product.save()
+        return redirect(reverse('manager:sizeProductControl', args=[str(product.id)]))
 
+def validate_size(request):
+    horizontal = request.GET.get('horizontal', None)
+    vertical = request.GET.get('vertical', None)
+    product_id =  request.GET.get('product_id', None)
+    data = {
+        'is_taken': SizeProduct.objects.filter(horizontal =  horizontal, vertical = vertical, product_id=product_id).exists()
+    }
+    return JsonResponse(data)
 # --------------------Purchase--------------------------
 # Nhap San Pham Tu NCC
 class purchaseProduct(LoginRequiredMixin,View):
@@ -298,7 +318,9 @@ class editPurchase(View):
         purchaseUpdate.sizeProduct = sizeProduct
         purchaseUpdate.amount = request.POST["amount"]
 
+        # Hoan thanh thi cong sl trong don vao sl san pham ton kho
         if purchaseUpdate.complete != True:
+
             purchaseUpdate.complete = request.POST["complete"]
 
             sizeProduct.amount = sizeProduct.amount + int(purchaseUpdate.amount)
@@ -307,6 +329,7 @@ class editPurchase(View):
             product.amount = product.amount + int(purchaseUpdate.amount)
             product.save()
             sizeProduct.save()
+
         purchaseUpdate.save()
         return redirect('manager:viewPurchase')
 

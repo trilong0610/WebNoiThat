@@ -25,6 +25,8 @@ urlpatterns = [
     path('test/', views.test, name="test"),
     path('register/', views.register, name="register"),
     path('sizeProductControl/<int:product_id>', views.sizeProductControl.as_view(), name="sizeProductControl"),
+    path('addSizeProduct/<int:product_id>', views.addSizeProduct.as_view(), name="addSizeProduct"),
+    path('ajax/validate_size', views.validate_size, name="validate_size"),
 
     #them, xoa, sua user
     path('register/', views.register, name="register"),
