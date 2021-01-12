@@ -36,20 +36,21 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
+class shippingEdit(models.Model):
+    STATUS =(
+        ('1', 'Đã tiếp nhận'),
+        ('2', 'Đang chuẩn bị'),
+        ('3', 'Đang giao hàng'),
+        ('4', 'Đã giao hàng'),
+        ('5', 'Đã hủy'),
+        ('6', 'Tạm ngưng'),
+    )
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
+    status = models.CharField(max_length=100, choices=STATUS)
+    datetime_change = models.DateTimeField()
+    def __str__(self):
+        return str(self.id)
+    
 
-    #
-    # @property
-    # def get_cart_items(self):
-    #     cartitem = self.cartitem_set.all()
-    #     total = sum([item.quantity for item in cartitem])
-    #     return total
-    #
-    # @property
-    # def shipping(self):
-    #     shipping = False
-    #     cartitem = self.cartitem_set.all()
-    #     for i in cartitem:
-    #         if i.product.digital == False:
-    #             shipping = True
-    #     return shipping
 

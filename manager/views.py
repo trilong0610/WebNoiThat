@@ -11,7 +11,7 @@ from django.urls import reverse
 from django.views import View
 
 from cart.models import Cart
-from order.models import Order
+from order.models import Order, shippingEdit
 from product.models import Product, Category, SizeProduct
 from product.forms import ProductForm, CategoryForm, SizeProductForm
 from purchase.models import PurchaseProduct
@@ -171,6 +171,13 @@ class editOrder(View):
         context = {'cart_id':order.cart.id}
         return redirect('manager:orderControl')
 
+# --------------------Shipping Edit--------------------------
+class shippingEdit(View):
+     def get(self, request, order_id):
+        order = Order.object.get(id = order_id)
+        shipping = shippingEdit.objects.filter().order_by('-id')
+        context ={'shipping':shipping}
+        return render(request, 'manager/orderControl/ShippingControl.html', context)
 
 # --------------------Product--------------------------
 class add_product(LoginRequiredMixin,View):

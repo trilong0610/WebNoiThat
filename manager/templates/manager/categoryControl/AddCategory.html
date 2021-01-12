@@ -9,14 +9,15 @@
         </div>
 {% endblock banner %}
 {% block content %}
-    <form action="{% url 'manager:addCategory' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-    {% csrf_token %}
-        <h4>Tên danh mục:</h4>
-        <div class="accInput"><p>{{ form.title }}</p></div>
-        <h4>Chi tiết:</h4>
-        <div class="accInput"><p>{{ form.description }}</p></div>
-    <div><input class="btn-arrival" type="submit" value="Thêm danh mục"></div>
-    </form>
-
+    <div class="border borders-dark">
+        <h1 class="text-center mt-5">THHÊM DANH MỤC</h1>
+        <form action="{% url 'manager:addCategory' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+            {% csrf_token %}
+                <h4 class="ml-5">Tên danh mục:</h4>
+                <div class="accInput ml-5"><p>{{ form.title }}</p></div>
+                <h4 class="ml-5">Chi tiết:</h4>
+                <div class="accInput ml-5"><p>{{ form.description }}</p></div>
+            <div><input class="btn-arrival ml-5 mb-5" type="submit" value="Thêm danh mục"></div>
+            </form>
+    </div>
 {% endblock content %}
-{#

@@ -41,6 +41,7 @@ urlpatterns = [
 
     # Order
     path('orderControl/', views.orderControl.as_view(), name="orderControl"),
+    path('shippingControl/', views.shipping_edit.as_view(), name="shippingControl"),
     path('editOrder/<int:order_id>', views.editOrder.as_view(), name="editOrder"),
 
 #     danh mucj

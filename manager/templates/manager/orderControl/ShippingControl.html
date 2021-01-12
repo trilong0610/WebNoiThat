@@ -44,19 +44,16 @@
     </form>
     <div class="lineAbout" style="width: 100%;height: 0px;margin-top: 20px;"></div>
     <div class="panel-group" id="faqAccordion">
-        {% for order in order %}
+        {% for shippingEdit in shipping %}
         <table class="table table-bordered table-striped table-light mt-5">
             <thead>
                 <tr>
-                    <th scope="col">ID: {{ order.id }}</th>
-                    <th scope="col">Người tiếp nhận: {{ order.user }}</th>
-                    <th scope="col">Ngày nhận: {{ order.date_ordered|date:'H:i d-m-Y' }}</th>
-                    <th scope="col">{{ order.get_status_display }}</th>
-                    <th scope="col">{{ order.cart.get_cart_total|intcomma }} VND</th>
+                    <th scope="col">ID: {{ shippingEdit.user }}</th>
+                    <th scope="col">{{ shippingEdit.order }}</th>
+                    <th scope="col">{{ shippingEdit.status }}</th>
                     <th scope="col">
                         {% if perms.order.change_order and order.status != 5 %}
-                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary">Quản lý giao hàng</button></a>
-                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary mt-2">Sửa</button></a>
+                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary">Tình trạng</button></a>
                         {% endif %}
                     </th>
                 </tr>

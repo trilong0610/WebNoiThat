@@ -257,6 +257,16 @@
 
                         </li>
                     {% endif %}
+                    {% if perms.order.view_shippingcontrol %}
+                        <li class="clearfix active" style=" border-top: 1px solid #d9d9d9;">
+
+                                <a href="{% url 'manager:shippingControl' %}">
+                                    <p>Giao hàng</p>
+                                    <i class="la la-user"></i>
+                                </a>
+
+                        </li>
+                    {% endif %}
                     </ul>
 {#                {% endblock left-navbar %}#}
 

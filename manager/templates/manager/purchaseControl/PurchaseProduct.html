@@ -13,19 +13,20 @@
    <div class="border border-dark">
     <form action="{% url 'manager:purchase_product' %}" method="post" id="purchaseForm">
         {% csrf_token %}
-            <div class="accInput">
+        <h1 class="text-center mt-5">TẠO ĐƠN NHẬP HÀNG</h1>
+            <div class="accInput ml-5">
                 <input  name="user" type="text" value="{{ user.id }}" hidden>
             </div>
-            <h4>Nhà cung cấp:</h4>
-            <div class="accInput">
+            <h4 class="ml-5">Nhà cung cấp:</h4>
+            <div class="accInput ml-5">
                 <select class="form-select" name="supplier">
                     {% for supplier in supplier %}
                         <option value="{{ supplier.id }}">{{ supplier.name }}</option>
                     {% endfor %}
                 </select>
             </div>
-            <h4>Tên sản phẩm:</h4>
-            <div class="accInput"><p>
+            <h4 class="ml-5">Tên sản phẩm:</h4>
+            <div class="accInput ml-5"><p>
                 <select class="form-select" name="product" id="pp_product_name">
                     <option value="">------------------</option>
                     {% for product in product %}
@@ -33,20 +34,20 @@
                     {% endfor %}
                 </select>
             </p></div>
-            <h4>Kích thước:</h4>
-            <div class="accInput"><p>
+            <h4 class="ml-5">Kích thước:</h4>
+            <div class="accInput ml-5"><p>
                 <select class="form-select" name="sizeProduct" id="id_sizeProduct_purchase">
                     <option value="">------------------</option>
                 </select>
             </p></div>
-            <h4>Số lượng:</h4>
-            <div class="accInput">
+            <h4 class="ml-5">Số lượng:</h4>
+            <div class="accInput ml-5">
                 <p><input  name="amount" id="id_amount" type="number"></p>
                 <p><label id="id_lbl"></label></p>
             </div>
     
             <div>
-                <button id="id_submit" class="btn-arrival">Đặt sản phẩm</button></div>
+                <button id="id_submit" class="btn-arrival ml-5 mb-5">Đặt sản phẩm</button></div>
         </form> 
    </div>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
