@@ -470,7 +470,8 @@ class revenue(View):
         order = Order.objects.all().order_by('-id')
         revune = 0
         for items in order:
-            revune = revune + items.cart.get_cart_total
+            if items.status == '4':
+                revune = revune + items.cart.get_cart_total
         context = {
             'order':order,
             'revune':revune
