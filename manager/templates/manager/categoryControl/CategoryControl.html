@@ -12,7 +12,7 @@
 {% endblock banner %}
 {% block content %}
 {#    <section class="myAcc myAcc2">#}
-        <div class="container">
+        <div class="container-fluid">
         {% if perms.product.add_category %}
             <a href={% url 'manager:addCategory' %}> <button type="button" class="btn btn-primary">Thêm danh mục</button></a>
         {% endif %}

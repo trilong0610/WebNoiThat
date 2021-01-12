@@ -36,7 +36,7 @@ class Order(models.Model):
     def __str__(self):
         return str(self.id)
 
-class shippingEdit(models.Model):
+class ShippingEdit(models.Model):
     STATUS =(
         ('1', 'Đã tiếp nhận'),
         ('2', 'Đang chuẩn bị'),

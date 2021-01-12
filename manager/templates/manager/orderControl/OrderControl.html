@@ -55,7 +55,7 @@
                     <th scope="col">{{ order.cart.get_cart_total|intcomma }} VND</th>
                     <th scope="col">
                         {% if perms.order.change_order and order.status != 5 %}
-                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary">Quản lý giao hàng</button></a>
+                            <a href="{% url 'manager:shippingControl' order.id %}"><button type="button" class="btn btn-primary">Quản lý giao hàng</button></a>
                             <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary mt-2">Sửa</button></a>
                         {% endif %}
                     </th>

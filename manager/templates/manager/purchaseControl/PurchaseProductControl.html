@@ -12,7 +12,7 @@
 {% endblock banner %}
 {% block content %}
 {#    <section class="myAcc myAcc2">#}
-        <div class="container">
+        <div class="container-fluid">
         {% if perms.purchase.add_purchaseproduct %}
             <a href={% url 'manager:purchase_product' %}> <button type="button" class="btn btn-primary">Tạo đơn nhập hàng</button></a>
         {% endif %}
@@ -39,7 +39,7 @@
                             <td scope="row">{{ purchase.user }}</td>
                             <td scope="row"><img src="{{ purchase.sizeProduct.product.image.url }}" alt="product" style="width:100px" class="img-responsive"></td>
                             <td scope="row">{{ purchase.sizeProduct }}</td>
-                            <td scope="row">{{ purchase.sizeProduct.vertical }}X{{ purchase.sizeProduct.horizontal }}}</td>
+                            <td scope="row">{{ purchase.sizeProduct.vertical }}X{{ purchase.sizeProduct.horizontal }}</td>
                             <td scope="row">{{ purchase.supplier }}</td>
                             <td scope="row">{{ purchase.amount }}</td>
                             <td scope="row">{{ purchase.time_create }}</td>
@@ -56,7 +56,7 @@
                                         <a href="{% url 'manager:editPurchase' purchase.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
                                     {% endif %}
                                     {% if perms.purchase.delete_purchaseproduct %}
-                                        <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-primary">Xóa</button></a>
+                                        <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-primary mt-2">Xóa</button></a>
                                     {% endif %}
                                 {% endif %}
                             </td>

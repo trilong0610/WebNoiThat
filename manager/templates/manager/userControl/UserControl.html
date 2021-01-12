@@ -10,11 +10,11 @@
         </div>
 {% endblock banner %}
 {% block content %}
-    <div class="container">
-        {% if perms.auth.add_user %}
+    <div class="container-fluid">
+                    {% if perms.auth.add_user %}
             <a href="{% url 'manager:register' %}"><button type="button" class="btn btn-primary">Thêm tài khoản</button></a>
         {% endif %}
-    {% if perms.auth.view_user %}
+        {% if perms.auth.view_user %}
         <div class="row mt-5">
             <table class="table table-bordered table-striped table-light">
                 <thead>
@@ -40,9 +40,9 @@
                             {% if perms.auth.change_user %}
                                 <a href="{% url 'manager:editUser' user.id %}"><button type="button" class="btn btn-warning ml-2">Sửa</button></a>
                             {% endif %}
-                        </td>                   
+                        </td>
                     </tr>
-                    {% endfor %} 
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
