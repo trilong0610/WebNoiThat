@@ -28,36 +28,12 @@
                             <th scope="col">Nhà cung cấp</th>
                             <th scope="col">Số lượng</th>
                             <th scope="col">Tình trạng</th>
+                            <th scope="col">Ngày nhập</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for purchase in purchase %}
-<<<<<<< Updated upstream
-                        <div class="row">
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>{{ purchase.id }}</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>{{ purchase.user }}</h4>
-                            </div>
-                            <div class="col-md-2">
-                                <img src="{{ purchase.sizeProduct.product.image.url }}" alt="product" class="img-responsive">
-                            </div>
-                            <div class="col-md-2" style="text-align: center;padding-top: 58px;">
-                                <h4>{{ purchase.sizeProduct }}</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>{{ purchase.sizeProduct.horizontal }}X{{ purchase.sizeProduct.vertical }}</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                                <h4>{{ purchase.supplier }}</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>{{ purchase.amount }}</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-=======
                         <tr>
                             <td scope="row">{{ purchase.id }}</td>
                             <td scope="row">{{ purchase.user }}</td>
@@ -66,8 +42,8 @@
                             <td scope="row">{{ purchase.sizeProduct.vertical }}X{{ purchase.sizeProduct.horizontal }}}</td>
                             <td scope="row">{{ purchase.supplier }}</td>
                             <td scope="row">{{ purchase.amount }}</td>
+                            <td scope="row">{{ purchase.time_create }}</td>
                             <td scope="row">
->>>>>>> Stashed changes
                                 {% if purchase.complete  %}
                                     <h4>Đã giao</h4>
                                 {% else %}

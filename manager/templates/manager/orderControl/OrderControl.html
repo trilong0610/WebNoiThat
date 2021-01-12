@@ -3,12 +3,12 @@
 {% load humanize %}
 {% block banner %}
     <div class="banner relative">
-            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
-            <div class="banner-arrival">
-                <h3>Quản lí đơn hàng</h3>
-                <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> orderControl</p>
-            </div>
+        <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
+        <div class="banner-arrival">
+            <h3>Quản lí đơn hàng</h3>
+            <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> orderControl</p>
         </div>
+    </div>
 {% endblock banner %}
 {% block content %}
 <div class="col-md-14">
@@ -44,8 +44,8 @@
     </form>
     <div class="lineAbout" style="width: 100%;height: 0px;margin-top: 20px;"></div>
     <div class="panel-group" id="faqAccordion">
-        <table class="table table=bordered table-striped table-light mt-5">
-            {% for order in order %}
+        {% for order in order %}
+        <table class="table table-bordered table-striped table-light mt-5">
             <thead>
                 <tr>
                     <th scope="col">ID: {{ order.id }}</th>
@@ -76,8 +76,8 @@
                 </tr>
                 {% endfor %}
             </tbody>
-            {% endfor %}
         </table>
+        {% endfor %}
  <script>
     $(function () {
       $("#datepicker").datepicker();
