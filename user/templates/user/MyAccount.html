@@ -1,96 +1,79 @@
 {% extends 'store/base_simple.html' %}
 {% load static %}
-{% block banner %}
-    <div class="banner relative">
-            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
-            <div class="banner-arrival">
-                <h3>Đăng nhập/Đăng kí</h3>
-                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Account</p>
+<div class="container">
+    {% block banner %}
+        <div id="carouselExampleIndicators" class="container-fluid carousel slide mt-1" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="{% static 'images/bia1.jpg' %}" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{% static 'images/bia2.jpg' %}" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="{% static 'images/bia3.jpg' %}" alt="Third slide">
+                </div>
             </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
-{% endblock banner %}
-{% block content %}
-    <section class="myAcc">
-                <div class="container">
-                    <div style="  width: calc(100% - 200px);margin: 0 auto">
-
-
-                        <div class="row">
-                            <form action="{% url 'user:login' %}" method="post">
-                                {% csrf_token%}
-
-                                <div class="col-md-6">
-                                    <h3>Đăng nhập   </h3>
-                                <div class="accInput">
-                                    <p>Tên đăng nhập</p>
-                                    <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
-                                </div>
-                                <div class="accInput">
-                                    <p>Mật khẩu</p>
-                                    <input type="password" name="password" class="inputText" placeholder="Enter your password">
-                                </div>
-{#                                <div class="btn-group style-checkbox" data-toggle="buttons">#}
-{#                                    <label class="btn btn-success default ">#}
-{#                                        <input type="checkbox" checked="">#}
-{#                                        <span class="glyphicon glyphicon-ok"></span>#}
-{#                                    </label>#}
-{#                                </div><span style="position: relative;top: 1px;margin-left: 5px;">Remember me</span>#}
-{#                                <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
-{##}
-{#                                </a>#}
-{#                                <div class="accInput" style="margin-top: 50px">#}
-{#                                    <p> Or Login with Social Network</p>#}
-{#                                    <div class="follow-list-icon">#}
-{#                                        <div class="mr-icon2">#}
-{#                                            <ul>#}
-{#                                                <li><a href="#"><img src="images/facebook.png" alt="logo"></a></li>#}
-{#                                                <li><a href="#"><img src="images/twitter.png" alt="logo"></a></li>#}
-{#                                                <li><a href="#"><img src="images/google-plus.png" alt="logo"></a></li>#}
-{#                                            </ul>#}
-{#                                        </div>#}
-{##}
-{#                                    </div>#}
-{#                                </div>#}
-{#                                </div>#}
-                                    <div  style="    margin-top: 25px;" >
-                                        <div><input class="btn-arrival" type="submit" value="ĐĂNG NHẬP"></div>
-                                    </div>
-                                </div>
-                            </form>
-                            <form action="{% url 'user:register' %}" method="post">
-                                {% csrf_token%}
-                                <div class="col-md-6">
-                                    <h3>Đăng kí</h3>
-                                    <div class="accInput">
-                                        <div class="accInput">
-                                        <p>Tên tài khoản</p>
-                                        <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Email</p>
-                                        <input type="email" name="email" class="inputText" placeholder="Enter your email address">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Mật khẩu </p>
-                                        <input type="password" name="password1" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Nhập lại mật khẩu</p>
-                                        <input type="password" name="password2" class="inputText" placeholder="Enter your password">
-                                    </div>
-{#                                    <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
-{#                                        <div class="btn-arrival" style="    margin-top: 25px;">#}
-{#                                            <div>REGISTER <img src="{% static 'images/arr.png' %}" alt="logo"></div>#}
-{#                                        </div>#}
-{#                                    </a>#}
+    {% endblock banner %}
+    {% block content %}
+            <div class="row">
+                <div class="col-md-4 border border-dark rounded m-5">
+                    <form action="{% url 'user:login' %}" method="post">
+                    {% csrf_token%}
+                        <h1 class="text-center mt-5">ĐĂNG NHẬP</h1>
+                        <div class="accInput mt-5 mr-5">
+                            <p class="ml-5">Tên đăng nhập</p>
+                            <input type="text" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên đăng nhập">
                         </div>
-                            <div  style="    margin-top: 25px;" >
-                                <div><input class="btn-arrival" type="submit" value="ĐĂNG KÍ"></div>
-                            </div>
+                        <div class="accInput">
+                            <p class="ml-5">Mật khẩu</p>
+                            <input type="password" name="password" class="inputText w-75 ml-5" placeholder="Vui lòng nhập mật khẩu">
+                        </div>
+                        <div class="mb-5">
+                            <input class="btn-arrival ml-5" type="submit" value="ĐĂNG NHẬP">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4 border border-dark rounded m-5">
+                    <form action="{% url 'user:register' %}" method="post">
+                    {% csrf_token%}
+                        <h1 class="text-center mt-5">ĐĂNG KÝ</h1>
+                        <div class="accInput mt-5">
+                            <p class="ml-5">Tên tài khoản</p>
+                            <input type="text" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên tài khoản">
+                        </div>
+                        <div class="accInput">
+                            <p class="ml-5">Email</p>
+                            <input type="email" name="email" class="inputText w-75 ml-5" placeholder="Vui lòng nhập email">
+                        </div>
+                        <div class="accInput">
+                            <p class="ml-5">Mật khẩu </p>
+                            <input type="password" name="password1" class="inputText w-75 ml-5" placeholder="Vui lòng nhập mật khẩu">
+                        </div>
+                        <div class="accInput">
+                            <p class="ml-5">Nhập lại mật khẩu</p>
+                            <input type="password" name="password2" class="inputText w-75 ml-5" placeholder="Vui lòng nhập lại mật khẩu">
+                        </div>
+                        <div class="mb-5">
+                            <input class="btn-arrival ml-5" type="submit" value="ĐĂNG KÍ">
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </section>
-{% endblock content %}
+    {% endblock content %}
+
+</div>

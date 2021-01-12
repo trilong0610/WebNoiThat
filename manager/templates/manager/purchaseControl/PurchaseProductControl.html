@@ -14,44 +14,26 @@
 {#    <section class="myAcc myAcc2">#}
         <div class="container">
         {% if perms.purchase.add_purchaseproduct %}
-            <a href={% url 'manager:purchase_product' %}> <button type="button" class="btn btn-warning">Tạo đơn nhập hàng</button></a>
+            <a href={% url 'manager:purchase_product' %}> <button type="button" class="btn btn-primary">Tạo đơn nhập hàng</button></a>
         {% endif %}
-            <div class="row">
-{#            Tieue de#}
-                <div class="col-md-10">
-                        <div class="row">
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>ID</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>Tài khoản đặt</h4>
-                            </div>
-                            <div class="col-md-2" style="text-align: center;padding-top: 58px;">
-                                <h4>Hình ảnh</h4>
-                            </div>
-                            <div class="col-md-2" style="text-align: center;padding-top: 58px;">
-                                <h4>Tên sản phẩm</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>Kích thước</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                                <h4>Nhà cung cấp</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>Số lượng</h4>
-                            </div>
-                            <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                                <h4>Tình trạng</h4>
-                            </div>
-                            <div class="col-md-2" style="text-align: right;padding-top: 58px;">
-                            </div>
-                        </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
-                </div>
-{#            Danh sach san pham#}
-                <div class="col-md-10">
+            <div class="row mt-5">
+                <table class="table table-bordered table-striped table-light">
+                    <thead>
+                        <tr class="text-left">
+                            <th scope="col">ID</th>
+                            <th scope="col">Tài khoản đặt</th>
+                            <th scope="col">Hình ảnh</th>
+                            <th scope="col">Tên sản phẩm</th>
+                            <th scope="col">Kích thước</th>
+                            <th scope="col">Nhà cung cấp</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Tình trạng</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for purchase in purchase %}
+<<<<<<< Updated upstream
                         <div class="row">
                             <div class="col-md-1" style="text-align: center;padding-top: 58px;">
                                 <h4>{{ purchase.id }}</h4>
@@ -75,30 +57,37 @@
                                 <h4>{{ purchase.amount }}</h4>
                             </div>
                             <div class="col-md-1" style="text-align: center;padding-top: 58px;">
+=======
+                        <tr>
+                            <td scope="row">{{ purchase.id }}</td>
+                            <td scope="row">{{ purchase.user }}</td>
+                            <td scope="row"><img src="{{ purchase.sizeProduct.product.image.url }}" alt="product" style="width:100px" class="img-responsive"></td>
+                            <td scope="row">{{ purchase.sizeProduct }}</td>
+                            <td scope="row">{{ purchase.sizeProduct.vertical }}X{{ purchase.sizeProduct.horizontal }}}</td>
+                            <td scope="row">{{ purchase.supplier }}</td>
+                            <td scope="row">{{ purchase.amount }}</td>
+                            <td scope="row">
+>>>>>>> Stashed changes
                                 {% if purchase.complete  %}
                                     <h4>Đã giao</h4>
                                 {% else %}
                                     <h4>Chưa giao</h4>
                                 {% endif %}
-
-                            </div>
-                        <div class="col-md-2" style="text-align: right;padding-top: 58px;">
-                            <i >
+                            </td>
+                            <td scope="row">
                                 {% if not purchase.complete  %}
                                     {% if perms.purchase.change_purchaseproduct %}
-                                        <a href="{% url 'manager:editPurchase' purchase.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                                        <a href="{% url 'manager:editPurchase' purchase.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
                                     {% endif %}
                                     {% if perms.purchase.delete_purchaseproduct %}
-                                        <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-danger">Xóa</button></a>
+                                        <a href="{% url 'manager:delete_purchase' purchase.id %}"><button type="button" class="btn btn-primary">Xóa</button></a>
                                     {% endif %}
                                 {% endif %}
-
-                            </i>
-                        </div>
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+                            </td>
+                        </tr>
                     {% endfor %}
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
 {#    </section>#}

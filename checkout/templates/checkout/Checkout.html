@@ -17,18 +17,18 @@
             <div class="row">
                 <form action="{% url 'order:addOrder' cart.id %}" method="post">
                     {% csrf_token %}
-                    <div class="col-md-8">
-                    <h3 style="margin-bottom: 30px;text-align: left">ĐỊA CHỈ GIAO HÀNG</h3>
+                    <div class="col-md-7 border border-dark rounded">
+                    <h1 class="mt-5 text-center">ĐỊA CHỈ GIAO HÀNG</h1>
 
-                    <div class="accInput">
+                    <div class="accInput mt-5 ml-5 w-75">
                         <p>Tên</p>
                         <input type="text" name="firstName" class="inputText" value="{{ user.first_name }}" placeholder="Nhập tên của bạn">
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Họ</p>
                         <input type="text" name="lastName"  class="inputText" value="{{ user.last_name }}" placeholder="Nhập họ của bạn">
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Số điện thoại</p>
                         <input type="text" name="phone" class="inputText" value="{{ address.phone }}" placeholder="Nhập số điện thoại của bạn">
 
@@ -39,12 +39,12 @@
 {#                            <option>Campuchia</option>#}
 {#                        </select>#}
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Email</p>
                         <input type="text" name="email" class="inputText" value="{{ user.email }}" placeholder="Nhập email của bạn">
                     </div>
 
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Tỉnh/Thành phố</p>
 
                         <select class="form-select" name="province" id="id_province">
@@ -56,7 +56,7 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Quận/Huyện</p>
 
                         <select class="form-select" name="district"  id="id_district">
@@ -64,7 +64,7 @@
                         </select>
 
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Phường/Xã</p>
 
                         <select class="form-select" name="wards" id="id_wards">
@@ -72,18 +72,18 @@
                         </select>
 
                     </div>
-                    <div class="accInput">
+                    <div class="accInput ml-5 w-75">
                         <p>Số nhà/Đường</p>
                         <input type="text" name="address" class="inputText" value="{{ address.address }}" placeholder="Nhập Số nhà/Đường của bạn">
                     </div>
 
                     <a href="#" style="" class="trash">
-                        <div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
+                        <div class="mb-5 mr-5" style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
                     </a>
                 </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 border border-dark rounded ml-5">
+                        <h1 class="text-center mt-5">ĐƠN HÀNG</h1>
                         <div class="form-tax">
-                        <h4>ĐƠN HÀNG</h4>
                         <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
                         <div class="box-formTax-content">

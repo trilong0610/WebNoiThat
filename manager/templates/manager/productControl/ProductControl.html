@@ -14,82 +14,50 @@
 {#    <section class="myAcc myAcc2">#}
         <div class="container">
 {#        {% if perms.product.add_product %}#}
-            <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>
+            <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-primary">Thêm sản phẩm</button></a>
 {#        {% endif %}#}
-            <div class="row">
-{#            Tieue de#}
-                <div class="col-md-10">
-                        <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
-                            <h4>Tên sản phẩm</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                            <h4>Giá</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Số lượng trong kho</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Đã bán</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Danh mục</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            <h4>Trạng thái</h4>
-                        </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                        </div>
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
-                </div>
-{#            Danh sach san pham#}
-                <div class="col-md-10">
-                    {% for product in products %}
-                        <div class="row">
-                        <div class="col-md-2">
-                            <img src="{{ product.image.url }}" alt="product" class="img-responsive">
-                        </div>
-                        <div class="col-md-3" style="text-align: center;padding-top: 58px;">
-                            {{ product.title }}
-                        </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                            {{ product.price|intcomma }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.amount }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.amount_sell }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {{ product.category }}
-                        </div>
-                        <div class="col-md-1" style="text-align: center;padding-top: 58px;">
-                            {% if product.active %}
-                                Đang bán
-                            {% else %}
-                                Ngừng bán
-                            {% endif %}
-                        </div>
-                        <div class="col-md-1" style="text-align: right;padding-top: 58px;">
-                            <i >
-                                {% if perms.product.change_product %}
-                                <a href="{% url 'manager:sizeProductControl' product.id %}"><button type="button" class="btn btn-warning">Kích thước</button></a>
-                                {% endif %}
-                            </i>
-                            <i >
-                                {% if perms.product.change_product %}
-                                <a href="{% url 'manager:edit_product' product.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
-                                {% endif %}
-                            </i>
-                        </div>
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
-                    {% endfor %}
-                </div>
+            <div class="row mt-5">
+                    <table class="table table-bordered table-striped table-light">
+                        <thead>
+                            <tr class="text-left">
+                                <th scope="col"></th>
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Giá</th>
+                                <th scope="col">Số lượng tồn</th>
+                                <th scope="col">Đã bán</th>
+                                <th scope="col">Danh mục</th>
+                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Chức năng</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for product in products %}
+                            <tr>
+                                <td scope="row"><a><img src="{{ product.image.url }}" alt="product" style="width:100px"></a></td>
+                                <td scope="row"">{{ product.title }}</td>
+                                <td scope="row">{{ product.price|intcomma }}</td>
+                                <td scope="row">{{ product.amount }}</td>
+                                <td scope="row">{{ product.amount_sell }}</td>
+                                <td scope="row">{{ product.category }}</td>
+                                <td scope="row">
+                                    {% if category.active %}
+                                        Đang bán
+                                    {% else %}
+                                        Ngừng bán
+                                    {% endif %}
+                                </td>
+                                <td scope="row">
+                                    {% if perms.product.change_product %}
+                                    <a href="{% url 'manager:sizeProductControl' product.id %}"><button type="button" class="btn btn-primary">Kích thước</button></a>
+                                    {% endif %}
+                                    {% if perms.product.change_product %}
+                                    <a href="{% url 'manager:edit_product' product.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
             </div>
         </div>
 {#    </section>#}

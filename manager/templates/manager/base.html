@@ -16,6 +16,8 @@
     <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/line-awesome/css/line-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/themify-icons/themify-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap4.0/css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap4.0/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap2-toggle.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700,700i,900,900i|Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
@@ -131,80 +133,39 @@
                                         <li class="dropdown">
                                             <a href="{% url 'store:home' %}" >Trang Chủ</a>
                                         </li>
-                                          <li class="dropdown productMN">
-                                                    <a href="{% url 'store:productGrid' %}" class="active-menu">Sản Phẩm</a>
-                                                    <i class="fa fa-angle-down"></i>
-                                                    <div class="box-menu">
-                                                        <div class="row">
-                                                            <div class="col-md-5 ">
-                                                                <div class=" slideSort">
-                                                                    <h3 class="slider-left-title">Loại Sản Phẩm</h3>
-                                                                    <ul class="slide-left-list">
-                                                                        {% for items in category %}
-                                                                            <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
-                                                                        {% endfor %}
-                                                                    </ul>
-                                                                </div>
+                                            <li class="dropdown productMN">
+                                                <a href="{% url 'store:productGrid' %}" class="active-menu">Sản Phẩm</a>
+                                                <i class="fa fa-angle-down"></i>
+                                                <div class="box-menu">
+                                                    <div class="row">
+                                                        <div class="col-md-5 ">
+                                                            <div class=" slideSort">
+                                                                <h3 class="slider-left-title">Loại Sản Phẩm</h3>
+                                                                <ul class="slide-left-list">
+                                                                    {% for items in category %}
+                                                                        <li><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>
+                                                                    {% endfor %}
+                                                                </ul>
                                                             </div>
-                                                            <div class="col-md-3 ">
-
-                                                                <div class=" slideSort">
-                                                                    <h3 class="slider-left-title">Danh Mục</h3>
-                                                                    <ul class="slide-left-list">
-                                                                        <li><a href="{% url 'store:hotProduct' %}">Sản phẩm mới</a></li>
-                                                                        <li><a href="{% url 'store:mostPopular' %}">Nhiều người mua</a></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-{#                                                            <div class="col-md-3 ">#}
-{#                                                                <div class="box-slider-left slideNewproduct slideNewproduct2">#}
-{#                                                                    <h3 class="slider-left-title" style="margin-bottom: 10px">Best sellers</h3>#}
-{#                                                                    <div class="box-slideNewproduct">#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
-{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P5.jpg' %}" alt="product1" class="img-responsive"></a>#}
-{#                                                                        </div>#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
-{#                                                                            <h5><a href="SingleProduct.html">Trailer</a></h5>#}
-{#                                                                            <p class="slideProduct-price">$32.00</p>#}
-{#                                                                        </div>#}
-{#                                                                    </div>#}
-{#                                                                    <div class="box-slideNewproduct ">#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
-{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P3.jpg' %}" alt="product1" class="img-responsive"></a>#}
-{#                                                                        </div>#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
-{#                                                                            <h5><a href="SingleProduct.html">Magic Clock</a></h5>#}
-{#                                                                            <p class="slideProduct-price">$32.00</p>#}
-{#                                                                        </div>#}
-{#                                                                    </div>#}
-{#                                                                    <div class="box-slideNewproduct">#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-img">#}
-{#                                                                            <a href="SingleProduct.html"><img src="{% static 'images/Product/1P1.jpg' %}" alt="product1" class="img-responsive"></a>#}
-{#                                                                        </div>#}
-{#                                                                        <div class="slideNewproduct-item slideNewproduct-text">#}
-{#                                                                            <h5><a href="SingleProduct.html">Obraz Mechaniczny</a></h5>#}
-{#                                                                            <p class="slideProduct-price">$32.00</p>#}
-{#                                                                        </div>#}
-{#                                                                    </div>#}
-{##}
-{#                                                                </div>#}
-{#                                                            </div>#}
-{#                                                            <div class="col-md-3 ">#}
-{#                                                                <h3 class="slider-left-title">Woody Store</h3>#}
-{#                                                                <div  class="box-gallery">#}
-{#                                                                    <a href="AboutUs.html">#}
-{#                                                                        <img src="{% static 'images/MN2.png' %}" alt="banner slideBar" class="img-responsive" style="width: 100%">#}
-{#                                                                        <div class="arrIcon">#}
-{#                                                                        </div>#}
-{#                                                                    </a>#}
-{#                                                                </div>#}
-{##}
-{#                                                            </div>#}
                                                         </div>
+                                                        <div class="col-md-3 ">
+
+                                                            <div class=" slideSort">
+                                                                <h3 class="slider-left-title">Danh Mục</h3>
+                                                                <ul class="slide-left-list">
+                                                                    <li><a href="{% url 'store:hotProduct' %}">Sản phẩm mới</a></li>
+                                                                    <li><a href="{% url 'store:mostPopular' %}">Nhiều người mua</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+<<<<<<< Updated upstream
                                                     </div>
                                                 </li>
 {#
                                         <li class="dropdown">
+=======
+                                            <li class="dropdown">
+>>>>>>> Stashed changes
                                             {% if user.is_authenticated %}
                                                <a href="{% url 'user:accountDetail' %}">
                                                     Tài Khoản
@@ -226,8 +187,6 @@
                                             <a class="fa fa-search " href="404.html"></a>
                                         </li>
                                     </ul>
-
-
                                 </div>
                             </div>
 
@@ -424,6 +383,9 @@
     </div>
 </footer>
 </div>
+<script type="text/javascript" src="{% static 'bootstrap4.0/js/bootstrap.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap4.0/js/bootstrap.bundle.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'bootstrap4.0/js/jquery-3.3.1.min.js' %}"></script>
 <script src="{% static 'vendor/jquery/dist/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/dist/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'vendor/jquery_easing/jquery.easing.min.js' %}"></script>

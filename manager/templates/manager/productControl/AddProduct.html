@@ -12,20 +12,22 @@
 {% block content %}
     <form action="{% url 'manager:add_product' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
     {% csrf_token %}
-        <h4>Danh mục:</h4>
-        <div class="accInput"><p>{{ product.category }}</p></div>
-        <h4>Tên sản phẩm:</h4>
-        <div class="accInput"><p>{{ product.title }}</p></div>
-        <h4>Giá:</h4>
-        <div class="accInput">
-            <p><input  name="price" id="id_price" type="number"></p>
-            <p><label id="id_lbl_price"></label></p>
+        <div class="border border-dark rounded">
+            <h1 class="text-center mt-5">THÊM SẢN PHẨM</h1>
+            <h4 class="mt-5 ml-5">Danh mục:</h4>
+            <div class="accInput ml-5 mt-3"><p>{{ product.category }}</p></div>
+            <h4 class="ml-5">Tên sản phẩm:</h4>
+            <div class="accInput ml-5 mt-3"><p>{{ product.title }}</p></div>
+            <h4 class="ml-5">Giá:</h4>
+            <div class="accInput ml-5 mt-3">
+                <p><input  name="price" id="id_price" type="number"></p>
+            </div>
+            <h4 class="ml-5">Chi tiết sản phẩm:</h4>
+            <div class="accInput ml-5 mt-3"><p>{{ product.description }}</p></div>
+            <h4 class="ml-5">Hình ảnh:</h4>
+            <div class="accInput ml-5 mt-3"><p>{{ product.image }}</p></div>
+            <div><input class="btn-arrival ml-5 mb-5" type="submit" value="Thêm sản phẩm"></div>
         </div>
-        <h4>Chi tiết sản phẩm:</h4>
-        <div class="accInput"><p>{{ product.description }}</p></div>
-        <h4>Hình ảnh:</h4>
-        <div class="accInput"><p>{{ product.image }}</p></div>
-    <div><input class="btn-arrival" type="submit" value="Thêm sản phẩm"></div>
     </form>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script>

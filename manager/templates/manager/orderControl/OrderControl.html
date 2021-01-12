@@ -12,79 +12,52 @@
 {% endblock banner %}
 {% block content %}
 <div class="col-md-14">
-{#    <a href={% url 'manager:add_product' %}> <button type="button" class="btn btn-warning">Thêm sản phẩm</button></a>#}
     <form action="" method="post">
         {% csrf_token %}
     <div class="row">
-        <div class="col-md-3">
-               <input type="search" placeholder="Tìm kiếm đơn hàng" style="border: 1px solid #444;
-                    padding: 10px 40px 11px 15px;
-                    border-radius: 3px;
-                    height: 30px;
-                    background: transparent;
-                    color: #0f0f0f;" name="searchOrder" >
-            </div>
-        <div class="col-md-2">
-            <input type="submit" value="Tim">
-        </div>
+        <form class="form-inline mr-auto">
+            <input class="form-control mr-sm-2 w-50" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
+        </form>
     </div>
 
     </form>
     <form action="" method="post">
-        <div class="row">{#loc don hang theo ngay#}
+        <div class="row mt-5">{#loc don hang theo ngay#}
             {% csrf_token %}
-                <div class="col-md-4">
-                    <input type="date" class="form-control" name="fromDate" placeholder="Từ ngày">
-                </div>
-                <div class="col-md-4">
-                    <input type="date" class="form-control" name="toDate" placeholder="Đến ngày">
-                </div>
-                <div class="col-md-1">
-                    <input type="submit"  value="Lọc">
-                </div>
+                <form class="form-inline mr-auto">
+                    <div class="form-group row">
+                        <label for="example-datetime-local-input" class="col-2 col-form-label">Từ</label>
+                        <div class="col-8">
+                            <input class="form-control" type="datetime-local"name="fromDate">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-datetime-local-input" class="col-2 col-form-label">Đến</label>
+                        <div class="col-7">
+                            <input class="form-control" type="datetime-local" name="toDate">
+                        </div>
+                        <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Lọc</button>
+                    </div>
+                </form>
         </div>
-
     </form>
-
     <div class="lineAbout" style="width: 100%;height: 0px;margin-top: 20px;"></div>
     <div class="panel-group" id="faqAccordion">
-        {% for order in order %}
-            <div class="panel panel-default faq-coat" style="border: none;    box-shadow: none;">
-                <div class="panel-heading faq-head bd-color-left-setting active" data-toggle="collapse"
-                     data-parent="#faqAccordion" data-target="#question0" aria-expanded="true"
-                     style="background: rgb(193, 155, 118);   ">
-                    <h4 class="panel-title">
-                        ID: {{ order.id }}
-                    </h4>
-                    <h4 class="panel-title">
-                        {{ order.user }}
-                    </h4>
-                    <h4 class="panel-title">
-                        {{ order.date_ordered|date:'H:i d-m-Y' }}
-                    </h4>
-
-                     <h4 class="panel-title">
-                        {{ order.get_status_display }}
-                    </h4>
-                    <span class="accordion-toggle question-toggle collapsed"><i
-                            class="" aria-hidden="true"></i></span>
-                    <p style="  position: absolute;
-                                right: 30%;
-                                top: 14px;
-                                font-size: 16px;
-                                color: #fff;">{{ order.cart.get_cart_total|intcomma }} VND</p>
-                    <i style="  position: absolute;
-                                right: 14px;
-                                top: 8px;
-                                font-size: 16px;
-                                color: #fff;" >
-{#                    Kiem tra quyen moi hien thi cac chuc nang     #}
-{#                        {% if perms.order.change_order %}#}
-{#                            <a href=""><button type="button" class="btn btn-info">Giao hàng</button></a>#}
-{#                        {% endif %}#}
+        <table class="table table=bordered table-striped table-dark">
+            {% for order in order %}
+            <thead>
+                <tr>
+                    <th scope="col">ID: {{ order.id }}</th>
+                    <th scope="col">Người tiếp nhận: {{ order.user }}</th>
+                    <th scope="col">Ngày nhận: {{ order.date_ordered|date:'H:i d-m-Y' }}</th>
+                    <th scope="col">{{ order.get_status_display }}</th>
+                    <th scope="col">{{ order.cart.get_cart_total|intcomma }} VND</th>
+                    <th scope="col">
                         {% if perms.order.change_order and order.status != 5 %}
-                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-warning">Sửa</button></a>
+                            <a href="{% url 'manager:editOrder' order.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
                         {% endif %}
+<<<<<<< Updated upstream
 {#                        {% if perms.order.delete_order %}#}
 {#                            <a href=""><button type="button" class="btn btn-danger">Xóa</button></a>#}
 {#                        {% endif %}#}
@@ -136,8 +109,28 @@
 <!--                                </h4>-->
 
 <!--                            </div>-->
+=======
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cartitem in order.cart.cartitem_set.all %}
+                <tr>
+>>>>>>> Stashed changes
 
-<!--                        </div>-->
+                    <td scope="row" class="mt-3">
+                        <img src="{{ cartitem.product.image.url }}" alt="product" class="product-img-first img-responsive">
+                    </td>
+                    <td scope="row">{{ cartitem.product.title }}</td>
+                    <td scope="row">{{ cartitem.product.price|intcomma }}</td>
+                    <td scope="row">{{ cartitem.quantity }}</td>
+                    <td scope="row">{{ cartitem.get_total|intcomma }}</td>
+                    <td scope="row"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            {% endfor %}
+        </table>
  <script>
     $(function () {
       $("#datepicker").datepicker();

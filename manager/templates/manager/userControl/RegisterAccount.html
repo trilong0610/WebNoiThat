@@ -10,6 +10,7 @@
 {% endblock banner %}
 {% block content %}
     <section class="myAcc">
+<<<<<<< Updated upstream
                 <div class="container">
                     <div style="  width: calc(100% - 200px);margin: 0 auto">
                         <div class="row">
@@ -43,10 +44,40 @@
                         </div>
                             <div  style="    margin-top: 25px;" >
                                 <div><input class="btn-arrival" type="submit" value="REGISTER"></div>
+=======
+        <div class="container">
+            <div style="  width: calc(100% - 200px);margin: 0 auto">
+                <form action="{% url 'manager:register' %}" method="post">
+                    {% csrf_token%}
+                    <div class="col-md border border-dark rounded">
+                        <div class="accInput text-center mt-5"><h1>ĐĂNG KÝ</h1></div>
+                        <div class="accInput ml-5">
+                            <div class="accInput ml-5">
+                            <div class="accInput ml-5">
+                                <p>Tên tài khoản hoặc Email *</p>
+                                <input type="text" name="user" class="inputText" placeholder="Nhập tên tài khoản hoặc Email">
+                            </div>
+                            <div class="accInput ml-5">
+                                <p>Địa chỉ Email *</p>
+                                <input type="email" name="email" class="inputText" placeholder="Nhập địa chỉ Email">
+                            </div>
+                            <div class="accInput ml-5">
+                                <p>Mật khẩu *</p>
+                                <input type="password" name="password1" class="inputText" placeholder="Nhập mật khẩu">
+                            </div>
+                            <div class="accInput ml-5">
+                                <p>Nhập lại mật khẩu</p>
+                                <input type="password" name="password2" class="inputText" placeholder="Nhập lại mật khẩu">
+                            </div>
+                            </div>
+                            <div class="ml-5">
+                                <input class="btn-arrival mb-5 ml-5" type="submit" value="ĐĂNG KÝ">
+>>>>>>> Stashed changes
                             </div>
                         </div>
-                    </form>
-                </div>
+
+                     </div>
+                </form>
             </div>
         </div>
     </section>
