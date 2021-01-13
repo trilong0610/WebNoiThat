@@ -13,16 +13,17 @@
     {% block content %}
             <div class="row">
                 <div class="col-md-4 border border-dark rounded m-5">
-                    <form action="{% url 'user:login' %}" method="post">
+                    <form action="{% url 'user:login' %}" method="post" class="form-login">
                     {% csrf_token%}
                         <h1 class="text-center mt-5">ĐĂNG NHẬP</h1>
+                        <label for="" id="id_lbl"></label>
                         <div class="accInput mt-5 mr-5">
                             <p class="ml-5">Tên đăng nhập</p>
-                            <input type="text" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên đăng nhập">
+                            <input type="text" id="id_user_login" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên đăng nhập">
                         </div>
                         <div class="accInput">
                             <p class="ml-5">Mật khẩu</p>
-                            <input type="password" name="password" class="inputText w-75 ml-5" placeholder="Vui lòng nhập mật khẩu">
+                            <input type="password" id="id_pass_login" name="password" class="inputText w-75 ml-5" placeholder="Vui lòng nhập mật khẩu">
                         </div>
                         <div class="mb-5">
                             <input class="btn-arrival ml-5" type="submit" value="ĐĂNG NHẬP">
@@ -35,11 +36,14 @@
                         <h1 class="text-center mt-5">ĐĂNG KÝ</h1>
                         <div class="accInput mt-5">
                             <p class="ml-5">Tên tài khoản</p>
-                            <input type="text" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên tài khoản">
+                            <input type="text" id="id_user_register" name="user" class="inputText w-75 ml-5" placeholder="Vui lòng nhập tên tài khoản">
+                            <p class="ml-5"><label class="ml-5" id="id_lbl_user_register"></label></p>
                         </div>
                         <div class="accInput">
                             <p class="ml-5">Email</p>
-                            <input type="email" name="email" class="inputText w-75 ml-5" placeholder="Vui lòng nhập email">
+                            <input type="email" id="id_email_register" name="email" class="inputText w-75 ml-5" placeholder="Vui lòng nhập email">
+                            <p class="ml-5"><label class="ml-5" id="id_lbl_email_register"></label></p>
+
                         </div>
                         <div class="accInput">
                             <p class="ml-5">Mật khẩu </p>
@@ -55,6 +59,67 @@
                     </form>
                 </div>
             </div>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+{#Kiem tra ton tai cua tai khoan dang ki#}
+    $("#id_user_register").change(function () {
+      var url = "/user/ajax/check_user_exist/";  // get the url of the `load_cities` view
+      var username = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'username': username       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          if (data.is_taken) {
+            $("#id_lbl_user_register").html("Tài khoản đã tồn tại")
+            $("#id_user_register").val("")
+          };  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+ {#Kiem tra ton tai cua email dang ki#}
+    $("#id_email_register").change(function () {
+      var url = "/user/ajax/check_email_exist/";  // get the url of the `load_cities` view
+      var email = $(this).val();  // get the selected country ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+        data: {
+          'email': email       // add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          if (data.is_taken) {
+            $("#id_lbl_email_register").html("Email đã tồn tại")
+            $("#id_email_register").val("")
+          };  // replace the contents of the city input with the data that came from the server
+        }
+      });
+    });
+{#Kiem tra user va pass#}
+    $('.form-login').on('submit', function(e) {
+      var url = "{% url 'user:ajax_check_account_login' %}";  // get the url of the `load_cities` view
+      var username = $("#id_user_login").val();
+      var password = $("#id_pass_login").val();
+      $.ajax({
+        url: url,
+        data: {
+            'username': username,
+            'password': password// add the country id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_cities` view function
+          if (data.is_taken) {
+          }
+          else {
+              alert("Tài khoản hoặc mật khẩu không chính xác !");
+          }// replace the contents of the city input with the data that came from the server
+        }
+      });
+})
+</script>
     {% endblock content %}
+
+
 
 </div>

@@ -65,8 +65,6 @@ def Login(request):
             if user is not None:
                 login(request, user)
                 return redirect('store:home')
-            else:
-                messages.info(request, 'Username or password is incorrect')
         context = {}
         return render(request, 'user/MyAccount.html', context)
 
@@ -151,4 +149,29 @@ def load_wards(request):
     wards = Wards.objects.filter(district_id=district_id).order_by('name')
     return render(request, 'user/ward_dropdown_list_options.html', {'wards': wards})
 
+def check_user_exist(request):
+    username = request.GET.get('username')
+    data ={
+        'is_taken': User.objects.filter(username=username).exists()
+    }
+    return JsonResponse(data)
+def check_email_exist(request):
+    email = request.GET.get('email')
+    data ={
+        'is_taken': User.objects.filter(email = email).exists()
+    }
+    return JsonResponse(data)
 
+def check_account_login(request):
+    username = request.GET.get('username')
+    password = request.GET.get('password')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        data = {
+            'is_taken': "ok"
+        }
+    else:
+        data = {
+            'is_taken': ""
+        }
+    return JsonResponse(data)

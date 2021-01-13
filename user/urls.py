@@ -10,4 +10,8 @@ urlpatterns = [
     path('register/', views.RegisterPage, name = 'register' ),
     path('ajax/load_district/', views.load_district, name='ajax_load_district'),
     path('ajax/load_wards/', views.load_wards, name='ajax_load_wards'),
+    path('ajax/check_user_exist/', views.check_user_exist, name='ajax_check_user_exist'),
+    path('ajax/check_email_exist/', views.check_email_exist, name='ajax_check_email_exist'),
+    path('ajax/check_account_login/', views.check_account_login, name='ajax_check_account_login'),
+
 ]
