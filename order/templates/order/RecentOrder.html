@@ -108,21 +108,20 @@
 {#                                <i class="la la-cc-mastercard"></i>#}
 {#                            </a>#}
 {#                        </li>#}
-                        {% if perms.product.view_product %}
+                        {% if perms.product.view_product or perms.auth.view_user or perms.order.view_order or perms.purchase.view_purchaseproduct  %}
                             <li class="clearfix">
                                 <a href="{% url 'manager:home' %}">
                                     <p>Trang dành cho quản lí</p>
                                     <i class="la la-shopping-cart"></i>
                                 </a>
                             </li>
-                        {% else %}
+                        {% endif %}
                             <li class="clearfix">
                                 <a href="{% url 'order:recentOrder' %}">
                                     <p>Đơn hàng của tôi</p>
                                     <i class="la la-shopping-cart"></i>
                                 </a>
                             </li>
-                        {% endif %}
                         <li class="clearfix">
                             <a href="{% url 'user:logout' %}">
                                 <p>Đăng xuất</p>

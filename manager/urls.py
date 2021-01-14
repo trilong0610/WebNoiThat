@@ -44,7 +44,8 @@ urlpatterns = [
     path('shippingControl/<int:order_id>', views.shippingEdit.as_view(), name="shippingControl"),
     path('editOrder/<int:order_id>', views.editOrder.as_view(), name="editOrder"),
 
-#     danh mucj
+
+    #     danh mucj
     path('categoryControl/', views.categoryControl, name="categoryControl"),
     path('addCategory/', views.addCategory.as_view(), name="addCategory"),
     path('editCategory/<int:category_id>', views.editCategory.as_view(), name="editCategory"),

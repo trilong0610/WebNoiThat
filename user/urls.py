@@ -13,5 +13,4 @@ urlpatterns = [
     path('ajax/check_user_exist/', views.check_user_exist, name='ajax_check_user_exist'),
     path('ajax/check_email_exist/', views.check_email_exist, name='ajax_check_email_exist'),
     path('ajax/check_account_login/', views.check_account_login, name='ajax_check_account_login'),
-
 ]

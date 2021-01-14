@@ -25,7 +25,7 @@
                             <img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive">
                         </div>
                         <div class="col-md-2" style="text-align: left;padding-top: 30px;">
-                            {{ cartitem.sizeProduct.product.title }}
+                            {{ cartitem.sizeProduct.horizontal }} x {{ cartitem.sizeProduct.vertical }}
                         </div>
                         <div class="col-md-1" style="text-align: right;padding-top: 30px;">
                             {{ cartitem.sizeProduct.product.price|intcomma }}
@@ -40,7 +40,7 @@
                         <div class="col-md-3" style="text-align: center;padding-top: 10px;">
                             <div class="cart-product-two shopping-cart-quantity cartConver">
                                 <div class="pd-c-quantity quantity add-card add-card-product">
-                                    <input data-order="{{ order.id }}" data-product="{{ cartitem.product.id }}" class="update-item-order" id="quantity_product_order_{{ cartitem.product.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+                                    <input data-order="{{ order.id }}" data-sizeproduct="{{ cartitem.sizeProduct.id }}" class="update-item-order" id="quantity_product_order_{{ cartitem.sizeProduct.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
                                 </div>
                             </div>
                         </div>

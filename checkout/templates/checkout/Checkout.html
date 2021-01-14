@@ -6,7 +6,6 @@
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
             <div class="banner-arrival">
                 <h3>Hoàn Tất Đặt Hàng</h3>
-                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Checkout</p>
             </div>
         </div>
 {% endblock banner %}
@@ -84,39 +83,39 @@
                     <div class="col-md-4 border border-dark rounded ml-5">
                         <h1 class="text-center mt-5">ĐƠN HÀNG</h1>
                         <div class="form-tax">
-                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
+                            <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
-                        <div class="box-formTax-content">
-                        {% for cartitem in cart.cartitem_set.all %}
-                            <div class="row">
-                                <div class="col-md-4" style="text-align: center"><img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive"></div>
-                                <div class="col-md-4" style="text-align: center;padding-top: 30px;">x{{ cartitem.quantity }}</div>
-                                <div class="col-md-4" style="text-align: right;padding-top: 30px;">{{ cartitem.get_total|intcomma }}</div>
-                            </div>
-                        {% endfor %}
-{#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>#}
-{##}
-{#                        <div class="box-formTax-count">#}
-{#                            <div class="row">#}
-{#                                <div class="col-md-6">Phí giao hàng:</div>#}
-{#                                <div class="col-md-6" style="text-align: right;">30,000</div>#}
-{#                            </div>#}
-{#                        </div>#}
-                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
+                                <div class="box-formTax-content">
+                                {% for cartitem in cart.cartitem_set.all %}
+                                    <div class="row">
+                                        <div class="col-md-4" style="text-align: center"><img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive"></div>
+                                        <div class="col-md-4" style="text-align: center;padding-top: 30px;">x{{ cartitem.quantity }}</div>
+                                        <div class="col-md-4" style="text-align: right;padding-top: 30px;">{{ cartitem.get_total|intcomma }}</div>
+                                    </div>
+                                {% endfor %}
+        {#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>#}
+        {##}
+        {#                        <div class="box-formTax-count">#}
+        {#                            <div class="row">#}
+        {#                                <div class="col-md-6">Phí giao hàng:</div>#}
+        {#                                <div class="col-md-6" style="text-align: right;">30,000</div>#}
+        {#                            </div>#}
+        {#                        </div>#}
+                                <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
-                        <div class="box-formTax-total">
-                            <div class="row">
-                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
-                                <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">{{ cart.get_cart_total|intcomma }}</div>
+                                <div class="box-formTax-total">
+                                    <div class="row">
+                                        <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
+                                        <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">{{ cart.get_cart_total|intcomma }}</div>
+                                    </div>
+                                </div>
+        {#                        <a href="" data-cartID="{{ cart.id }}" class="btn-formTax add-order">#}
+                                <div  style="    margin-top: 25px;" >
+                                    <div><input class="btn-arrival" type="submit" value="ĐẶT HÀNG"></div>
+                                </div>
+        {#                        </a>#}
                             </div>
                         </div>
-{#                        <a href="" data-cartID="{{ cart.id }}" class="btn-formTax add-order">#}
-                        <div  style="    margin-top: 25px;" >
-                            <div><input class="btn-arrival" type="submit" value="ĐẶT HÀNG"></div>
-                        </div>
-{#                        </a>#}
-                    </div>
-                </div>
 
             </div>
                 </form>

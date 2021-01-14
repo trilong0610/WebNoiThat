@@ -50,25 +50,25 @@
                                         <div class="arrIcon2">
                                             <ul>
 {#                                                ---------------Thêm vào giỏ hàng-------------- #}
-                                                {% if user.is_authenticated %}
-                                                    {% if all_product.amount > 0 %}
-                                                        <li>
-                                                        <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>
-                                                        </li>
-                                                    {% endif %}
-                                                {% else %}
-                                                    <a href="{% url 'user:login' %}">
-                                                        <li>
-                                                        <i  class="la la-shopping-cart"></i>
-                                                        </li>
-                                                    </a>
-                                                {% endif %}
+{#                                                {% if user.is_authenticated %}#}
+{#                                                    {% if all_product.amount > 0 %}#}
+{#                                                        <li>#}
+{#                                                        <i data-product="{{ all_product.id }}" data-action="add" class="la la-shopping-cart update-carts"></i>#}
+{#                                                        </li>#}
+{#                                                    {% endif %}#}
+{#                                                {% else %}#}
+{#                                                    <a href="{% url 'user:login' %}">#}
+{#                                                        <li>#}
+{#                                                        <i  class="la la-shopping-cart"></i>#}
+{#                                                        </li>#}
+{#                                                    </a>#}
+{#                                                {% endif %}#}
 
-                                                <li style="margin-left: 6px;margin-right: 6px;">
-                                                    <a href="{% url 'store:detailProduct' all_product.id %}">
-                                                    <i class="la la-eye"></i>
-                                                    </a>
-                                                </li>
+{#                                                <li style="margin-left: 6px;margin-right: 6px;">#}
+{#                                                    <a href="{% url 'store:detailProduct' all_product.id %}">#}
+{#                                                    <i class="la la-eye"></i>#}
+{#                                                    </a>#}
+{#                                                </li>#}
                                             </ul>
                                         </div>
                                     </div>

@@ -44,6 +44,16 @@ class Product(models.Model):
         size = self.sizeproduct_set.all()
         total = sum([item.amount_sell for item in size])
         return total
+    @property
+    def check_active_allsize(self):
+        size = self.sizeproduct_set.all()
+        total = 0
+        for item in size:
+            if item.active == False:
+                total = total + 1
+        if total == size.count():
+            return False
+        return True
 
 class SizeProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)

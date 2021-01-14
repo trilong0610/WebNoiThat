@@ -1,4 +1,5 @@
 import json
+import time
 
 from django.contrib import messages, auth
 from django.shortcuts import render, redirect
@@ -65,6 +66,8 @@ def Login(request):
             if user is not None:
                 login(request, user)
                 return redirect('store:home')
+            else:
+                pass
         context = {}
         return render(request, 'user/MyAccount.html', context)
 
@@ -122,6 +125,17 @@ def accountDetail(request):
     return render(request, 'user/AccountDetail.html', context)
 
 def changePassword(request):
+    if request.user.is_authenticated:
+        user = request.user
+        cart, created = Cart.objects.get_or_create(user=user, complete=False)
+        items = cart.cartitem_set.all()
+        cartItems = cart.get_cart_items
+    else:
+        items = []
+        cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+        cartItems = cart['get_cart_items']
+    category = Category.objects.all()
+
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -134,7 +148,8 @@ def changePassword(request):
     else:
         form = PasswordChangeForm(request.user)
     context = {
-        'form': form
+        'form': form,
+        'category':category
     }
     return render(request, 'user/AccountDetail.html', context)
 

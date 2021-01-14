@@ -90,21 +90,21 @@ function addItemToCart(sizeProductID, quantity){
 console.log("Loadded update-item-order")
 var updateToOrderBtns = document.getElementsByClassName('update-item-order')
 for (i = 0; i < updateToOrderBtns.length; i++){
-    updateToOrderBtns[i].addEventListener('keyup', function (){
+    updateToOrderBtns[i].addEventListener('change', function (){
         var orderID = this.dataset.order
-        var productID = this.dataset.product
-        var quantity = document.getElementById("quantity_product_order_"+productID).value;
-        console.log('orderID:', orderID, 'productID:', productID, 'quantity', quantity)
+        var sizeProductID = this.dataset.sizeproduct
+        var quantity = document.getElementById("quantity_product_order_"+sizeProductID).value;
+        console.log('productID:', sizeProductID, 'quantity', quantity)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            updateItemToOrder(orderID,productID, quantity)
+            updateItemToOrder(orderID,sizeProductID, quantity)
         }
     })
 }
-function updateItemToOrder(orderID,productID, quantity){
+function updateItemToOrder(orderID,sizeProductID, quantity){
 console.log('user is authenticated, sending data..')
 
 var url = '/order/editOrder/'
@@ -115,7 +115,7 @@ fetch(url,{
         'Content-Type':'application/json',
         'X-CSRFToken':csrftoken,
     },
-    body:JSON.stringify({'orderID': orderID,'productID': productID, 'quantity':quantity})
+    body:JSON.stringify({'orderID': orderID,'sizeProductID': sizeProductID, 'quantity':quantity})
 })
 .then((response) => {
     return response.json();
@@ -183,18 +183,18 @@ console.log("Loadded remove-item-carts")
 var removeToCartBtns = document.getElementsByClassName('remove-item-carts')
 for (i = 0; i < removeToCartBtns.length; i++){
     removeToCartBtns[i].addEventListener('click', function (){
-        var productID = this.dataset.product
-        console.log('productID:', productID)
+        var sizeproductID = this.dataset.sizeproduct
+        console.log('productID:', sizeproductID)
         console.log('USER:', user)
         if(user == 'AnonymousUser'){
             console.log("user is not authenticated")
         }
         else {
-            addItemToCart(productID)
+            removeItemToCart(sizeproductID)
         }
     })
 }
-function removeItemToCart(productID){
+function removeItemToCart(sizeproductID){
     console.log('user is authenticated, sending data..')
 
     var url = '/deleteProductCart/'
@@ -205,7 +205,7 @@ function removeItemToCart(productID){
             'Content-Type':'application/json',
             'X-CSRFToken':csrftoken,
         },
-        body:JSON.stringify({'productID': productID})
+        body:JSON.stringify({'sizeproductID': sizeproductID})
     })
     .then((response) => {
         return response.json();

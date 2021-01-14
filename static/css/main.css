@@ -3351,6 +3351,10 @@ ul li {
    margin-bottom: 30px;
  }
  .form-tax{
+   background: #FFFFFF;
+   padding: 50px 40px;
+ }
+ .form-tax1{
    background: #fafafa;
    padding: 50px 40px;
  }
@@ -3374,6 +3378,13 @@ ul li {
    border: 1px solid #000;
  }
 .form-tax h4 {
+  font-size: 35px;
+  font-weight: 700;
+  text-align: left;
+  text-transform: uppercase;
+  color: #000;
+}
+.form-tax1 h4 {
   font-size: 35px;
   font-weight: 700;
   text-align: left;

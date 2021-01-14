@@ -87,20 +87,35 @@ def addOrder(request, cart_id):
 def editOrder(request):
     data = json.loads(request.body)
     orderID = data['orderID']
-    productID = data['productID']
+    sizeproductID = data['sizeProductID']
     quantity = data['quantity']
-    product = Product.objects.get(id = productID)
 
     order = Order.objects.get(id = orderID)
     cart = order.cart
-    cartItem = CartItem.objects.get(cart=cart, product_id=productID)
+    sizeProduct = SizeProduct.objects.get(id = sizeproductID)
+    product = Product.objects.get(id = sizeProduct.product.id)
+    cartItem = CartItem.objects.get(cart=cart, sizeProduct_id=sizeproductID)
 
-    if product.amount > int(quantity):
+    if sizeProduct.product.amount > int(quantity):
+        # Neu sl thay doi > sl hien tai:
+        #     - Tru di chenh lech vao amount
+        if int(quantity) > cartItem.quantity:
+            amount = int(quantity) - cartItem.quantity
+            sizeProduct.amount = sizeProduct.amount - amount
+            sizeProduct.save()
+            product.amount = product.amount - amount
+            product.save()
+        else:
+            amount =  cartItem.quantity - int(quantity)
+            sizeProduct.amount = sizeProduct.amount + amount
+            sizeProduct.save()
+            product.amount = product.amount + amount
+            product.save()
         cartItem.quantity = int(quantity)
     else:
         context = {
             'outStock': True,
-            'amount_product': product.amount,
+            'amount_product': sizeProduct.product.amount,
         }
         return JsonResponse(context, safe=False)
     cartItem.save()

@@ -25,12 +25,23 @@ from django.http import HttpResponse, JsonResponse
 # --------------------Home------------------------------
 class home(View):
     def get(self,request):
+        if request.user.is_authenticated:
+            user = request.user
+            cart, created = Cart.objects.get_or_create(user=user, complete=False)
+            items = cart.cartitem_set.all()
+            cartItems = cart.get_cart_items
+        else:
+            items = []
+            cart = {'get_cart_total': 0, 'get_cart_items': 0, 'shipping': False}
+            cartItems = cart['get_cart_items']
+        category = Category.objects.all()
         # Neu la superuser moi cho vao trang phan quyen
-            list_users = User.objects.all()
-            # Gui OBJ user hien tai de check permission
-            request_user = User.objects.get(id = request.user.id)
-            context = {'users': list_users, 'request_user': request_user}
-            return render(request, 'manager/userControl/UserControl.html', context)
+        list_users = User.objects.all()
+
+        # Gui OBJ user hien tai de check permission
+        request_user = User.objects.get(id = request.user.id)
+        context = {'users': list_users, 'request_user': request_user, 'category':category, 'cartItems':cartItems}
+        return render(request, 'manager/userControl/UserControl.html', context)
 
 
 # --------------------Category--------------------------
@@ -38,6 +49,7 @@ class home(View):
 
 class add_category(LoginRequiredMixin,View):
     def get(self,request):
+
         category = CategoryForm()
         return render(request, "manager/manage_Action.html", {"add_category": category})
     def post(self,request):
@@ -171,6 +183,8 @@ class editOrder(View):
         context = {'cart_id':order.cart.id}
         return redirect('manager:orderControl')
 
+
+
 # --------------------Shipping Edit--------------------------
 class shippingEdit(View):
     def get(self, request, order_id):
@@ -250,7 +264,7 @@ class sizeProductControl(View):
         sizeProduct = SizeProduct.objects.get(id = product_id)
         sizeProduct.active = request.POST["active_size"]
         sizeProduct.save()
-        return redirect('manager:product_control')
+        return redirect(reverse('manager:sizeProductControl', args=[str(sizeProduct.product.id)]))
 
 class addSizeProduct(View):
     def get(self, request, product_id):

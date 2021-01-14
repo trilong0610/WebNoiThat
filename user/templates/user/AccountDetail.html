@@ -143,14 +143,14 @@
                                     <i class="la la-shopping-cart"></i>
                                 </a>
                             </li>
-                        {% else %}
+                        {% endif %}
                             <li class="clearfix">
                                 <a href="{% url 'order:recentOrder' %}">
                                     <p>Đơn hàng của tôi</p>
                                     <i class="la la-shopping-cart"></i>
                                 </a>
                             </li>
-                        {% endif %}
+
 
                         <li class="clearfix">
                             <a href="{% url 'user:logout' %}">

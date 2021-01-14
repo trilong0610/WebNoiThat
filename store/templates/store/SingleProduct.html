@@ -53,6 +53,7 @@
                             {% if product.amount > 0 %}
                                 <div class="lineAbout" style="width: 100%;height: 1px"></div>
 
+                                {% if product.check_active_allsize %}
                                 <div class="details-button clearfix" style="margin-bottom: 0">
                                     <!--/Quantity Product-->
                                    <div style="width: 50%;float: left">
@@ -91,10 +92,8 @@
                                    <div class="sidebar-filter-color" style="width: 50%;float: left">
                                    </div>
                                 </div>
-
-                            {% endif %}
-                            <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 15px;"></div>
-                            <div class="addCart">
+                                <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 15px;"></div>
+                                <div class="addCart">
                                <ul>
     {#                               --------------ADD to Cart------------------#}
                                    {% if user.is_authenticated %}
@@ -114,6 +113,12 @@
 
                                </ul>
                            </div><!--/add_to_cart-->
+                                {% else %}
+                                    <p><h2 style="color: #cc0000">Sản phẩm đang ngừng bán</h2></p>
+                                {% endif %}
+
+                            {% endif %}
+
 {#                    ---------------END FORM ADD TO CART----------------#}
 
                         <div class="category_tag" style="margin-top: 20px">

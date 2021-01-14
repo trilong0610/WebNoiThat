@@ -6,22 +6,11 @@
         <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
         <div class="banner-arrival">
             <h3>Quản lí đơn hàng</h3>
-            <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> orderControl</p>
         </div>
     </div>
 {% endblock banner %}
 {% block content %}
 <div class="col-md-14">
-    <form action="" method="post">
-        {% csrf_token %}
-    <div class="row">
-        <form class="form-inline mr-auto">
-            <input class="form-control mr-sm-2 w-50" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn blue-gradient btn-rounded btn-sm my-0" type="submit">Search</button>
-        </form>
-    </div>
-
-    </form>
     <form action="" method="post">
         <div class="row mt-5">{#loc don hang theo ngay#}
             {% csrf_token %}
@@ -49,7 +38,7 @@
             <thead>
                 <tr>
                     <th scope="col">ID: {{ order.id }}</th>
-                    <th scope="col">Người tiếp nhận: {{ order.user }}</th>
+                    <th scope="col">Người đặt: {{ order.user }}</th>
                     <th scope="col">Ngày nhận: {{ order.date_ordered|date:'H:i d-m-Y' }}</th>
                     <th scope="col">{{ order.get_status_display }}</th>
                     <th scope="col">{{ order.cart.get_cart_total|intcomma }} VND</th>
@@ -79,12 +68,15 @@
             </tbody>
         </table>
         {% endfor %}
- <script>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
     $(function () {
       $("#datepicker").datepicker();
     });
-  </script>
-    </div>
-</div>
+
+</script>
 {#    </section>#}
 {% endblock content %}

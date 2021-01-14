@@ -6,7 +6,6 @@
             <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
             <div class="banner-arrival">
                 <h3>Giỏ Hàng</h3>
-                <p>Home<i class="fa fa-angle-right" aria-hidden="true"></i> Cart</p>
             </div>
         </div>
 {% endblock banner %}
@@ -18,11 +17,37 @@
 {#            Title row#}
                 <div class="row">
                 <div class="col-md-8">
+                <div class="row">
+{#                            Delete sizeProduct   #}
+                            <div class="col-md-1" style="text-align: center;padding-top: 40px;">
+                            </div>
+    {#                            Product Image   #}
+                            <div class="col-md-2" style="text-align: center;padding-top: 48px;">
+                                <h4>Hình ảnh</h4>
+                            </div>
+                            {#                            sizeProduct   #}
+                            <div class="col-md-2" style="text-align: center;padding-top: 48px;">
+                                <h4>Kích thước</h4>
+                            </div>
+                            {#                            product price   #}
+                            <div class="col-md-2" style="text-align: center;padding-top: 48px;">
+                                <h4>Đơn giá</h4>
+                            </div>
+
+                            {#                            input quantity   #}
+                            <div class="col-md-3" style="text-align: center;padding-top: 48px;">
+                                <h4>Số lượng</h4>
+                            </div>
+                            {#                            product total   #}
+                            <div class="col-md-2" style="text-align: right;padding-top: 48px;"> <h4>Thành tiền</h4></div>
+                        </div>
+                                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
+
                     {% for cartitem in cart.cartitem_set.all %}
                         <div class="row">
 {#                            Delete sizeProduct   #}
                             <div class="col-md-1" style="text-align: center;padding-top: 40px;">
-                                <a href=""> <i class="la la-close remove-item-carts" data-product="{{ cartitem.sizeProduct.id }}" style="font-size: 20px;"></i></a>
+                                <a href=""> <i class="la la-close remove-item-carts" data-sizeproduct="{{ cartitem.sizeProduct.id }}" style="font-size: 20px;"></i></a>
                             </div>
     {#                            Product Image   #}
                             <div class="col-md-2" style="text-align: center">
@@ -38,7 +63,7 @@
                             </div>
 
                             {#                            input quantity   #}
-                            <div class="col-md-3" style="text-align: center;padding-top: 25px;">
+                            <div class="col-md-3" style="text-align: center;padding-top: 30px;">
                                 <div class="cart-product-two shopping-cart-quantity cartConver">
                                     <div class="pd-c-quantity quantity add-card add-card-product">
 
@@ -59,7 +84,7 @@
                     {% endfor %}
                 </div>
                 <div class="col-md-4">
-                        <div class="form-tax">
+                        <div class="form-tax1">
                             <h4>Giỏ hàng</h4>
                             <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
                             <div class="box-formTax-total">

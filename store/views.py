@@ -251,12 +251,12 @@ def addItemToCart(request):
 
 def deleteProductCart(request):
     data = json.loads(request.body)
-    productID = data['productID']
+    sizeproductID = data['sizeproductID']
 
     customer = request.user
-    product = Product.objects.get(id=productID)
+    sizeProduct = SizeProduct.objects.get(id=sizeproductID)
     cart, created = Cart.objects.get_or_create(user=customer, complete=False)
-    cartItem, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    cartItem, created = CartItem.objects.get_or_create(cart=cart, sizeProduct=sizeProduct)
     cartItem.quantity =  0
     cartItem.save()
     if cartItem.quantity <= 0:
