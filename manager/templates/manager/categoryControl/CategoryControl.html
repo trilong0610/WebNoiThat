@@ -27,8 +27,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                    {% for category in category %}
                         <tr>
-                            {% for category in category %}
+
                             <td scope="row" class="mt-3">{{ category.id }}</td>
                             <td scope="row" class="mt-3">{{ category.title }}</td>
                             <td scope="row" class="mt-3">{{ category.description }}</td>
@@ -44,8 +45,9 @@
                                     <a href="{% url 'manager:editCategory' category.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
                                 {% endif %}
                             </td>
-                            {% endfor %}
+
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

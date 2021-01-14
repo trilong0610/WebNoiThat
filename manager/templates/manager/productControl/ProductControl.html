@@ -33,13 +33,13 @@
                         {% for product in products %}
                             <tr>
                                 <td scope="row"><a><img src="{{ product.image.url }}" alt="product" style="width:100px"></a></td>
-                                <td scope="row"">{{ product.title }}</td>
+                                <td scope="row">{{ product.title }}</td>
                                 <td scope="row">{{ product.price|intcomma }}</td>
                                 <td scope="row">{{ product.amount }}</td>
                                 <td scope="row">{{ product.amount_sell }}</td>
                                 <td scope="row">{{ product.category }}</td>
                                 <td scope="row">
-                                    {% if category.active %}
+                                    {% if product.active %}
                                         Đang bán
                                     {% else %}
                                         Ngừng bán

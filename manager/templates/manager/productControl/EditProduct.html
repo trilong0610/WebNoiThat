@@ -11,7 +11,7 @@
 {% block content %}
 <div class="border border-dark rounded">
     <h1 class="text-center mt-5 mb-5">SỬA SẢN PHẨM</h1>
-    <form class="ml-5" action="{% url 'manager:edit_product' product.id %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+    <form class="ml-5" action="{% url 'manager:edit_product' product.id %}" method="post" >
         {% csrf_token %}
             <div class="accInput">
                 <p>Danh mục:</p>

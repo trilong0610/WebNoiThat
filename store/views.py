@@ -1,5 +1,6 @@
 from django.contrib import messages, auth
 from django.contrib.postgres import serializers
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views import View
 from django.contrib import messages
@@ -33,12 +34,15 @@ def view_product(request):
     best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
 
     all_product = Product.objects.filter(active=True)
+    paginator = Paginator(all_product, 9)  # Show 25 contacts per page.
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {'category':category,
                'hot_product':hot_product,
                'items': items,
                'cartItems' : cartItems,
-               'all_product':all_product,
+               'all_product':page_obj,
                'best_sellers':best_seller,
                }
     return render(request, 'store/ProductGrid.html', context)
@@ -59,12 +63,15 @@ def most_popular(request):
     hot_product = Product.objects.filter(active=True).order_by('-id')[:6]
     # best seller
     best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
+    paginator = Paginator(best_seller, 9)  # Show 25 contacts per page.
 
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {'category':category,
                'hot_product':hot_product,
                'items': items,
                'cartItems' : cartItems,
-               'all_product':best_seller,
+               'all_product':page_obj,
                'best_sellers':best_seller,
                }
     return render(request, 'store/ProductGrid.html', context)
@@ -87,11 +94,15 @@ def home(request):
 
     all_product = Product.objects.filter(active=True)
 
+    paginator = Paginator(all_product, 9)  # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {'category': category,
                'hot_product': hot_product,
                'items': items,
                'cartItems': cartItems,
-               'all_product': all_product,
+               'all_product': page_obj,
                'best_sellers': best_seller,
                }
     return render(request, 'store/ProductGrid.html', context)
@@ -144,10 +155,14 @@ class view_category(View):
         hot_product = Product.objects.filter(active=True).order_by('-id')[:6]
         # best seller
         best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
+        paginator = Paginator(all_product, 9)  # Show 25 contacts per page.
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         context = {'category': category,
                    'items': items,
                    'cartItems': cartItems,
-                   'all_product': all_product,
+                   'all_product': page_obj,
                    'best_sellers': best_seller,
                    'hot_product':hot_product,
                    'items': items
@@ -312,13 +327,17 @@ def hot_product(request):
     # best seller
     best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
     # sam pham moi nhat
-    all_product = Product.objects.filter(active=True).order_by('-id')[:10]
+    all_product = Product.objects.filter(active=True).order_by('-id')
+    paginator = Paginator(all_product, 9)  # Show 25 contacts per page.
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {'category':category,
                'hot_product':hot_product,
                'items': items,
                'best_sellers':best_seller,
                'cartItems' : cartItems,
-               'all_product':all_product,
+               'all_product':page_obj,
                }
     return render(request, 'store/ProductGrid.html', context)
 
@@ -352,7 +371,8 @@ def detailProduct(request, product_id):
     # sam pham moi nhat
     hot_product = Product.objects.filter(active=True).order_by('-id')[:6]
     # best seller
-    best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
+    best_seller = Product.objects.filter(active=True).order_by('-amount_sell')
+
 
     all_product = Product.objects.filter(active=True)
     detail = Product.objects.get(id=product_id)
