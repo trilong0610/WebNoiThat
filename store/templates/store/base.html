@@ -33,6 +33,7 @@
     <link href="{% static 'vendor/css-hamburgers/css/hamburgers.min.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/slick/css/slick.css' %}" rel="stylesheet">
     <link href="{% static 'vendor/range_filter/css/jquery-ui.css' %}" rel="stylesheet">
+
     <!-- Revolution -->
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/settings.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'vendor/slider-revolution/css/layers.css' %}">
@@ -167,14 +168,10 @@
                                 </div>
                                 <div class="search2">
                                     <ul>
-                                        <form action="{% url 'store:search' %}" method="post">
+                                        <form class="example" action="{% url 'store:search' %}" method="post">
                                             {% csrf_token %}
-                                        <li>
-                                                <input type="text" name="key" placeholder="Search" class="">
-                                        </li>
-                                        <li>
-                                               <input class="fa fa-search" type="submit" value="Tìm kiếm">
-                                        </li>
+                                            <input type="text" placeholder="Search.." name="key">
+                                            <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
                                         </form>
                                     </ul>
 

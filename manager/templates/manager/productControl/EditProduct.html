@@ -9,45 +9,47 @@
         </div>
 {% endblock banner %}
 {% block content %}
-    <form action="{% url 'manager:edit_product' product.id %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
-    {% csrf_token %}
-        <div class="accInput">
-            <p>Danh mục:</p>
-            <select name="category_id">
-              {% for category in  category %}
-                  {% if category.title == product.category.title %}
-                    <option value="{{ category.id }}" selected>{{ category.title }}</option>
-                  {% else %}
-                      <option value="{{ category.id }}">{{ category.title }}</option>
-                  {% endif %}
-              {% endfor %}
-            </select>
-        </div>
-        <div class="accInput">
-            <p>Tên sản phẩm:</p>
-            <input type="text" name="title" class="inputText" value="{{ product.title }}">
-        </div>
-        <div class="accInput">
-            <p>Giá:</p>
-            <input type="number" name="price" class="inputText" value="{{ product.price }}">
-        </div>
-        <div class="accInput">
-            <p>Chi tiết sản phẩm:</p>
-            <input type="text" name="description" class="inputText" value="{{ product.description }}">
-        </div>
-        <div class="accInput">
-            <p>Trạng thái:</p>
-            {% if product.active %}
-                <p><input type="radio" name="active" value="True" checked> Đang bán</p>
-               <p> <input type="radio" name="active" value="False"> Ngừng bán</p>
-            {% else %}
-                <p><input type="radio" name="active" value="True" > Đang bán</p>
-                <p><input type="radio" name="active" value="False" checked> Ngừng bán</p>
-            {% endif %}
+<div class="border border-dark rounded">
+    <h1 class="text-center mt-5 mb-5">SỬA SẢN PHẨM</h1>
+    <form class="ml-5" action="{% url 'manager:edit_product' product.id %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+        {% csrf_token %}
+            <div class="accInput">
+                <p>Danh mục:</p>
+                <select name="category_id">
+                  {% for category in  category %}
+                      {% if category.title == product.category.title %}
+                        <option value="{{ category.id }}" selected>{{ category.title }}</option>
+                      {% else %}
+                          <option value="{{ category.id }}">{{ category.title }}</option>
+                      {% endif %}
+                  {% endfor %}
+                </select>
+            </div>
+            <div class="accInput">
+                <p>Tên sản phẩm:</p>
+                <input type="text" name="title" class="inputText" value="{{ product.title }}">
+            </div>
+            <div class="accInput">
+                <p>Giá:</p>
+                <input type="number" name="price" class="inputText" value="{{ product.price }}">
+            </div>
+            <div class="accInput">
+                <p>Chi tiết sản phẩm:</p>
+                <input type="text" name="description" class="inputText" value="{{ product.description }}">
+            </div>
+            <div class="accInput">
+                <p>Trạng thái:</p>
+                {% if product.active %}
+                    <p><input type="radio" name="active" value="True" checked> Đang bán</p>
+                   <p> <input type="radio" name="active" value="False"> Ngừng bán</p>
+                {% else %}
+                    <p><input type="radio" name="active" value="True" > Đang bán</p>
+                    <p><input type="radio" name="active" value="False" checked> Ngừng bán</p>
+                {% endif %}
 
-        </div>
+            </div>
 
-    <p><input class="btn-arrival" type="submit" value="Sửa sản phẩm"></p>
+        <p class="mb-5"><input class="btn-arrival" type="submit" value="Sửa sản phẩm"></p>
     </form>
-
+</div>
 {% endblock content %}

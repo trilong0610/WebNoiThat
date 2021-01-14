@@ -104,7 +104,7 @@
     {#        ---- Category-------                #}
     </div>
     <div class="lineAbout" style="width: 100%;height: 1px"></div>
-        <div class="box-slider-left slideNewproduct slideNewproduct2 ml-5">
+        <div class="box-slider-left slideNewproductbg-secondary ml-5">
             <h3 class="slider-left-title">Bán Chạy Nhất</h3>
 {#                    -------------Best seller---------#}
             {% for best_seller in best_sellers %}
@@ -122,5 +122,28 @@
         </div>
     </div>
 </div>
+<!--<ul class="list-group">-->
+<!--    <li class="list-group-item bg-secondary active">Danh Mục</li>-->
+<!--    <li class="list-group-item"><a href="{% url 'store:hotProduct' %}">Sản phẩm mới</a></li>-->
+<!--    <li class="list-group-item"><a href="{% url 'store:mostPopular' %}">Nhiều người mua</a></li>-->
+<!--    <li class="list-group-item bg-secondary active">Loại</li>-->
+<!--    {% for items in category %}-->
+<!--        <li class="list-group-item"><a href="{% url 'store:category' items.id %}">{{ items.title }}</a></li>-->
+<!--    {% endfor %}-->
+<!--    <li class="list-group-item bg-secondary active">Bán chạy nhất</li>-->
+<!--    <li class="list-group-item">-->
+<!--        {% for best_seller in best_sellers %}-->
+<!--                <div class="box-slideNewproduct">-->
+<!--                    <div class="slideNewproduct-item slideNewproduct-img">-->
+<!--                        <a href="{% url 'store:detailProduct' best_seller.id %}"><img src="{{ best_seller.image.url|default_if_none:'#' }}" alt="product1" class="img-responsive"/></a>-->
+<!--                    </div>-->
+<!--                    <div class="slideNewproduct-item slideNewproduct-text">-->
+<!--                        <h5><a href="{% url 'store:detailProduct' best_seller.id %}"> {{ best_seller.title }}</a></h5>-->
+<!--                        <p class="slideProduct-price"> {{ best_seller.price }} VND</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--        {% endfor %}-->
+<!--    </li>-->
+<!--</ul>-->
 {% endblock left-navbar %}
 

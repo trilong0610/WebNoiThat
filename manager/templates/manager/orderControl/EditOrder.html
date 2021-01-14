@@ -15,6 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
+<<<<<<< HEAD
                 <h3 style="margin-bottom: 30px;text-align: left">DANH SÁCH SẢN PHẨM</h3>
                     {% for cartitem in order.cart.cartitem_set.all %}
                         <div class="row">
@@ -33,21 +34,51 @@
                         <div class="col-md-1" style="padding-top: 30px;">
                             <div class="sidebar-filter-color">
                                 <ul class="clearfix">
-
-                                </ul>
+=======
+                    <div class="border border-dark rounded">
+                        <h3 class="text-center mt-5 mb-5" style="margin-bottom: 30px;text-align: left">DANH SÁCH SẢN PHẨM</h3>
+                        {% for cartitem in order.cart.cartitem_set.all %}
+                        <div class="row ml-5 mr-5 mb-5">
+                            <div class="col-md-1" style="text-align: center;padding-top: 40px;">
+                                <a href="#"> <i class="la la-close remove-item-carts" data-product="{{ cartitem.product.id }}" style="font-size: 20px;"></i></a>
                             </div>
+                            <div class="col-md-2">
+                                <img src="{{ cartitem.sizeProduct.product.image.url }}" alt="product" class="img-responsive">
+                            </div>
+                            <div class="col-md-2" style="text-align: left;padding-top: 30px;">
+                                {{ cartitem.sizeProduct.product.title }}
+                            </div>
+                            <div class="col-md-1" style="text-align: right;padding-top: 30px;">
+                                {{ cartitem.sizeProduct.product.price|intcomma }}
+                            </div>
+                            <div class="col-md-1" style="padding-top: 30px;">
+                                <div class="sidebar-filter-color">
+                                    <ul class="clearfix">
+>>>>>>> main
+
+                                    </ul>
+                                </div>
+                            </div>
+<<<<<<< HEAD
                         </div>
                         <div class="col-md-3" style="text-align: center;padding-top: 10px;">
                             <div class="cart-product-two shopping-cart-quantity cartConver">
                                 <div class="pd-c-quantity quantity add-card add-card-product">
                                     <input data-order="{{ order.id }}" data-sizeproduct="{{ cartitem.sizeProduct.id }}" class="update-item-order" id="quantity_product_order_{{ cartitem.sizeProduct.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+=======
+                            <div class="col-md-3" style="text-align: center;padding-top: 10px;">
+                                <div class="cart-product-two shopping-cart-quantity cartConver">
+                                    <div class="pd-c-quantity quantity add-card add-card-product">
+                                        <input data-order="{{ order.id }}" data-product="{{ cartitem.product.id }}" class="update-item-order" id="quantity_product_order_{{ cartitem.product.id }}" type="number"  value="{{ cartitem.quantity }}" style="border-bottom: 1px solid rgb(193, 155, 118);padding-bottom: 10px;">
+                                    </div>
+>>>>>>> main
                                 </div>
                             </div>
+                            <div class="col-md-2" style="text-align: right;padding-top: 30px;"> {{ cartitem.get_total|intcomma }}</div>
                         </div>
-                        <div class="col-md-2" style="text-align: right;padding-top: 30px;"> {{ cartitem.get_total|intcomma }}</div>
-                    </div>
-                    <div class="lineAbout" style="width: 100%;height: 1px;margin-top: 20px;"></div>
                     {% endfor %}
+                    </div>
+
                 </div>
             <div class="col-md-4">
                     <div class="form-tax">
@@ -135,57 +166,55 @@
             <div class="row">
                 <form action="{% url 'manager:editOrder' order.id %}" method="post">
                     {% csrf_token %}
-                    <div class="col-md-8">
-                    <h3 style="margin-bottom: 30px;text-align: left">ĐỊA CHỈ GIAO HÀNG</h3>
-                    <input type="hidden" value="{{ order.cart.user }}" name="user">
-                    <div class="accInput">
-                        <p>Tên</p>
-                        <input type="text" name="firstName" class="inputText" value="{{ order.first_name }}" placeholder="Nhập tên của bạn">
-                    </div>
-                    <div class="accInput">
-                        <p>Họ</p>
-                        <input type="text" name="lastName"  class="inputText" value="{{ order.last_name }}" placeholder="Nhập họ của bạn">
-                    </div>
-                    <div class="accInput">
-                        <p>Số điện thoại</p>
-                        <input type="text" name="phone" class="inputText" value="{{ order.phone }}" placeholder="Nhập số điện thoại của bạn">
+                    <div class="col-md-6 ml-5">
+                        <div class="border border-dark rounded">
 
-{#                        <select class="sidebar-select">#}
-{#                            <option selected="">Viet Nam</option>#}
-{#                            <option>Lao</option>#}
-{#                            <option>Thai Lan</option>#}
-{#                            <option>Campuchia</option>#}
-{#                        </select>#}
-                    </div>
-                    <div class="accInput">
-                        <p>Email</p>
-                        <input type="text" name="email" class="inputText" value="{{ order.email }}" placeholder="Nhập email của bạn">
-                    </div>
+                            <h3 class="text-center mt-5 mb-5" style="margin-bottom: 30px;text-align: left">ĐỊA CHỈ GIAO HÀNG</h3>
+                            <input type="hidden" value="{{ order.cart.user }}" name="user">
+                            <div class="ml-5 mr-5">
+                                <div class="accInput">
+                                    <p>Tên</p>
+                                    <input type="text" name="firstName" class="inputText" value="{{ order.first_name }}" placeholder="Nhập tên của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <p>Họ</p>
+                                    <input type="text" name="lastName"  class="inputText" value="{{ order.last_name }}" placeholder="Nhập họ của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <p>Số điện thoại</p>
+                                    <input type="text" name="phone" class="inputText" value="{{ order.phone }}" placeholder="Nhập số điện thoại của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <p>Email</p>
+                                    <input type="text" name="email" class="inputText" value="{{ order.email }}" placeholder="Nhập email của bạn">
+                                </div>
 
-                    <div class="accInput">
-                        <p>Tỉnh/Thành phố</p>
-                        <input type="text" name="province" class="inputText" value="{{ order.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
-                    </div>
-                    <div class="accInput">
-                        <p>Quận/Huyện</p>
-                        <input type="text" name="district" class="inputText" value="{{ order.district }}" placeholder="Nhập Quận/Huyện của bạn">
-                    </div>
-                    <div class="accInput">
-                        <p>Phường/Xã</p>
-                        <input type="text" name="wards" class="inputText" value="{{ order.wards }}" placeholder="Nhập Phường/Xã của bạn">
-                    </div>
+                                <div class="accInput">
+                                    <p>Tỉnh/Thành phố</p>
+                                    <input type="text" name="province" class="inputText" value="{{ order.province }}" placeholder="Nhập Tỉnh/Thành phố của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <p>Quận/Huyện</p>
+                                    <input type="text" name="district" class="inputText" value="{{ order.district }}" placeholder="Nhập Quận/Huyện của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <p>Phường/Xã</p>
+                                    <input type="text" name="wards" class="inputText" value="{{ order.wards }}" placeholder="Nhập Phường/Xã của bạn">
+                                </div>
 
-                    <div class="accInput">
-                        <p>Số nhà/Đường</p>
-                        <input type="text" name="address" class="inputText" value="{{ order.address }}" placeholder="Nhập Số nhà/Đường của bạn">
+                                <div class="accInput">
+                                    <p>Số nhà/Đường</p>
+                                    <input type="text" name="address" class="inputText" value="{{ order.address }}" placeholder="Nhập Số nhà/Đường của bạn">
+                                </div>
+                                <div class="accInput">
+                                    <a href="#" style="" class="trash">
+                                        <div class="mb-5" style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-
-                    <a href="#" style="" class="trash">
-                        <div style="font-size: 16px;float: right;"><i class="la la-trash"></i> Clear all</div>
-                    </a>
-                </div>
-                    <div class="col-md-4">
+                <div class="col-md-4">
                     <div class="accInput">
                         <div class="form-tax">
                             <h3 style="margin-bottom: 30px;text-align: left">GIAO HÀNG</h3>
@@ -237,44 +266,34 @@
                             </ul>
                         </div>
                     </div>
-                        <div class="form-tax">
+                    <div class="form-tax">
                         <h4>ĐƠN HÀNG</h4>
                         <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
-                        <div class="box-formTax-content">
-                        {% for cartitem in order.cart.cartitem_set.all %}
-                            <div class="row">
-                                <div class="col-md-3"><img style="height: 70px; width: 70px" src="{{ cartitem.sizeProduct.product.image.url }}"></div>
-                                <div class="col-md-2" style="text-align: center;margin-top: 30px">{{ cartitem.sizeProduct.horizontal }}x{{ cartitem.sizeProduct.vertical }}</div>
-                                <div class="col-md-3" style="text-align: center;margin-top: 30px">x{{ cartitem.quantity }}</div>
-                                <div class="col-md-4" style="text-align: right;margin-top: 30px">{{ cartitem.get_total|intcomma }}</div>
-                            </div>
-                        {% endfor %}
-{#                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>#}
-{##}
-{#                        <div class="box-formTax-count">#}
-{#                            <div class="row">#}
-{#                                <div class="col-md-6">Phí giao hàng:</div>#}
-{#                                <div class="col-md-6" style="text-align: right;">30,000</div>#}
-{#                            </div>#}
-{#                        </div>#}
-                        <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
+                            <div class="box-formTax-content">
+                            {% for cartitem in order.cart.cartitem_set.all %}
+                                <div class="row">
+                                    <div class="col-md-3"><img style="height: 70px; width: 70px" src="{{ cartitem.sizeProduct.product.image.url }}"></div>
+                                    <div class="col-md-2" style="text-align: center;margin-top: 30px">{{ cartitem.sizeProduct.horizontal }}x{{ cartitem.sizeProduct.vertical }}</div>
+                                    <div class="col-md-3" style="text-align: center;margin-top: 30px">x{{ cartitem.quantity }}</div>
+                                    <div class="col-md-4" style="text-align: right;margin-top: 30px">{{ cartitem.get_total|intcomma }}</div>
+                                </div>
+                            {% endfor %}
+                            <div class="lineAbout" style="width: 100%;height: 1px;    margin-top: 20px;"></div>
 
-                        <div class="box-formTax-total">
-                            <div class="row">
-                                <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
-                                <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">{{ cart.get_cart_total|intcomma }}</div>
+                            <div class="box-formTax-total">
+                                <div class="row">
+                                    <div class="col-md-6" style="font-size: 18px;font-weight: bold">Tổng tiền</div>
+                                    <div class="col-md-6" style="text-align: right;font-size: 18px;font-weight: bold">{{ cart.get_cart_total|intcomma }}</div>
+                                </div>
+                            </div>
+                            <div  style="    margin-top: 25px;" >
+                                <div><input class="btn-arrival" type="submit" value="Cập Nhật"></div>
                             </div>
                         </div>
-{#                        <a href="" data-cartID="{{ cart.id }}" class="btn-formTax add-order">#}
-                        <div  style="    margin-top: 25px;" >
-                            <div><input class="btn-arrival" type="submit" value="Cập Nhật"></div>
-                        </div>
-{#                        </a>#}
                     </div>
-                </div>
 
-            </div>
+                </div>
                 </form>
 
         </div>
