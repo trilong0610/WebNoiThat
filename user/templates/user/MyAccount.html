@@ -6,19 +6,12 @@
         <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
         <div class="banner-arrival">
             <h3>Đăng nhập / Đăng ký</h3>
-    <div class="row">
-        <div class="banner relative">
-            <img src="{% static 'images/15.png' %}" alt="logo" class=" img-responsive">
-            <div class="banner-arrival">
-                <h3>ĐĂNG NHẬP / ĐĂNG KÝ</h3>
-                <p>Manager <i class="fa fa-angle-right" aria-hidden="true"></i> MyAccount</p>
-            </div>
-        </div>
-    </div>
     {% endblock banner %}
     {% block content %}
             <div class="row">
-                <div class="col-md-4 border border-dark rounded m-5">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5 mb-5 mt-5 border border-dark rounded">
                     <form action="{% url 'user:login' %}" method="post" class="form-login">
                     {% csrf_token%}
                         <h1 class="text-center mt-5">ĐĂNG NHẬP</h1>
@@ -36,7 +29,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-md-4 border border-dark rounded m-5">
+                <div class="col-md-5 border border-dark rounded ml-5 mb-5 mt-5">
                     <form action="{% url 'user:register' %}" method="post">
                     {% csrf_token%}
                         <h1 class="text-center mt-5">ĐĂNG KÝ</h1>

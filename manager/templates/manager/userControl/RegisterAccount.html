@@ -10,39 +10,6 @@
 {% endblock banner %}
 {% block content %}
     <section class="myAcc">
-                <div class="container">
-                    <div style="  width: calc(100% - 200px);margin: 0 auto">
-                        <div class="row">
-                            <div class="col-md-3"></div>
-                            <form action="{% url 'manager:register' %}" method="post">
-                                {% csrf_token%}
-                                <div class="col-md-6">
-                                    <div class="accInput"><p>Thêm tài khoản</p></div>
-                                    <div class="accInput">
-                                        <div class="accInput">
-                                        <p>Tên tài khoản</p>
-                                        <input type="text" name="user" class="inputText" placeholder="Enter your username or email address">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Email</p>
-                                        <input type="email" name="email" class="inputText" placeholder="Enter your email address">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Mật khẩu</p>
-                                        <input type="password" name="password1" class="inputText" placeholder="Enter your password">
-                                    </div>
-                                    <div class="accInput">
-                                        <p>Nhập lại mật khẩu</p>
-                                        <input type="password" name="password2" class="inputText" placeholder="Enter your password">
-                                    </div>
-{#                                    <a href="AccountDetail.html" style="color: #000" class="Brightness">#}
-{#                                        <div class="btn-arrival" style="    margin-top: 25px;">#}
-{#                                            <div>REGISTER <img src="{% static 'images/arr.png' %}" alt="logo"></div>#}
-{#                                        </div>#}
-{#                                    </a>#}
-                        </div>
-                            <div  style="    margin-top: 25px;" >
-                                <div><input class="btn-arrival" type="submit" value="REGISTER"></div>
         <div class="container">
             <div style="  width: calc(100% - 200px);margin: 0 auto">
                 <form action="{% url 'manager:register' %}" method="post">

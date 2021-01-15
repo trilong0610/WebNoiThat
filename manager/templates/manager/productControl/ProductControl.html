@@ -50,7 +50,7 @@
                                     <a href="{% url 'manager:sizeProductControl' product.id %}"><button type="button" class="btn btn-primary">Kích thước</button></a>
                                     {% endif %}
                                     {% if perms.product.change_product %}
-                                    <a href="{% url 'manager:edit_product' product.id %}"><button type="button" class="btn btn-primary">Sửa</button></a>
+                                    <a href="{% url 'manager:edit_product' product.id %}"><button type="button" class="btn btn-primary mt-2">Sửa</button></a>
                                     {% endif %}
                                 </td>
                             </tr>
