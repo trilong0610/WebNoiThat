@@ -34,7 +34,7 @@ def view_product(request):
     best_seller = Product.objects.filter(active=True).order_by('-amount_sell')[:6]
 
     all_product = Product.objects.filter(active=True)
-    paginator = Paginator(all_product, 9)  # Show 25 contacts per page.
+    paginator = Paginator(all_product, 9)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

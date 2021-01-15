@@ -374,7 +374,7 @@ $(function() {
     //User Trict
     "user strict";
     /*Preloader animsition*/
-    $(window).on('load', function () {
+    $(document).ready(function () {
         $('.page-loader').fadeOut('slow', function () {
             $(this).remove();
         });
@@ -564,34 +564,6 @@ $(function() {
     });
 
     // trademark-list
-    $('.trademark-list').owlCarousel({
-        autoplay: true,
-        loop: true,
-        // margin:100,
-        // nav:true,
-        responsiveClass: true,
-        responsive: {
-            0: {
-                items: 2,
-                nav: true
-            },
-            480: {
-                items: 3,
-                nav: true
-            },
-            768: {
-                items: 4,
-                nav: false
-            },
-            992: {
-                items: 8,
-                nav: true,
-                loop: false
-            }
-        }
-
-    });
-
     //  Home_stote_V2 - Banner
     $('#slide-home-stoteV2').show().revolution({
         responsiveLevels: [1920, 1600, 768, 480],
